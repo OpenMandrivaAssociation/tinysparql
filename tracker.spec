@@ -1,0 +1,252 @@
+%define name tracker
+%define version 0.6.0
+%define svn 544
+%if %svn
+%define release %mkrel 0.%svn.1
+%else
+%define release %mkrel 1
+%endif
+%define major 0
+%define libname %mklibname %name %major
+
+Summary: Desktop-neutral metadata-based search framework
+Name: %{name}
+Version: %{version}
+Release: %{release}
+%if %svn
+Source0: %{name}-%{svn}.tar.bz2
+%else
+Source0: %{name}-%{version}.tar.bz2
+%endif
+License: GPL
+Group: Graphical desktop/GNOME
+Url: http://www.gnome.org/projects/tracker
+%if %svn
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{svn}-buildroot
+%else
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+%endif
+BuildRequires: libsqlite3-devel
+BuildRequires: libdbus-devel
+BuildRequires: libglib2-devel
+BuildRequires: libz-devel
+BuildRequires: libmagic-devel
+BuildRequires: libgmime-devel
+BuildRequires: libgstreamer0.10-devel
+BuildRequires: libpoppler-devel
+BuildRequires: pygtk2.0-devel
+BuildRequires: libvorbis-devel
+BuildRequires: libpng-devel
+BuildRequires: libexif-devel
+BuildRequires: libgsf-devel
+BuildRequires: libgamin-devel
+BuildRequires: libgnome2-devel
+BuildRequires: libgnomeui2-devel
+BuildRequires: libgnome-desktop-2-devel
+BuildRequires: libglib2-devel
+BuildRequires: libglade2.0-devel
+BuildRequires: deskbar-applet
+BuildRequires: desktop-file-utils
+BuildRequires: ImageMagick
+%if %svn
+BuildRequires: gnome-common
+BuildRequires: intltool
+%endif
+Requires: libxslt-proc
+Requires: w3m
+Requires: wv
+
+%description
+Tracker is a framework designed to extract information and metadata about your 
+personal data so that it can be searched easily and quickly. Tracker is
+desktop-neutral, fast and resource efficient.
+
+%package common
+Summary: Graphical search tool for tracker search framework
+Group: Graphical desktop/GNOME
+Requires: %name = %version
+
+%description common
+Tracker is a tool designed to extract information and metadata about your 
+personal data so that it can be searched easily and quickly. Tracker is
+desktop-neutral, fast and resource efficient. This package contains common
+files for the tracker framework.
+
+%package search-tool
+Summary: Graphical search tool for tracker search framework
+Group: Graphical desktop/GNOME
+Requires: %name = %version
+Requires: %name-common = %version
+
+%description search-tool
+Tracker is a tool designed to extract information and metadata about your 
+personal data so that it can be searched easily and quickly. Tracker is
+desktop-neutral, fast and resource efficient. This package contains the
+GNOME-based standalone graphical search tool for the tracker framework.
+
+%package preferences
+Summary: Configuration tool for tracker search framework
+Group: Graphical desktop/GNOME
+Requires: %name = %version
+Requires: %name-common = %version
+
+%description preferences
+Tracker is a tool designed to extract information and metadata about your 
+personal data so that it can be searched easily and quickly. Tracker is
+desktop-neutral, fast and resource efficient. This package contains the
+GNOME-based configuration tool for the tracker framework.
+
+%package deskbar-handler
+Summary: Deskbar plugin for tracker search framework
+Group: Graphical desktop/GNOME
+Requires: %name = %version
+Requires: deskbar-applet
+
+%description deskbar-handler
+Tracker is a tool designed to extract information and metadata about your 
+personal data so that it can be searched easily and quickly. Tracker is
+desktop-neutral, fast and resource efficient. This package contains a
+plugin that will allow the deskbar-applet panel search tool to search
+using tracker.
+
+%package -n %libname
+Group: System/Libraries
+Summary: Shared library of tracker
+
+%description -n %libname
+Tracker is a tool designed to extract information and metadata about your 
+personal data so that it can be searched easily and quickly. Tracker is
+desktop-neutral, fast and resource efficient.
+
+%package -n %libname-devel
+Group: Development/C
+Summary: Development library of tracker
+Requires: %libname = %version
+Provides: lib%name-devel = %version-%release
+
+%description -n %libname-devel
+Tracker is a tool designed to extract information and metadata about your 
+personal data so that it can be searched easily and quickly. Tracker is
+desktop-neutral, fast and resource efficient.
+
+%prep
+%if %svn
+%setup -q -n %name-%svn
+%else
+%setup -q
+%endif
+
+%build
+./autogen.sh
+%configure2_5x --enable-deskbar-applet
+%make
+
+%install
+rm -rf $RPM_BUILD_ROOT
+%makeinstall_std
+
+desktop-file-install --vendor="" \
+  --remove-category="Utility" \
+  --add-category="X-MandrivaLinux-System-FileTools" \
+  --add-category="System" \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/tracker-search-tool.desktop
+
+# old icons
+
+mkdir -p %buildroot{%_liconsdir,%_miconsdir}
+convert -scale 48 src/tracker-search-tool/tracker.png %buildroot%_liconsdir/tracker.png
+convert -scale 32 src/tracker-search-tool/tracker.png %buildroot%_iconsdir/tracker.png
+convert -scale 16 src/tracker-search-tool/tracker.png %buildroot%_miconsdir/tracker.png
+
+%find_lang %name
+
+%post search-tool
+%update_icon_cache hicolor
+%update_menus
+%postun search-tool
+%clean_icon_cache hicolor
+%clean_menus
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files -f %name.lang
+%defattr(-,root,root)
+%doc README NEWS AUTHORS ChangeLog
+%config(noreplace) %_sysconfdir/xdg/autostart/trackerd.desktop
+%_bindir/htmless
+%_bindir/o3totxt
+%_bindir/trackerd
+%_bindir/tracker-extract
+%_bindir/tracker-files
+%_bindir/tracker-meta-folder
+%_bindir/tracker-query
+%_bindir/tracker-search
+%_bindir/tracker-stats
+%_bindir/tracker-tag
+%_bindir/tracker-thumbnailer
+%dir %_datadir/%name
+%_datadir/%name/*
+%dir %_libdir/%name
+%dir %_libdir/%name/filters
+%dir %_libdir/%name/filters/application
+%_libdir/%name/filters/application/*
+%dir %_libdir/%name/filters/text
+%_libdir/%name/filters/text/*
+%dir %_libdir/%name/thumbnailers
+%dir %_libdir/%name/thumbnailers/application
+%_libdir/%name/thumbnailers/application/*
+%dir %_libdir/%name/thumbnailers/image
+%_libdir/%name/thumbnailers/image/*
+%_mandir/man1/htmless.1*
+%_mandir/man1/trackerd.1*
+%_mandir/man1/tracker-extract.1*
+%_mandir/man1/tracker-files.1*
+%_mandir/man1/tracker-meta-folder.1*
+%_mandir/man1/tracker-query.1*
+%_mandir/man1/tracker-search.1*
+%_mandir/man1/tracker-stats.1*
+%_mandir/man1/tracker-tag.1*
+%_mandir/man1/tracker-thumbnailer.1*
+%_datadir/dbus-1/services/tracker.service
+
+%files common
+%defattr(-,root,root)
+%_datadir/icons/hicolor/16x16/apps/%{name}.png
+%_datadir/icons/hicolor/22x22/apps/%{name}.png
+%_datadir/icons/hicolor/24x24/apps/%{name}.png
+%_datadir/icons/hicolor/32x32/apps/%{name}.png
+%_datadir/icons/hicolor/48x48/apps/%{name}.png
+%_datadir/icons/hicolor/scalable/apps/%{name}.svg
+%_liconsdir/tracker.png
+%_iconsdir/tracker.png
+%_miconsdir/tracker.png
+
+%files search-tool
+%defattr(-,root,root)
+%_bindir/tracker-search-tool
+%_datadir/applications/tracker-search-tool.desktop
+%_mandir/man1/tracker-search-tool.1*
+
+%files preferences
+%defattr(-,root,root)
+%_bindir/tracker-preferences
+%_datadir/applications/tracker-preferences.desktop
+
+%files deskbar-handler
+%defattr(-,root,root)
+%_libdir/deskbar-applet/handlers/tracker-handler.py
+
+%files -n %libname
+%defattr(-,root,root)
+%_libdir/lib*.so.%{major}*
+
+%files -n %libname-devel
+%defattr(-,root,root)
+%_libdir/lib*.so
+%attr(644,root,root) %_libdir/lib*a
+%_includedir/*
+%_libdir/pkgconfig/tracker.pc
+%_libdir/pkgconfig/libtracker-gtk.pc
+
+
