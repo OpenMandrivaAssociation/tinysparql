@@ -1,6 +1,6 @@
 %define name tracker
 %define version 0.6.0
-%define svn 544
+%define svn 591
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
@@ -21,16 +21,11 @@ Source0: %{name}-%{version}.tar.bz2
 License: GPL
 Group: Graphical desktop/GNOME
 Url: http://www.gnome.org/projects/tracker
-%if %svn
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{svn}-buildroot
-%else
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-%endif
 BuildRequires: libsqlite3-devel
 BuildRequires: libdbus-devel
 BuildRequires: libglib2-devel
 BuildRequires: libz-devel
-BuildRequires: libmagic-devel
 BuildRequires: libgmime-devel
 BuildRequires: libgstreamer0.10-devel
 BuildRequires: libpoppler-devel
@@ -131,14 +126,14 @@ desktop-neutral, fast and resource efficient.
 
 %prep
 %if %svn
-%setup -q -n %name-%svn
+%setup -q -n %name
 %else
 %setup -q
 %endif
 
 %build
 ./autogen.sh
-%configure2_5x --enable-deskbar-applet
+%configure --enable-deskbar-applet
 %make
 
 %install
@@ -154,9 +149,9 @@ desktop-file-install --vendor="" \
 # old icons
 
 mkdir -p %buildroot{%_liconsdir,%_miconsdir}
-convert -scale 48 src/tracker-search-tool/tracker.png %buildroot%_liconsdir/tracker.png
-convert -scale 32 src/tracker-search-tool/tracker.png %buildroot%_iconsdir/tracker.png
-convert -scale 16 src/tracker-search-tool/tracker.png %buildroot%_miconsdir/tracker.png
+install -m644 data/icons/48x48/tracker.png %buildroot%_liconsdir/tracker.png
+install -m644 data/icons/32x32/tracker.png %buildroot%_iconsdir/tracker.png
+install -m644 data/icons/16x16/tracker.png %buildroot%_miconsdir/tracker.png
 
 %find_lang %name
 
@@ -176,28 +171,17 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %_sysconfdir/xdg/autostart/trackerd.desktop
 %_bindir/htmless
 %_bindir/o3totxt
-%_bindir/trackerd
-%_bindir/tracker-extract
-%_bindir/tracker-files
-%_bindir/tracker-meta-folder
-%_bindir/tracker-query
-%_bindir/tracker-search
-%_bindir/tracker-stats
-%_bindir/tracker-tag
-%_bindir/tracker-thumbnailer
-%dir %_datadir/%name
-%_datadir/%name/*
-%dir %_libdir/%name
-%dir %_libdir/%name/filters
-%dir %_libdir/%name/filters/application
-%_libdir/%name/filters/application/*
-%dir %_libdir/%name/filters/text
-%_libdir/%name/filters/text/*
-%dir %_libdir/%name/thumbnailers
-%dir %_libdir/%name/thumbnailers/application
-%_libdir/%name/thumbnailers/application/*
-%dir %_libdir/%name/thumbnailers/image
-%_libdir/%name/thumbnailers/image/*
+%_bindir/%{name}d
+%_bindir/%{name}-extract
+%_bindir/%{name}-files
+%_bindir/%{name}-meta-folder
+%_bindir/%{name}-query
+%_bindir/%{name}-search
+%_bindir/%{name}-stats
+%_bindir/%{name}-tag
+%_bindir/%{name}-thumbnailer
+%_datadir/%name
+%_libdir/%name
 %_mandir/man1/htmless.1*
 %_mandir/man1/trackerd.1*
 %_mandir/man1/tracker-extract.1*
@@ -212,15 +196,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files common
 %defattr(-,root,root)
-%_datadir/icons/hicolor/16x16/apps/%{name}.png
-%_datadir/icons/hicolor/22x22/apps/%{name}.png
-%_datadir/icons/hicolor/24x24/apps/%{name}.png
-%_datadir/icons/hicolor/32x32/apps/%{name}.png
-%_datadir/icons/hicolor/48x48/apps/%{name}.png
-%_datadir/icons/hicolor/scalable/apps/%{name}.svg
-%_liconsdir/tracker.png
-%_iconsdir/tracker.png
-%_miconsdir/tracker.png
+%_iconsdir/hicolor/16x16/apps/%{name}.png
+%_iconsdir/hicolor/22x22/apps/%{name}.png
+%_iconsdir/hicolor/24x24/apps/%{name}.png
+%_iconsdir/hicolor/32x32/apps/%{name}.png
+%_iconsdir/hicolor/48x48/apps/%{name}.png
+%_iconsdir/hicolor/scalable/apps/%{name}.svg
+%_iconsdir/%{name}.png
+%_liconsdir/%{name}.png
+%_miconsdir/%{name}.png
 
 %files search-tool
 %defattr(-,root,root)
@@ -248,5 +232,3 @@ rm -rf $RPM_BUILD_ROOT
 %_includedir/*
 %_libdir/pkgconfig/tracker.pc
 %_libdir/pkgconfig/libtracker-gtk.pc
-
-
