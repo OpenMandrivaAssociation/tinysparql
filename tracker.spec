@@ -1,6 +1,6 @@
 %define name tracker
 %define version 0.6.0
-%define svn 591
+%define svn 598
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
@@ -8,6 +8,7 @@
 %endif
 %define major 0
 %define libname %mklibname %name %major
+%define develname %mklibname %name -d
 
 Summary: Desktop-neutral metadata-based search framework
 Name: %{name}
@@ -41,7 +42,6 @@ BuildRequires: libgnome-desktop-2-devel
 BuildRequires: libglib2-devel
 BuildRequires: libglade2.0-devel
 BuildRequires: deskbar-applet
-BuildRequires: desktop-file-utils
 BuildRequires: ImageMagick
 %if %svn
 BuildRequires: gnome-common
@@ -113,13 +113,14 @@ Tracker is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
-%package -n %libname-devel
+%package -n %develname
 Group: Development/C
 Summary: Development library of tracker
 Requires: %libname = %version
-Provides: lib%name-devel = %version-%release
+Obsoletes: %mklibname %name 0 -d
+Provides: %name-devel = %version-%release
 
-%description -n %libname-devel
+%description -n %develname
 Tracker is a tool designed to extract information and metadata about your 
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
@@ -139,19 +140,6 @@ desktop-neutral, fast and resource efficient.
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
-
-desktop-file-install --vendor="" \
-  --remove-category="Utility" \
-  --add-category="X-MandrivaLinux-System-FileTools" \
-  --add-category="System" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/tracker-search-tool.desktop
-
-# old icons
-
-mkdir -p %buildroot{%_liconsdir,%_miconsdir}
-install -m644 data/icons/48x48/tracker.png %buildroot%_liconsdir/tracker.png
-install -m644 data/icons/32x32/tracker.png %buildroot%_iconsdir/tracker.png
-install -m644 data/icons/16x16/tracker.png %buildroot%_miconsdir/tracker.png
 
 %find_lang %name
 
@@ -202,9 +190,6 @@ rm -rf $RPM_BUILD_ROOT
 %_iconsdir/hicolor/32x32/apps/%{name}.png
 %_iconsdir/hicolor/48x48/apps/%{name}.png
 %_iconsdir/hicolor/scalable/apps/%{name}.svg
-%_iconsdir/%{name}.png
-%_liconsdir/%{name}.png
-%_miconsdir/%{name}.png
 
 %files search-tool
 %defattr(-,root,root)
@@ -225,7 +210,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %_libdir/lib*.so.%{major}*
 
-%files -n %libname-devel
+%files -n %develname
 %defattr(-,root,root)
 %_libdir/lib*.so
 %attr(644,root,root) %_libdir/lib*a
