@@ -1,6 +1,6 @@
 %define name tracker
 %define version 0.6.0
-%define svn 598
+%define svn 0
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
@@ -17,9 +17,9 @@ Release: %{release}
 %if %svn
 Source0: %{name}-%{svn}.tar.bz2
 %else
-Source0: %{name}-%{version}.tar.bz2
+Source0: http://www.gnome.org/~jamiemcc/tracker/%{name}-%{version}.tar.gz
 %endif
-License: GPL
+License: GPLv2
 Group: Graphical desktop/GNOME
 Url: http://www.gnome.org/projects/tracker
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -117,7 +117,7 @@ desktop-neutral, fast and resource efficient.
 Group: Development/C
 Summary: Development library of tracker
 Requires: %libname = %version
-Obsoletes: %mklibname %name 0 -d
+Obsoletes: %mklibname tracker 0 -d
 Provides: %name-devel = %version-%release
 
 %description -n %develname
@@ -133,7 +133,9 @@ desktop-neutral, fast and resource efficient.
 %endif
 
 %build
+%if %svn
 ./autogen.sh
+%endif
 %configure --enable-deskbar-applet
 %make
 
@@ -157,7 +159,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc README NEWS AUTHORS ChangeLog
 %config(noreplace) %_sysconfdir/xdg/autostart/trackerd.desktop
-%_bindir/htmless
 %_bindir/o3totxt
 %_bindir/%{name}d
 %_bindir/%{name}-extract
@@ -166,11 +167,11 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/%{name}-query
 %_bindir/%{name}-search
 %_bindir/%{name}-stats
+%_bindir/%{name}-status
 %_bindir/%{name}-tag
 %_bindir/%{name}-thumbnailer
 %_datadir/%name
 %_libdir/%name
-%_mandir/man1/htmless.1*
 %_mandir/man1/trackerd.1*
 %_mandir/man1/tracker-extract.1*
 %_mandir/man1/tracker-files.1*
@@ -178,8 +179,11 @@ rm -rf $RPM_BUILD_ROOT
 %_mandir/man1/tracker-query.1*
 %_mandir/man1/tracker-search.1*
 %_mandir/man1/tracker-stats.1*
+%_mandir/man1/tracker-status.1*
 %_mandir/man1/tracker-tag.1*
 %_mandir/man1/tracker-thumbnailer.1*
+%_mandir/man5/tracker.cfg.5*
+%_mandir/man7/tracker-services.7*
 %_datadir/dbus-1/services/tracker.service
 
 %files common
