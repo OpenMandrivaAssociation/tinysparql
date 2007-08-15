@@ -204,6 +204,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %_bindir/tracker-preferences
 %_datadir/applications/tracker-preferences.desktop
+%_mandir/man1/tracker-preferences.1*
 
 %files deskbar-handler
 %defattr(-,root,root)
