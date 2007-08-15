@@ -1,5 +1,5 @@
 %define name tracker
-%define version 0.6.0
+%define version 0.6.1
 %define svn 0
 %if %svn
 %define release %mkrel 0.%svn.1
@@ -17,9 +17,9 @@ Release: %{release}
 %if %svn
 Source0: %{name}-%{svn}.tar.bz2
 %else
-Source0: http://www.gnome.org/~jamiemcc/tracker/%{name}-%{version}.tar.gz
+Source0: http://www.gnome.org/~jamiemcc/tracker/%{name}-%{version}.tar.bz2
 %endif
-License: GPLv2
+License: GPLv2+ and LGPLv2+
 Group: Graphical desktop/GNOME
 Url: http://www.gnome.org/projects/tracker
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
