@@ -135,7 +135,7 @@ desktop-neutral, fast and resource efficient.
 %if %svn
 ./autogen.sh
 %endif
-%configure --enable-deskbar-applet
+%configure --enable-deskbar-applet=module
 %make
 
 %install
@@ -208,7 +208,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files deskbar-handler
 %defattr(-,root,root)
-%_libdir/deskbar-applet/handlers/tracker-handler.py
+%_libdir/deskbar-applet//modules-2.20-compatible/tracker-module.py
 
 %files -n %libname
 %defattr(-,root,root)
