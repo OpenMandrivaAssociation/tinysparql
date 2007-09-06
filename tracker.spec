@@ -1,5 +1,5 @@
 %define name tracker
-%define version 0.6.1
+%define version 0.6.2
 %define svn 0
 %if %svn
 %define release %mkrel 0.%svn.1
