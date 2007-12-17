@@ -22,7 +22,6 @@ Source0: http://www.gnome.org/~jamiemcc/tracker/%{name}-%{version}.tar.bz2
 License: GPLv2+ and LGPLv2+
 Group: Graphical desktop/GNOME
 Url: http://www.gnome.org/projects/tracker
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: sqlite3-devel
 BuildRequires: dbus-devel
 BuildRequires: glib2-devel
