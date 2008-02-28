@@ -10,7 +10,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	0.6.4
+Version:	0.6.5
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
