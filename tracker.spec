@@ -26,7 +26,7 @@ BuildRequires:	dbus-devel
 BuildRequires:	glib2-devel
 BuildRequires:	zlib-devel
 BuildRequires:	libgmime-devel
-BuildRequires:	libgstreamer0.10-devel
+BuildRequires:	gstreamer0.10-devel
 BuildRequires:	libpoppler-devel
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	libvorbis-devel
