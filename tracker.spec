@@ -38,6 +38,10 @@ BuildRequires:	libgnome2-devel
 BuildRequires:	gnomeui2-devel
 BuildRequires:	gnome-desktop-devel
 BuildRequires:	libglade2.0-devel
+BuildRequires:	libnotify-devel
+BuildRequires:	hal-devel
+BuildRequires:	libpoppler-glib-devel
+BuildRequires:	exempi-devel
 BuildRequires:	deskbar-applet
 BuildRequires:	ImageMagick
 %if %svn
