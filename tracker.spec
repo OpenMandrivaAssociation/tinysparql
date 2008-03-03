@@ -10,7 +10,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	0.6.5
+Version:	0.6.6
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -54,7 +54,7 @@ personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
 %package common
-Summary:	Graphical search tool for tracker search framework
+Summary:	Graphical search tool for Tracker search framework
 Group:		Graphical desktop/GNOME
 Requires:	%{name} = %{version}
 
@@ -65,7 +65,7 @@ desktop-neutral, fast and resource efficient. This package contains common
 files for the tracker framework.
 
 %package search-tool
-Summary:	Graphical search tool for tracker search framework
+Summary:	Graphical search tool for Tracker search framework
 Group:		Graphical desktop/GNOME
 Requires:	%{name} = %{version}
 Requires:	%{name}-common = %{version}
@@ -77,7 +77,7 @@ desktop-neutral, fast and resource efficient. This package contains the
 GNOME-based standalone graphical search tool for the tracker framework.
 
 %package preferences
-Summary:	Configuration tool for tracker search framework
+Summary:	Configuration tool for Tracker search framework
 Group:		Graphical desktop/GNOME
 Requires:	%{name} = %{version}
 Requires:	%{name}-common = %{version}
@@ -89,7 +89,7 @@ desktop-neutral, fast and resource efficient. This package contains the
 GNOME-based configuration tool for the tracker framework.
 
 %package deskbar-handler
-Summary:	Deskbar plugin for tracker search framework
+Summary:	Deskbar plugin for Tracker search framework
 Group:		Graphical desktop/GNOME
 Requires:	%{name} = %{version}
 Requires:	deskbar-applet
@@ -101,9 +101,21 @@ desktop-neutral, fast and resource efficient. This package contains a
 plugin that will allow the deskbar-applet panel search tool to search
 using tracker.
 
+%package applet
+Summary:	Panel applet for Tracker search framework
+Group:		Graphical desktop/GNOME
+Requires:	%{name} = %{version}
+Requires:	%{name}-common = %{version}
+
+%description applet
+Tracker is a tool designed to extract information and metadata about your 
+personal data so that it can be searched easily and quickly. Tracker is
+desktop-neutral, fast and resource efficient. This package contains a
+panel applet for configuring and using Tracker.
+
 %package -n %{libname}
 Group:		System/Libraries
-Summary:	Shared library of tracker
+Summary:	Shared library of Tracker
 
 %description -n %{libname}
 Tracker is a tool designed to extract information and metadata about your 
@@ -112,7 +124,7 @@ desktop-neutral, fast and resource efficient.
 
 %package -n %{develname}
 Group:		Development/C
-Summary:	Development library of tracker
+Summary:	Development library of Tracker
 Requires:	%{libname} = %{version}
 Obsoletes:	%{mklibname tracker 0 -d}
 Provides:	%{name}-devel = %{version}-%{release}
@@ -202,6 +214,12 @@ rm -rf %{buildroot}
 %files deskbar-handler
 %defattr(-,root,root)
 %{_libdir}/deskbar-applet/modules-2.20-compatible/tracker-module.py
+
+%files applet
+%defattr(-,root,root)
+%{_bindir}/tracker-applet
+%{_mandir}/man1/tracker-applet.1*
+%{_sysconfdir}/xdg/autostart/tracker-applet.desktop
 
 %files -n %{libname}
 %defattr(-,root,root)
