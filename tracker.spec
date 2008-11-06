@@ -2,7 +2,7 @@
 %if %svn
 %define release %mkrel 0.%svn.2
 %else
-%define release %mkrel 5
+%define release %mkrel 6
 %endif
 %define major		0
 %define libname		%mklibname %{name} %{major}
