@@ -43,7 +43,7 @@ BuildRequires:	hal-devel
 BuildRequires:	libpoppler-glib-devel
 BuildRequires:	exempi-devel
 BuildRequires:	deskbar-applet
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 %if %svn
 BuildRequires:	gnome-common
 BuildRequires:	intltool
