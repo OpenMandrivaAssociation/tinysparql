@@ -1,8 +1,8 @@
 %define svn 0
 %if %svn
-%define release %mkrel 0.%svn.2
+%define release %mkrel 0.%svn.1
 %else
-%define release %mkrel 7
+%define release %mkrel 8
 %endif
 %define major		0
 %define libname		%mklibname %{name} %{major}
@@ -17,6 +17,7 @@ Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://www.gnome.org/~jamiemcc/tracker/%{name}-%{version}.tar.bz2
 %endif
+Patch:		tracker-0.6.6-format-strings.patch
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
@@ -144,6 +145,7 @@ desktop-neutral, fast and resource efficient.
 %else
 %setup -q
 %endif
+%patch -p1
 
 %build
 %if %svn
