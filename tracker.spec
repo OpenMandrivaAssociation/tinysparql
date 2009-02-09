@@ -2,7 +2,7 @@
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
-%define release %mkrel 8
+%define release %mkrel 1
 %endif
 %define major		0
 %define libname		%mklibname %{name} %{major}
@@ -10,14 +10,13 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	0.6.6
+Version:	0.6.90
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
-Source0:	http://www.gnome.org/~jamiemcc/tracker/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 %endif
-Patch:		tracker-0.6.6-format-strings.patch
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
@@ -27,7 +26,7 @@ BuildRequires:	dbus-devel
 BuildRequires:	glib2-devel
 BuildRequires:	zlib-devel
 BuildRequires:	libgmime-devel
-BuildRequires:	libgstreamer-devel >= 0.10
+BuildRequires:	libgstreamer-plugins-base-devel >= 0.10
 BuildRequires:	libpoppler-devel
 BuildRequires:	pygtk2.0-devel
 BuildRequires:	libvorbis-devel
@@ -40,8 +39,11 @@ BuildRequires:	gnomeui2-devel
 BuildRequires:	gnome-desktop-devel
 BuildRequires:	libglade2.0-devel
 BuildRequires:	libnotify-devel
+BuildRequires:	libtiff-devel
 BuildRequires:	hal-devel
 BuildRequires:	libpoppler-glib-devel
+BuildRequires:	raptor-devel
+BuildRequires:	libstemmer-devel
 BuildRequires:	exempi-devel
 BuildRequires:	deskbar-applet
 BuildRequires:	imagemagick
@@ -145,13 +147,14 @@ desktop-neutral, fast and resource efficient.
 %else
 %setup -q
 %endif
-%patch -p1
+#%patch -p1
 
 %build
 %if %svn
 ./autogen.sh
 %endif
-%configure --enable-deskbar-applet=module
+%define _disable_ld_no_undefined 1
+%configure2_5x --enable-deskbar-applet=module
 %make
 
 %install
@@ -178,32 +181,38 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README NEWS AUTHORS ChangeLog
 %config(noreplace) %{_sysconfdir}/xdg/autostart/trackerd.desktop
-%{_bindir}/o3totxt
-%{_bindir}/%{name}d
-%{_bindir}/%{name}-extract
 %{_bindir}/%{name}-files
+%{_bindir}/%{name}-info
 %{_bindir}/%{name}-meta-folder
 %{_bindir}/%{name}-query
 %{_bindir}/%{name}-search
+%{_bindir}/%{name}-services
 %{_bindir}/%{name}-stats
 %{_bindir}/%{name}-status
 %{_bindir}/%{name}-tag
-%{_bindir}/%{name}-thumbnailer
+%{_bindir}/%{name}-unique
 %{_datadir}/%{name}
 %{_libdir}/%{name}
+%_libexecdir/tracker-extract
+%_libexecdir/tracker-indexer
+%_libexecdir/trackerd
 %{_mandir}/man1/trackerd.1*
 %{_mandir}/man1/tracker-extract.1*
 %{_mandir}/man1/tracker-files.1*
+%{_mandir}/man1/tracker-info.1*
 %{_mandir}/man1/tracker-meta-folder.1*
 %{_mandir}/man1/tracker-query.1*
 %{_mandir}/man1/tracker-search.1*
+%{_mandir}/man1/tracker-services.1*
 %{_mandir}/man1/tracker-stats.1*
 %{_mandir}/man1/tracker-status.1*
 %{_mandir}/man1/tracker-tag.1*
 %{_mandir}/man1/tracker-thumbnailer.1*
+%{_mandir}/man1/tracker-unique.1*
 %{_mandir}/man5/tracker.cfg.5*
-%{_mandir}/man7/tracker-services.7*
-%{_datadir}/dbus-1/services/tracker.service
+%_datadir/dbus-1/services/org.freedesktop.Tracker.Extract.service
+%_datadir/dbus-1/services/org.freedesktop.Tracker.Indexer.service
+%_datadir/dbus-1/services/org.freedesktop.Tracker.service
 
 %files common
 %defattr(-,root,root)
@@ -241,4 +250,7 @@ rm -rf %{buildroot}
 %attr(644,root,root) %{_libdir}/lib*a
 %{_includedir}/*
 %{_libdir}/pkgconfig/tracker.pc
+%{_libdir}/pkgconfig/tracker-module-1.0.pc
 %{_libdir}/pkgconfig/libtracker-gtk.pc
+%_datadir/gtk-doc/html/libtracker-common
+%_datadir/gtk-doc/html/libtracker-module
