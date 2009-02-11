@@ -47,9 +47,9 @@ BuildRequires:	libstemmer-devel
 BuildRequires:	exempi-devel
 BuildRequires:	deskbar-applet
 BuildRequires:	imagemagick
+BuildRequires:	intltool
 %if %svn
 BuildRequires:	gnome-common
-BuildRequires:	intltool
 %endif
 Requires:	libxslt-proc
 Requires:	w3m
