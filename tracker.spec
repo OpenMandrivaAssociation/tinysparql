@@ -160,9 +160,6 @@ desktop-neutral, fast and resource efficient.
 %install
 rm -rf %{buildroot}
 %makeinstall_std
-%if %_lib != lib
-mv %buildroot%_prefix/lib/deskbar* %buildroot%_libdir
-%endif
 
 %find_lang %{name}
 
