@@ -4,12 +4,14 @@
 %else
 %define release %mkrel 1
 %endif
+
+%define name tracker
 %define major		0
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
 
 Summary:	Desktop-neutral metadata-based search framework
-Name:		tracker
+Name:		%{name}
 Version:	0.6.93
 Release:	%{release}
 %if %svn
