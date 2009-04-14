@@ -48,6 +48,7 @@ BuildRequires:	raptor-devel
 BuildRequires:	libstemmer-devel
 BuildRequires:	exempi-devel
 BuildRequires:	deskbar-applet
+BuildRequires:	evolution-devel
 BuildRequires:	imagemagick
 BuildRequires:	intltool
 %if %svn
@@ -121,6 +122,19 @@ Tracker is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient. This package contains a
 panel applet for configuring and using Tracker.
+
+%package -n evolution-tracker
+Group:Networking/Mail
+Summary: Integrate Evolution with the Tracker desktop search
+Requires: evolution
+Requires:	%{name} = %{version}
+
+%description -n evolution-tracker
+Tracker is a tool designed to extract information and metadata about your 
+personal data so that it can be searched easily and quickly. Tracker is
+desktop-neutral, fast and resource efficient. This package contains an
+evolution plugin for Tracker integration.
+
 
 %package -n %{libname}
 Group:		System/Libraries
@@ -261,4 +275,8 @@ rm -rf %{buildroot}
 %_datadir/gtk-doc/html/libtracker-common
 %_datadir/gtk-doc/html/libtracker-module
 
-
+%files -n evolution-tracker
+%defattr(-,root,root)
+%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.la
+%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.so
+%_libdir/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
