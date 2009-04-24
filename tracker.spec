@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 2
+%define release %mkrel 1
 
 %define name tracker
 %define major		0
@@ -8,7 +8,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.6.93
+Version:	0.6.94
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
