@@ -15,6 +15,7 @@ Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 %endif
+Patch:	tracker-gmime-2.4.patch
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
@@ -23,7 +24,7 @@ BuildRequires:	sqlite3-devel
 BuildRequires:	dbus-devel
 BuildRequires:	glib2-devel
 BuildRequires:	zlib-devel
-BuildRequires:	libgmime-devel
+BuildRequires:	libgmime-devel >= 2.4
 BuildRequires:	libgstreamer-plugins-base-devel >= 0.10
 BuildRequires:	libpoppler-devel
 BuildRequires:	pygtk2.0-devel
@@ -159,7 +160,8 @@ desktop-neutral, fast and resource efficient.
 %else
 %setup -q
 %endif
-#%patch -p1
+%patch -p0
+autoreconf
 
 %build
 %if %svn
