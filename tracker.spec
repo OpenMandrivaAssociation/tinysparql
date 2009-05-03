@@ -48,6 +48,7 @@ BuildRequires:	deskbar-applet
 BuildRequires:	evolution-devel
 BuildRequires:	imagemagick
 BuildRequires:	intltool
+BuildRequires:  gtk-doc
 %if %svn
 BuildRequires:	gnome-common
 %endif
