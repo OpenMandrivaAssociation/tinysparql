@@ -162,7 +162,7 @@ desktop-neutral, fast and resource efficient.
 %setup -q
 %endif
 %patch -p0
-autoreconf
+autoreconf -fi
 
 %build
 %if %svn
