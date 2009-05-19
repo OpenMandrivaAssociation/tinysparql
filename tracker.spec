@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define name tracker
 %define major		0
