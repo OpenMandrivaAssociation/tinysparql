@@ -8,7 +8,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.6.94
+Version:	0.6.95
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -161,7 +161,7 @@ desktop-neutral, fast and resource efficient.
 %else
 %setup -q
 %endif
-%patch -p0
+%patch -p1 -b .gmime
 autoreconf -fi
 
 %build
@@ -270,8 +270,8 @@ rm -rf %{buildroot}
 %_datadir/gtk-doc/html/libtracker-common
 %_datadir/gtk-doc/html/libtracker-module
 
-%files -n evolution-tracker
-%defattr(-,root,root)
-%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.la
-%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.so
-%_libdir/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
+#%files -n evolution-tracker
+#%defattr(-,root,root)
+#%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.la
+#%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.so
+#%_libdir/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
