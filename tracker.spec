@@ -27,6 +27,7 @@ BuildRequires:	libxine-devel
 BuildRequires:	sqlite3-devel
 BuildRequires:	dbus-devel
 BuildRequires:	gtk+2-devel >= 2.16
+BuildRequires:	gnome-panel-devel
 BuildRequires:	zlib-devel
 BuildRequires:	libgstreamer-plugins-base-devel >= 0.10
 BuildRequires:	libpoppler-devel
