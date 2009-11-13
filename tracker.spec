@@ -1,30 +1,33 @@
 %define svn 0
-%define release %mkrel 4
+%define release %mkrel 1
 
 %define name tracker
+%define api 0.7
 %define major		0
-%define libname		%mklibname %{name} %{major}
+%define libname		%mklibname %{name} %api %{major}
 %define develname	%mklibname %{name} -d
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.6.95
+Version:	0.7.7
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 %endif
-Patch:	tracker-gmime-2.4.patch
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+#BuildRequires:	quill-devel
+#BuildRequires:	unac-devel
+BuildRequires:	devicekit-power-devel
+BuildRequires:	libxine-devel
 BuildRequires:	sqlite3-devel
 BuildRequires:	dbus-devel
 BuildRequires:	glib2-devel
 BuildRequires:	zlib-devel
-BuildRequires:	libgmime-devel >= 2.4
 BuildRequires:	libgstreamer-plugins-base-devel >= 0.10
 BuildRequires:	libpoppler-devel
 BuildRequires:	pygtk2.0-devel
@@ -36,13 +39,16 @@ BuildRequires:	gamin-devel
 BuildRequires:	libgnome2-devel
 BuildRequires:	gnomeui2-devel
 BuildRequires:	gnome-desktop-devel
-BuildRequires:	libglade2.0-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	hal-devel
 BuildRequires:	libpoppler-glib-devel
 BuildRequires:	raptor-devel
-BuildRequires:	libstemmer-devel
+BuildRequires:	enca-devel
+BuildRequires:	libgee-devel
+BuildRequires:	libiptcdata-devel
+BuildRequires:	totem-plparser-devel
+BuildRequires:  libuuid-devel
 BuildRequires:	exempi-devel
 BuildRequires:	deskbar-applet
 BuildRequires:	evolution-devel
@@ -161,8 +167,6 @@ desktop-neutral, fast and resource efficient.
 %else
 %setup -q
 %endif
-%patch -p1 -b .gmime
-autoreconf -fi
 
 %build
 %if %svn
@@ -194,40 +198,43 @@ rm -rf %{buildroot}
 %files -f %{name}.lang
 %defattr(-,root,root)
 %doc README NEWS AUTHORS ChangeLog
-%config(noreplace) %{_sysconfdir}/xdg/autostart/trackerd.desktop
-%{_bindir}/%{name}-files
+%config(noreplace) %{_sysconfdir}/xdg/autostart/tracker-miner-fs.desktop
+%config(noreplace) %{_sysconfdir}/xdg/autostart/tracker-status-icon.desktop
+%config(noreplace) %{_sysconfdir}/xdg/autostart/tracker-store.desktop
+%{_bindir}/%{name}-control
+%{_bindir}/%{name}-explorer
+%{_bindir}/%{name}-import
 %{_bindir}/%{name}-info
-%{_bindir}/%{name}-meta-folder
-%{_bindir}/%{name}-processes
-%{_bindir}/%{name}-query
 %{_bindir}/%{name}-search
-%{_bindir}/%{name}-services
+%{_bindir}/%{name}-sparql
+%{_bindir}/%{name}-status-icon
 %{_bindir}/%{name}-stats
 %{_bindir}/%{name}-status
 %{_bindir}/%{name}-tag
-%{_bindir}/%{name}-unique
 %{_datadir}/%{name}
-%{_libdir}/%{name}
+%{_libdir}/%{name}-%{api}
 %_libexecdir/tracker-extract
-%_libexecdir/tracker-indexer
-%_libexecdir/trackerd
-%{_mandir}/man1/trackerd.1*
+%{_libexecdir}/%{name}-miner-fs
+%{_libexecdir}/%{name}-store
+%{_mandir}/man1/tracker-control.1*
 %{_mandir}/man1/tracker-extract.1*
-%{_mandir}/man1/tracker-files.1*
+%{_mandir}/man1/tracker-import.1*
 %{_mandir}/man1/tracker-info.1*
-%{_mandir}/man1/tracker-meta-folder.1*
-%{_mandir}/man1/tracker-query.1*
+%{_mandir}/man1/tracker-miner-fs.1*
 %{_mandir}/man1/tracker-search.1*
-%{_mandir}/man1/tracker-services.1*
+%{_mandir}/man1/tracker-sparql.1*
 %{_mandir}/man1/tracker-stats.1*
 %{_mandir}/man1/tracker-status.1*
+%{_mandir}/man1/tracker-status-icon.1*
+%{_mandir}/man1/tracker-store.1*
 %{_mandir}/man1/tracker-tag.1*
-%{_mandir}/man1/tracker-thumbnailer.1*
-%{_mandir}/man1/tracker-unique.1*
-%{_mandir}/man5/tracker.cfg.5*
-%_datadir/dbus-1/services/org.freedesktop.Tracker.Extract.service
-%_datadir/dbus-1/services/org.freedesktop.Tracker.Indexer.service
-%_datadir/dbus-1/services/org.freedesktop.Tracker.service
+%{_mandir}/man5/tracker-extract.cfg.5*
+%{_mandir}/man5/tracker-fts.cfg.5*
+%{_mandir}/man5/tracker-miner-fs.cfg.5*
+%{_mandir}/man5/tracker-store.cfg.5*
+%_datadir/dbus-1/services/org.freedesktop.Tracker1.Extract.service
+%_datadir/dbus-1/services/org.freedesktop.Tracker1.Miner*
+%_datadir/dbus-1/services/org.freedesktop.Tracker1.service
 
 %files common
 %defattr(-,root,root)
@@ -251,27 +258,28 @@ rm -rf %{buildroot}
 
 %files applet
 %defattr(-,root,root)
-%{_bindir}/tracker-applet
-%{_mandir}/man1/tracker-applet.1*
-%{_sysconfdir}/xdg/autostart/tracker-applet.desktop
+%_libdir/bonobo/servers/GNOME_Search_Bar_Applet.server
+%_libexecdir/tracker-search-bar
+%{_mandir}/man1/tracker-search-bar.1*
 
 %files -n %{libname}
 %defattr(-,root,root)
-%{_libdir}/lib*.so.%{major}*
+%{_libdir}/libtracker-client-%api.so.%{major}*
+%{_libdir}/libtracker-gtk-%api.so.%{major}*
 
 %files -n %{develname}
 %defattr(-,root,root)
 %{_libdir}/lib*.so
 %attr(644,root,root) %{_libdir}/lib*a
 %{_includedir}/*
-%{_libdir}/pkgconfig/tracker.pc
-%{_libdir}/pkgconfig/tracker-module-1.0.pc
-%{_libdir}/pkgconfig/libtracker-gtk.pc
+%{_libdir}/pkgconfig/tracker-client-%{api}.pc
+%{_libdir}/pkgconfig/tracker-miner-%{api}.pc
+%{_libdir}/pkgconfig/tracker-gtk-%{api}.pc
 %_datadir/gtk-doc/html/libtracker-common
-%_datadir/gtk-doc/html/libtracker-module
+%_datadir/gtk-doc/html/libtracker-miner
 
-#%files -n evolution-tracker
-#%defattr(-,root,root)
-#%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.la
-#%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.so
-#%_libdir/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
+%files -n evolution-tracker
+%defattr(-,root,root)
+%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.la
+%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.so
+%_libdir/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
