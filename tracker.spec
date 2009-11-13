@@ -53,6 +53,8 @@ BuildRequires:  libuuid-devel
 BuildRequires:	exempi-devel
 BuildRequires:	deskbar-applet
 BuildRequires:	evolution-devel
+#gw libtool dep of evo:
+BuildRequires: gnome-pilot-devel
 BuildRequires:	imagemagick
 BuildRequires:	intltool
 BuildRequires:  gtk-doc
