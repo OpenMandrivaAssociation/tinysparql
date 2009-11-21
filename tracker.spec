@@ -9,7 +9,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.7
+Version:	0.7.8
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
