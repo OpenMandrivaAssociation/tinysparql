@@ -9,7 +9,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.8
+Version:	0.7.9
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -176,6 +176,8 @@ desktop-neutral, fast and resource efficient.
 ./autogen.sh
 %endif
 %define _disable_ld_no_undefined 1
+#gw format string error in generated vala source in tracker 0.7.9
+%define Werror_cflags %nil
 %configure2_5x --enable-deskbar-applet=module
 %make
 
@@ -219,6 +221,7 @@ rm -rf %{buildroot}
 %_libexecdir/tracker-extract
 %{_libexecdir}/%{name}-miner-fs
 %{_libexecdir}/%{name}-store
+%_libexecdir/tracker-writeback
 %{_mandir}/man1/tracker-control.1*
 %{_mandir}/man1/tracker-extract.1*
 %{_mandir}/man1/tracker-import.1*
