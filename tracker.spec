@@ -50,7 +50,7 @@ BuildRequires:	libgee-devel
 BuildRequires:	libiptcdata-devel
 BuildRequires:	totem-plparser-devel
 BuildRequires:  libuuid-devel
-BuildRequires:	exempi-devel
+BuildRequires:	exempi-devel >= 2.1.0
 BuildRequires:	deskbar-applet
 BuildRequires:	evolution-devel
 #gw libtool dep of evo:
