@@ -9,7 +9,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.9
+Version:	0.7.10
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -281,6 +281,7 @@ rm -rf %{buildroot}
 %{_libdir}/pkgconfig/tracker-client-%{api}.pc
 %{_libdir}/pkgconfig/tracker-miner-%{api}.pc
 %{_libdir}/pkgconfig/tracker-gtk-%{api}.pc
+%_datadir/gtk-doc/html/libtracker-client
 %_datadir/gtk-doc/html/libtracker-common
 %_datadir/gtk-doc/html/libtracker-miner
 
