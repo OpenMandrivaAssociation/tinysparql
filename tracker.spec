@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 2
+%define release %mkrel 1
 
 %define name tracker
 %define api 0.7
@@ -7,9 +7,11 @@
 %define libname		%mklibname %{name} %api %{major}
 %define develname	%mklibname %{name} -d
 
+%define build_evo 0
+
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.10
+Version:	0.7.11
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -52,9 +54,6 @@ BuildRequires:	totem-plparser-devel
 BuildRequires:  libuuid-devel
 BuildRequires:	exempi-devel >= 2.1.0
 BuildRequires:	deskbar-applet
-BuildRequires:	evolution-devel
-#gw libtool dep of evo:
-BuildRequires: gnome-pilot-devel
 BuildRequires:	imagemagick
 BuildRequires:	intltool
 BuildRequires:  gtk-doc
@@ -130,18 +129,22 @@ personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient. This package contains a
 panel applet for configuring and using Tracker.
 
+%if %build_evo
 %package -n evolution-tracker
 Group:Networking/Mail
 Summary: Integrate Evolution with the Tracker desktop search
 Requires: evolution
 Requires:	%{name} = %{version}
+BuildRequires:	evolution-devel
+#gw libtool dep of evo:
+BuildRequires: gnome-pilot-devel
 
 %description -n evolution-tracker
 Tracker is a tool designed to extract information and metadata about your 
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient. This package contains an
 evolution plugin for Tracker integration.
-
+%endif
 
 %package -n %{libname}
 Group:		System/Libraries
@@ -178,7 +181,11 @@ desktop-neutral, fast and resource efficient.
 %define _disable_ld_no_undefined 1
 #gw format string error in generated vala source in tracker 0.7.9
 %define Werror_cflags %nil
-%configure2_5x --enable-deskbar-applet=module
+%configure2_5x --enable-deskbar-applet=module \
+%if !%build_evo
+--disable-evolution-miner
+%endif
+
 %make
 
 %install
@@ -285,8 +292,10 @@ rm -rf %{buildroot}
 %_datadir/gtk-doc/html/libtracker-common
 %_datadir/gtk-doc/html/libtracker-miner
 
+%if %build_evo
 %files -n evolution-tracker
 %defattr(-,root,root)
 %_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.la
 %_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.so
 %_libdir/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
+%endif
