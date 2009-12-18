@@ -11,7 +11,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.11
+Version:	0.7.12
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -146,6 +146,19 @@ desktop-neutral, fast and resource efficient. This package contains an
 evolution plugin for Tracker integration.
 %endif
 
+%package -n nautilus-tracker
+Group: Graphical desktop/GNOME
+Summary: Nautilus integration of tracker
+Requires:	%{name} = %{version}
+BuildRequires: nautilus-devel
+
+%description -n nautilus-tracker
+Tracker is a tool designed to extract information and metadata about your 
+personal data so that it can be searched easily and quickly. Tracker is
+desktop-neutral, fast and resource efficient. This package contains an
+nautilus plugin for Tracker integration.
+
+
 %package -n %{libname}
 Group:		System/Libraries
 Summary:	Shared library of Tracker
@@ -181,7 +194,7 @@ desktop-neutral, fast and resource efficient.
 %define _disable_ld_no_undefined 1
 #gw format string error in generated vala source in tracker 0.7.9
 %define Werror_cflags %nil
-%configure2_5x --enable-deskbar-applet=module \
+%configure2_5x --enable-deskbar-applet=module --enable-gtk-doc \
 %if !%build_evo
 --disable-evolution-miner
 %endif
@@ -291,6 +304,7 @@ rm -rf %{buildroot}
 %_datadir/gtk-doc/html/libtracker-client
 %_datadir/gtk-doc/html/libtracker-common
 %_datadir/gtk-doc/html/libtracker-miner
+%_datadir/gtk-doc/html/ontology
 
 %if %build_evo
 %files -n evolution-tracker
@@ -299,3 +313,7 @@ rm -rf %{buildroot}
 %_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.so
 %_libdir/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
 %endif
+
+%files -n nautilus-tracker
+%defattr(-,root,root)
+%_libdir/nautilus/extensions-2.0/libnautilus-tracker-tags*
