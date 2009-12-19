@@ -58,6 +58,7 @@ BuildRequires:	imagemagick
 BuildRequires:  graphviz
 BuildRequires:	intltool
 BuildRequires:  gtk-doc
+BuildRequires:  docbook-dtd412-xml
 %if %svn
 BuildRequires:	gnome-common
 %endif
