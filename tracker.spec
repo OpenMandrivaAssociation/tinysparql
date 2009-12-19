@@ -55,6 +55,7 @@ BuildRequires:  libuuid-devel
 BuildRequires:	exempi-devel >= 2.1.0
 BuildRequires:	deskbar-applet
 BuildRequires:	imagemagick
+BuildRequires:  graphviz
 BuildRequires:	intltool
 BuildRequires:  gtk-doc
 %if %svn
