@@ -11,7 +11,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.12
+Version:	0.7.13
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -59,9 +59,9 @@ BuildRequires:  graphviz
 BuildRequires:	intltool
 BuildRequires:  gtk-doc
 BuildRequires:  docbook-dtd412-xml
-%if %svn
+#if %svn
 BuildRequires:	gnome-common
-%endif
+#endif
 Requires:	libxslt-proc
 Requires:	w3m
 Requires:	wv
@@ -188,6 +188,8 @@ desktop-neutral, fast and resource efficient.
 %else
 %setup -q
 %endif
+#gw gtk-doc 1.13 issue
+gnome-autogen.sh
 
 %build
 %if %svn
