@@ -65,6 +65,7 @@ BuildRequires:	gnome-common
 Requires:	libxslt-proc
 Requires:	w3m
 Requires:	wv
+Requires:	odt2txt
 
 %description
 Tracker is a framework designed to extract information and metadata about your 
