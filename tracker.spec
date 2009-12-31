@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define name tracker
 %define api 0.7
@@ -8,6 +8,9 @@
 %define develname	%mklibname %{name} -d
 
 %define build_evo 0
+%if %mdvver <= 201000
+%define build_evo 1
+%endif
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
@@ -26,6 +29,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 #BuildRequires:	unac-devel
 BuildRequires:	devicekit-power-devel
 BuildRequires:	libxine-devel
+BuildRequires:	id3lib-devel
 BuildRequires:	sqlite3-devel
 BuildRequires:	dbus-devel
 BuildRequires:	gtk+2-devel >= 2.16
