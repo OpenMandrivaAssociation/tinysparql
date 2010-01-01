@@ -55,7 +55,11 @@ BuildRequires:	enca-devel
 BuildRequires:	libgee-devel
 BuildRequires:	libiptcdata-devel
 BuildRequires:	totem-plparser-devel
+%if %mdvver < 201000
+BuildRequires:  ext2fs-devel
+%else
 BuildRequires:  libuuid-devel
+%endif
 BuildRequires:	exempi-devel >= 2.1.0
 BuildRequires:	deskbar-applet
 BuildRequires:	imagemagick
