@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define name tracker
 %define api 0.7
@@ -26,7 +26,7 @@ Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 #BuildRequires:	quill-devel
-#BuildRequires:	unac-devel
+BuildRequires:	unac-devel
 BuildRequires:	devicekit-power-devel
 BuildRequires:	libxine-devel
 BuildRequires:	id3lib-devel
@@ -208,6 +208,7 @@ gnome-autogen.sh
 #gw format string error in generated vala source in tracker 0.7.9
 %define Werror_cflags %nil
 %configure2_5x --enable-deskbar-applet=module --enable-gtk-doc \
+--enable-libvorbis \
 %if !%build_evo
 --disable-evolution-miner
 %endif
