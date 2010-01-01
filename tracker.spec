@@ -30,7 +30,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	devicekit-power-devel
 BuildRequires:	libxine-devel
 BuildRequires:	id3lib-devel
-BuildRequires:	sqlite3-devel
+BuildRequires:	sqlite3-devel >= 3.6.16
 BuildRequires:	dbus-devel
 BuildRequires:	gtk+2-devel >= 2.16
 BuildRequires:	gnome-panel-devel
