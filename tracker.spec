@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 2
+%define release %mkrel 1
 
 %define name tracker
 %define api 0.7
@@ -14,7 +14,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.15
+Version:	0.7.16
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -31,7 +31,7 @@ BuildRequires:	devicekit-power-devel
 BuildRequires:	libxine-devel
 BuildRequires:	id3lib-devel
 BuildRequires:	sqlite3-devel >= 3.6.16
-BuildRequires:	dbus-devel
+BuildRequires:	dbus-glib-devel > 0.82-1mdv2010.0
 BuildRequires:	gtk+2-devel >= 2.16
 BuildRequires:	gnome-panel-devel
 BuildRequires:	zlib-devel
@@ -55,6 +55,7 @@ BuildRequires:	enca-devel
 BuildRequires:	libgee-devel
 BuildRequires:	libiptcdata-devel
 BuildRequires:	totem-plparser-devel
+BuildRequires:	wv2-devel
 %if %mdvver < 201000
 BuildRequires:  ext2fs-devel
 %else
@@ -72,7 +73,6 @@ BuildRequires:	gnome-common
 #endif
 Requires:	libxslt-proc
 Requires:	w3m
-Requires:	wv
 Requires:	odt2txt
 
 %description
@@ -197,8 +197,6 @@ desktop-neutral, fast and resource efficient.
 %else
 %setup -q
 %endif
-#gw gtk-doc 1.13 issue
-gnome-autogen.sh
 
 %build
 %if %svn
