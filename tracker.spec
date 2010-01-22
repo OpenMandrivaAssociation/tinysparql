@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define name tracker
 %define api 0.7
@@ -71,8 +71,6 @@ BuildRequires:  docbook-dtd412-xml
 #if %svn
 BuildRequires:	gnome-common
 #endif
-Requires:	libxslt-proc
-Requires:	w3m
 Requires:	odt2txt
 
 %description
