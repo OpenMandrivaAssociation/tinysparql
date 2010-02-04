@@ -14,7 +14,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.18
+Version:	0.7.19
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
