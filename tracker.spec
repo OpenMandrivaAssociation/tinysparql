@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define name tracker
 %define api 0.7
@@ -25,8 +25,9 @@ License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-#BuildRequires:	quill-devel
-BuildRequires:	unac-devel
+#gw disabled for now: 
+# https://bugzilla.gnome.org/show_bug.cgi?id=609850
+#BuildRequires:	unac-devel
 BuildRequires:	devicekit-power-devel
 BuildRequires:	libxine-devel
 BuildRequires:	id3lib-devel
