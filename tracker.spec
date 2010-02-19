@@ -33,7 +33,7 @@ BuildRequires:	libxine-devel
 BuildRequires:	id3lib-devel
 BuildRequires:	sqlite3-devel >= 3.6.16
 BuildRequires:	dbus-glib-devel > 0.82-1mdv2010.0
-BuildRequires:	gtk+2-devel >= 2.16
+BuildRequires:	gtk+2-devel >= 2.18
 BuildRequires:	gnome-panel-devel
 BuildRequires:	zlib-devel
 BuildRequires:	libgstreamer-plugins-base-devel >= 0.10
@@ -57,11 +57,7 @@ BuildRequires:	libgee-devel
 BuildRequires:	libiptcdata-devel
 BuildRequires:	totem-plparser-devel
 BuildRequires:	wv2-devel
-%if %mdvver < 201000
-BuildRequires:  ext2fs-devel
-%else
 BuildRequires:  libuuid-devel
-%endif
 BuildRequires:	exempi-devel >= 2.1.0
 BuildRequires:	deskbar-applet
 BuildRequires:	imagemagick
@@ -216,17 +212,6 @@ desktop-neutral, fast and resource efficient.
 rm -rf %{buildroot}
 %makeinstall_std
 %find_lang %{name}
-
-%if %mdkversion < 200900
-%post search-tool
-%{update_icon_cache hicolor}
-%{update_menus}
-%endif
-%if %mdkversion < 200900
-%postun search-tool
-%{clean_icon_cache hicolor}
-%{clean_menus}
-%endif
 
 %clean
 rm -rf %{buildroot}
