@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define name tracker
 %define api 0.7
@@ -21,13 +21,14 @@ Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 %endif
+#gw fix for unac crash
+# https://bugzilla.gnome.org/show_bug.cgi?id=609850
+Patch: tracker-fix-unac-crash.patch
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-#gw disabled for now: 
-# https://bugzilla.gnome.org/show_bug.cgi?id=609850
-#BuildRequires:	unac-devel
+BuildRequires:	unac-devel
 BuildRequires:	devicekit-power-devel
 BuildRequires:	libxine-devel
 BuildRequires:	id3lib-devel
@@ -49,7 +50,6 @@ BuildRequires:	gnomeui2-devel
 BuildRequires:	gnome-desktop-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	hal-devel
 BuildRequires:	libpoppler-glib-devel
 BuildRequires:	raptor-devel
 BuildRequires:	enca-devel
@@ -192,6 +192,8 @@ desktop-neutral, fast and resource efficient.
 %else
 %setup -q
 %endif
+%apply_patches
+
 
 %build
 %if %svn
@@ -201,7 +203,7 @@ desktop-neutral, fast and resource efficient.
 #gw format string error in generated vala source in tracker 0.7.9
 %define Werror_cflags %nil
 %configure2_5x --enable-deskbar-applet=module --enable-gtk-doc \
---enable-libvorbis \
+--enable-libvorbis --enable-unac \
 %if !%build_evo
 --disable-evolution-miner
 %endif
