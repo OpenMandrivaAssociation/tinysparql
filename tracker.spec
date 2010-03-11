@@ -24,7 +24,11 @@ Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	unac-devel
+%if %mdvver > 201000
+BuildRequires: UPower-devel
+%else
 BuildRequires:	devicekit-power-devel
+%endif
 BuildRequires:	libxine-devel
 BuildRequires:	id3lib-devel
 BuildRequires:	sqlite3-devel >= 3.6.16
