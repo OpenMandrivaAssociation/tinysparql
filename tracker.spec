@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define name tracker
 %define api 0.7
@@ -7,10 +7,7 @@
 %define libname		%mklibname %{name} %api %{major}
 %define develname	%mklibname %{name} -d
 
-%define build_evo 0
-%if %mdvver <= 201000
 %define build_evo 1
-%endif
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
@@ -199,9 +196,6 @@ desktop-neutral, fast and resource efficient.
 %if %svn
 ./autogen.sh
 %endif
-%define _disable_ld_no_undefined 1
-#gw format string error in generated vala source in tracker 0.7.9
-%define Werror_cflags %nil
 %configure2_5x --enable-deskbar-applet=module --enable-gtk-doc \
 --enable-libvorbis --enable-unac \
 %if !%build_evo
