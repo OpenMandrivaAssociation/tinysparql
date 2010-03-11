@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 3
+%define release %mkrel 1
 
 %define name tracker
 %define api 0.7
@@ -11,16 +11,14 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.24
+Version:	0.7.25
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 %endif
-#gw fix for unac crash
-# https://bugzilla.gnome.org/show_bug.cgi?id=609850
-Patch: tracker-fix-unac-crash.patch
+Patch0: tracker-0.7.25-fix-linking.patch
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
@@ -190,7 +188,7 @@ desktop-neutral, fast and resource efficient.
 %setup -q
 %endif
 %apply_patches
-
+autoreconf -fi
 
 %build
 %if %svn
