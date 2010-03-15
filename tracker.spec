@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define name tracker
 %define api 0.7
@@ -19,6 +19,9 @@ Source0:	%{name}-%{svn}.tar.bz2
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 %endif
 Patch0: tracker-0.7.25-fix-linking.patch
+#gw plugin does not work with evo 2.29
+#http://bugzilla.gnome.org/show_bug.cgi?id=612744
+Patch1: tracker-fix-evolution-plugin.patch
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
