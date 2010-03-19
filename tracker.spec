@@ -11,17 +11,13 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.26
+Version:	0.7.27
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 %endif
-#gw missing from the tarball:
-#https://bugzilla.gnome.org/show_bug.cgi?id=613268
-Source1: tracker-miner-web.xml
-Patch0: tracker-add-missing-file.patch
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
@@ -195,8 +191,7 @@ desktop-neutral, fast and resource efficient.
 %setup -q
 %endif
 %apply_patches
-autoreconf -fi
-cp -i %SOURCE1 data/dbus/
+#autoreconf -fi
 
 %build
 %if %svn
