@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define name tracker
 %define api 0.7
@@ -67,6 +67,8 @@ BuildRequires:  docbook-dtd412-xml
 BuildRequires:	gnome-common
 #endif
 Requires:	odt2txt
+#gw libtracker-common is in the main package and not provided
+%define _requires_exceptions libtracker-common
 
 %description
 Tracker is a framework designed to extract information and metadata about your 
