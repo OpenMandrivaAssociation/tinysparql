@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 2
+%define release %mkrel 1
 
 %define name tracker
 %define api 0.7
@@ -11,7 +11,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.7.27
+Version:	0.7.28
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -57,7 +57,6 @@ BuildRequires:	totem-plparser-devel
 BuildRequires:	wv2-devel
 BuildRequires:  libuuid-devel
 BuildRequires:	exempi-devel >= 2.1.0
-BuildRequires:	deskbar-applet
 BuildRequires:	imagemagick
 BuildRequires:  graphviz
 BuildRequires:	intltool
@@ -109,19 +108,6 @@ Tracker is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient. This package contains the
 GNOME-based configuration tool for the tracker framework.
-
-%package deskbar-handler
-Summary:	Deskbar plugin for Tracker search framework
-Group:		Graphical desktop/GNOME
-Requires:	%{name} = %{version}
-Requires:	deskbar-applet
-
-%description deskbar-handler
-Tracker is a tool designed to extract information and metadata about your 
-personal data so that it can be searched easily and quickly. Tracker is
-desktop-neutral, fast and resource efficient. This package contains a
-plugin that will allow the deskbar-applet panel search tool to search
-using tracker.
 
 %package applet
 Summary:	Panel applet for Tracker search framework
@@ -272,10 +258,6 @@ rm -rf %{buildroot}
 %{_bindir}/tracker-preferences
 %{_datadir}/applications/tracker-preferences.desktop
 %{_mandir}/man1/tracker-preferences.1*
-
-%files deskbar-handler
-%defattr(-,root,root)
-%{_libdir}/deskbar-applet/modules-2.20-compatible/tracker-module.py
 
 %files applet
 %defattr(-,root,root)
