@@ -185,7 +185,7 @@ desktop-neutral, fast and resource efficient.
 %if %svn
 ./autogen.sh
 %endif
-%configure2_5x --enable-deskbar-applet=module --enable-gtk-doc \
+%configure2_5x --enable-gtk-doc \
 --enable-libvorbis --enable-unac \
 %if !%build_evo
 --disable-evolution-miner
