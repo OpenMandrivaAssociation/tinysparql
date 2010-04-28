@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 3
+%define release %mkrel 4
 
 %define name tracker
 %define api 0.8
