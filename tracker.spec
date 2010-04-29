@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 4
+%define release %mkrel 1
 
 %define name tracker
 %define api 0.8
@@ -11,15 +11,13 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.8.3
+Version:	0.8.4
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 %endif
-# (fc) 0.8.3-3mdv fix evolution plugin (GNOME bug #615930) (GIT)
-Patch0:		tracker-0.8.3-fix-evolution-plugin.patch
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
