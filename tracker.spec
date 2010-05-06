@@ -11,7 +11,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.8.4
+Version:	0.8.5
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -290,6 +290,7 @@ rm -rf %{buildroot}
 %_datadir/gtk-doc/html/ontology
 %_datadir/vala/vapi/tracker-client-%api.vapi
 %_datadir/vala/vapi/tracker-miner-%api.vapi
+%_datadir/vala/vapi/tracker-miner-%api.deps
 %_datadir/tracker-tests
 
 %if %build_evo
