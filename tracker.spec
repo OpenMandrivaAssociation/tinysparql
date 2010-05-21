@@ -67,6 +67,8 @@ BuildRequires:	intltool
 BuildRequires:  gtk-doc
 BuildRequires:  docbook-dtd412-xml
 BuildRequires:  desktop-file-utils
+#need by patch0
+BuildRequires:  vala
 #if %svn
 BuildRequires:	gnome-common
 #endif
