@@ -1,5 +1,5 @@
 %define svn 0
-%define release %mkrel 2
+%define release %mkrel 1
 
 %define name tracker
 %define api 0.8
@@ -11,17 +11,13 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
-Version:	0.8.7
+Version:	0.8.11
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 %endif
-# (fc) 0.8.7-1mdv fix tracker UI in non-UTF8 locale (GNOME bug #616540)
-Patch0:		tracker-0.8.7-nonutf8-locale.patch
-# (fc) 0.8.7-1mdv handle renaming file to non-ascii filename in non-UTF8 locale (GNOME bug #619280)
-Patch1:		tracker-0.8.7-rename-nonutf8.patch
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
