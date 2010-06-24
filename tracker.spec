@@ -32,6 +32,7 @@ BuildRequires:	libxine-devel
 BuildRequires:	id3lib-devel
 BuildRequires:	sqlite3-devel >= 3.6.16
 BuildRequires:	dbus-glib-devel > 0.82-1mdv2010.0
+BuildRequires:	glib2-devel >= 2.24
 BuildRequires:	gtk+2-devel >= 2.18
 BuildRequires:	gnome-panel-devel
 BuildRequires:	zlib-devel
