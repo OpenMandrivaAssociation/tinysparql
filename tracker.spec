@@ -7,7 +7,7 @@
 %define libname		%mklibname %{name} %api %{major}
 %define develname	%mklibname %{name} -d
 
-%define build_evo 1
+%define build_evo 0
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
@@ -192,7 +192,7 @@ desktop-neutral, fast and resource efficient.
 %configure2_5x --enable-gtk-doc \
 --enable-libvorbis --enable-unac \
 %if !%build_evo
---disable-evolution-miner
+--disable-miner-evolution
 %endif
 
 %make
