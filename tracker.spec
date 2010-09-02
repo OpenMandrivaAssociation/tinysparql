@@ -8,6 +8,9 @@
 %define develname	%mklibname %{name} -d
 
 %define build_evo 1
+%if %mdvver > 201100
+%define build_evo 0
+%endif
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		%{name}
