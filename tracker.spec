@@ -183,7 +183,7 @@ desktop-neutral, fast and resource efficient.
 %else
 %setup -q
 %endif
-%if %mdvver < 201100
+%if %mdvver >= 201100
 %apply_patches
 %endif
 #autoreconf -fi
