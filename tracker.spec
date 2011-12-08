@@ -2,6 +2,7 @@
 %define major		0
 %define gir_major	0.12
 %define libname		%mklibname %{name} %{api} %{major}
+%define girname		%mklibname %{name}-gir %{gir_major}
 %define develname	%mklibname %{name} -d
 
 %define build_evo 1
@@ -17,10 +18,11 @@ Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 Patch0:		tracker-0.12.8-linkage.patch
 Patch1:		tracker-0.12.7-gthread.patch
 
+BuildRequires:	desktop-file-utils
 BuildRequires:	intltool
 BuildRequires:	giflib-devel
 BuildRequires:	tiff-devel
@@ -82,18 +84,6 @@ personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient. This package contains common
 files for the tracker framework.
 
-%package search-tool
-Summary:	Graphical search tool for Tracker search framework
-Group:		Graphical desktop/GNOME
-Requires:	%{name} = %{version}-%{release}
-Requires:	%{name}-common = %{version}-%{release}
-
-%description search-tool
-Tracker is a tool designed to extract information and metadata about your 
-personal data so that it can be searched easily and quickly. Tracker is
-desktop-neutral, fast and resource efficient. This package contains the
-GNOME-based standalone graphical search tool for the tracker framework.
-
 %package preferences
 Summary:	Configuration tool for Tracker search framework
 Group:		Graphical desktop/GNOME
@@ -124,7 +114,7 @@ Group:Networking/Mail
 Summary: Integrate Evolution with the Tracker desktop search
 Requires: evolution
 Requires:	%{name} = %{version}-%{release}
-BuildRequires:	evolution-devel
+BuildRequires:	pkgconfig(evolution-shell-3.0)
 #gw libtool dep of evo:
 BuildRequires: gnome-pilot-devel
 
@@ -213,52 +203,39 @@ desktop-file-install \
 
 %files -f %{name}.lang
 %doc README NEWS AUTHORS ChangeLog
-%config(noreplace) %{_sysconfdir}/xdg/autostart/tracker-miner-fs.desktop
-%config(noreplace) %{_sysconfdir}/xdg/autostart/tracker-status-icon.desktop
-%config(noreplace) %{_sysconfdir}/xdg/autostart/tracker-store.desktop
+%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-flickr.desktop
+%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-fs.desktop
+%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-store.desktop
 %{_bindir}/%{name}-control
 %{_bindir}/%{name}-explorer
 %{_bindir}/%{name}-import
 %{_bindir}/%{name}-info
+%{_bindir}/%{name}-needle
 %{_bindir}/%{name}-search
 %{_bindir}/%{name}-sparql
-%{_bindir}/%{name}-status-icon
 %{_bindir}/%{name}-stats
-%{_bindir}/%{name}-status
 %{_bindir}/%{name}-tag
 %{_datadir}/%{name}
 %{_libdir}/%{name}-%{api}
-%{_libexecdir}/tracker-extract
+%{_libexecdir}/%{name}-extract
+%{_libexecdir}/%{name}-miner-flickr
 %{_libexecdir}/%{name}-miner-fs
 %{_libexecdir}/%{name}-store
 %{_libexecdir}/tracker-writeback
-%{_mandir}/man1/tracker-control.1*
-%{_mandir}/man1/tracker-extract.1*
-%{_mandir}/man1/tracker-import.1*
-%{_mandir}/man1/tracker-info.1*
-%{_mandir}/man1/tracker-miner-fs.1*
-%{_mandir}/man1/tracker-search.1*
-%{_mandir}/man1/tracker-sparql.1*
-%{_mandir}/man1/tracker-stats.1*
-%{_mandir}/man1/tracker-status.1*
-%{_mandir}/man1/tracker-status-icon.1*
-%{_mandir}/man1/tracker-store.1*
-%{_mandir}/man1/tracker-tag.1*
-%{_mandir}/man5/tracker-extract.cfg.5*
-%{_mandir}/man5/tracker-fts.cfg.5*
-%{_mandir}/man5/tracker-miner-fs.cfg.5*
-%{_mandir}/man5/tracker-store.cfg.5*
-%_datadir/dbus-1/services/org.freedesktop.Tracker1.Extract.service
-%_datadir/dbus-1/services/org.freedesktop.Tracker1.Miner*
-%_datadir/dbus-1/services/org.freedesktop.Tracker1.service
+%{_mandir}/man1/tracker-*.1*
+%exclude %{_mandir}/man1/tracker-preferences.1*
+%exclude %{_mandir}/man1/tracker-search-bar.1*
+%{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Extract.service
+%{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
+%{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
+%{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
+%{_datadir}/dbus-1/services/org.gnome.panel.applet.SearchBarFactory.service
+%{_datadir}/gnome-panel/4.0/applets/org.gnome.panel.SearchBar.panel-applet
+%{_datadir}/applications/tracker-needle.desktop
+%{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
 
 %files common
 %{_iconsdir}/hicolor/*/apps/%{name}.*
-
-%files search-tool
-%{_bindir}/tracker-search-tool
-%{_datadir}/applications/tracker-search-tool.desktop
-%{_mandir}/man1/tracker-search-tool.1*
 
 %files preferences
 %{_bindir}/tracker-preferences
@@ -266,44 +243,42 @@ desktop-file-install \
 %{_mandir}/man1/tracker-preferences.1*
 
 %files applet
-%_libdir/bonobo/servers/GNOME_Search_Bar_Applet.server
 %{_libexecdir}/tracker-search-bar
 %{_mandir}/man1/tracker-search-bar.1*
 
 %files -n %{libname}
-%{_libdir}/libtracker-client-%{api}.so.%{major}*
 %{_libdir}/libtracker-extract-%{api}.so.%{major}*
 %{_libdir}/libtracker-miner-%{api}.so.%{major}*
+%{_libdir}/libtracker-sparql-%{api}.so.%{major}*
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/Tracker-%{girmajor}.typelib
-%{_libdir}/girepository-1.0/TrackerExtract-%{girmajor}.typelib
-%{_libdir}/girepository-1.0/TrackerMiner-%{girmajor}.typelib
+%{_libdir}/girepository-1.0/Tracker-%{gir_major}.typelib
+%{_libdir}/girepository-1.0/TrackerExtract-%{gir_major}.typelib
+%{_libdir}/girepository-1.0/TrackerMiner-%{gir_major}.typelib
 
 %files -n %{develname}
 %{_libdir}/lib*.so
-%{_includedir}/*
-%{_libdir}/pkgconfig/tracker-client-%{api}.pc
+%{_includedir}/%{name}-%{api}/*
 %{_libdir}/pkgconfig/tracker-extract-%{api}.pc
 %{_libdir}/pkgconfig/tracker-miner-%{api}.pc
-%_datadir/gtk-doc/html/libtracker-client
-%_datadir/gtk-doc/html/libtracker-common
-%_datadir/gtk-doc/html/libtracker-extract
-%_datadir/gtk-doc/html/libtracker-miner
-%_datadir/gtk-doc/html/ontology
-%_datadir/vala/vapi/tracker-client-%{api}.vapi
-%_datadir/vala/vapi/tracker-miner-%{api}.vapi
-%_datadir/vala/vapi/tracker-miner-%{api}.deps
-%{_datadir}/gir-1.0/Tracker-%{girmajor}.gir
-%{_datadir}/gir-1.0/TrackerExtract-%{girmajor}.gir
-%{_datadir}/gir-1.0/TrackerMiner-%{girmajor}.gir
+%{_libdir}/pkgconfig/tracker-sparql-%{api}.pc
+%{_datadir}/gtk-doc/html/libtracker-extract
+%{_datadir}/gtk-doc/html/libtracker-miner
+%{_datadir}/gtk-doc/html/libtracker-sparql
+%{_datadir}/vala/vapi/tracker-miner-%{api}.vapi
+%{_datadir}/vala/vapi/tracker-miner-%{api}.deps
+%{_datadir}/vala/vapi/tracker-sparql-%{api}.vapi
+%{_datadir}/vala/vapi/tracker-sparql-%{api}.deps
+%{_datadir}/gir-1.0/Tracker-%{gir_major}.gir
+%{_datadir}/gir-1.0/TrackerExtract-%{gir_major}.gir
+%{_datadir}/gir-1.0/TrackerMiner-%{gir_major}.gir
 
 %if %{build_evo}
 %files -n evolution-tracker
-%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.la
-%_libdir/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.so
-%_libdir/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
+%{_libdir}/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.so
+%{_libdir}/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
 %endif
 
 %files -n nautilus-tracker
-%_libdir/nautilus/extensions-3.0/libnautilus-tracker-tags*
+%{_libdir}/nautilus/extensions-3.0/libnautilus-tracker-tags*
+
