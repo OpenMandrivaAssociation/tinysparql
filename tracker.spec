@@ -216,7 +216,10 @@ desktop-file-install \
 %{_bindir}/%{name}-stats
 %{_bindir}/%{name}-tag
 %{_datadir}/%{name}
-%{_libdir}/%{name}-%{api}
+%dir %{_libdir}/%{name}-%{api}/extract-modules
+%dir %{_libdir}/%{name}-%{api}/writeback-modules
+%{_libdir}/%{name}-%{api}/extract-modules/*.so
+%{_libdir}/%{name}-%{api}/writeback-modules/*.so
 %{_libexecdir}/%{name}-extract
 %{_libexecdir}/%{name}-miner-flickr
 %{_libexecdir}/%{name}-miner-fs
@@ -250,6 +253,7 @@ desktop-file-install \
 %{_libdir}/libtracker-extract-%{api}.so.%{major}*
 %{_libdir}/libtracker-miner-%{api}.so.%{major}*
 %{_libdir}/libtracker-sparql-%{api}.so.%{major}*
+%{_libdir}/%{name}-%{api}/libtracker-*.so.%{major}*
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Tracker-%{gir_major}.typelib
@@ -258,6 +262,7 @@ desktop-file-install \
 
 %files -n %{develname}
 %{_libdir}/lib*.so
+%{_libdir}/%{name}-%{api}/libtracker-*.so
 %{_includedir}/%{name}-%{api}/*
 %{_libdir}/pkgconfig/tracker-extract-%{api}.pc
 %{_libdir}/pkgconfig/tracker-miner-%{api}.pc
