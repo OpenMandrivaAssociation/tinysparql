@@ -186,7 +186,7 @@ desktop-neutral, fast and resource efficient.
 	--enable-miner-evolution 
 %endif
 
-%make
+%make  LIBS='-lgmodule-2.0'
 
 %install
 rm -rf %{buildroot}
