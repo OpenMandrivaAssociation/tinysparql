@@ -23,6 +23,7 @@ Patch0:		tracker-0.12.8-linkage.patch
 Patch1:		tracker-0.12.7-gthread.patch
 
 BuildRequires:	desktop-file-utils
+BuildRequires:	glib2.0-common
 BuildRequires:	intltool
 BuildRequires:	giflib-devel
 BuildRequires:	tiff-devel
