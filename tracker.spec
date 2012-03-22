@@ -14,19 +14,20 @@
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
 Version:	0.12.10
-Release:	1
+Release:	2
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 Patch0:		tracker-0.12.8-linkage.patch
-BuildRequires:	desktop-file-utils
-BuildRequires:	glib2.0-common
-BuildRequires:	intltool
-BuildRequires:	giflib-devel
-BuildRequires:	tiff-devel
-BuildRequires:	jpeg-devel
-BuildRequires:	libunistring-devel
+
+BuildRequires: desktop-file-utils
+BuildRequires: glib2.0-common
+BuildRequires: intltool
+BuildRequires: giflib-devel
+BuildRequires: tiff-devel
+BuildRequires: jpeg-devel
+BuildRequires: libunistring-devel
 BuildRequires: pkgconfig(camel-1.2) >= 2.32.0
 BuildRequires: pkgconfig(evolution-data-server-1.2) >= 2.32.0
 BuildRequires: pkgconfig(evolution-plugin-3.0)
@@ -224,9 +225,6 @@ desktop-file-install \
 %{_libexecdir}/%{name}-miner-fs
 %{_libexecdir}/%{name}-store
 %{_libexecdir}/tracker-writeback
-%{_mandir}/man1/tracker-*.1*
-%exclude %{_mandir}/man1/tracker-preferences.1*
-%exclude %{_mandir}/man1/tracker-search-bar.1*
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Extract.service
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
@@ -235,6 +233,9 @@ desktop-file-install \
 %{_datadir}/gnome-panel/4.0/applets/org.gnome.panel.SearchBar.panel-applet
 %{_datadir}/applications/tracker-needle.desktop
 %{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
+%{_mandir}/man1/tracker-*.1*
+%exclude %{_mandir}/man1/tracker-preferences.1*
+%exclude %{_mandir}/man1/tracker-search-bar.1*
 
 %files common
 %{_iconsdir}/hicolor/*/apps/%{name}.*
