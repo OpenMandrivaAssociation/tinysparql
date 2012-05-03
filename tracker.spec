@@ -1,6 +1,6 @@
-%define api			0.12
+%define api			0.14
 %define major		0
-%define gir_major	0.12
+%define gir_major	0.14
 %define libname		%mklibname %{name} %{api} %{major}
 %define girname		%mklibname %{name}-gir %{gir_major}
 %define develname	%mklibname %{name} -d
@@ -9,12 +9,12 @@
 %define build_doc 0
 
 #gw libtracker-common is in the main package and not provided
-%define _requires_exceptions devel(libtracker-common\\|devel(libtracker-data
+%define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	0.12.10
-Release:	4
+Version:	0.14.0
+Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
@@ -28,8 +28,8 @@ BuildRequires: giflib-devel
 BuildRequires: tiff-devel
 BuildRequires: jpeg-devel
 BuildRequires: libunistring-devel
-BuildRequires: pkgconfig(camel-1.2) >= 2.32.0
-BuildRequires: pkgconfig(evolution-data-server-1.2) >= 2.32.0
+BuildRequires: pkgconfig(camel-1.2)
+BuildRequires: pkgconfig(evolution-data-server-1.2) >= 3.3
 BuildRequires: pkgconfig(evolution-plugin-3.0)
 BuildRequires: pkgconfig(evolution-shell-3.0) >= 3.1
 BuildRequires: pkgconfig(exempi-2.0) >= 2.1.0
@@ -137,6 +137,23 @@ personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient. This package contains an
 nautilus plugin for Tracker integration.
 
+%package firefox-plugin
+Summary:        A simple bookmark exporter for Tracker
+Group:		Graphical desktop/GNOME
+Requires:       %{name} = %{version}-%{release}
+
+%description firefox-plugin
+This Firefox addon exports your bookmarks to Tracker, so that you can search
+for them for example using tracker-needle.
+
+%package thunderbird-plugin
+Summary:        Thunderbird extension to export mails to Tracker
+Group:		Graphical desktop/GNOME
+Requires:       %{name} = %{version}-%{release}
+
+%description thunderbird-plugin
+A simple Thunderbird extension to export mails to Tracker.
+
 %package -n %{libname}
 Group:		System/Libraries
 Summary:	Shared library of Tracker
@@ -180,10 +197,12 @@ desktop-neutral, fast and resource efficient.
 %endif
 	--enable-libvorbis \
 %if !%{build_evo}
-	--disable-miner-evolution
+	--disable-miner-evolution \
 %else
-	--enable-miner-evolution 
+	--enable-miner-evolution \
 %endif
+    --with-firefox-plugin-dir=%{_libdir}/firefox/extensions         \
+    --with-thunderbird-plugin-dir=%{_libdir}/thunderbird/extensions 
 
 %make  LIBS='-lgmodule-2.0'
 
@@ -259,6 +278,15 @@ desktop-file-install \
 %{_libdir}/girepository-1.0/Tracker-%{gir_major}.typelib
 %{_libdir}/girepository-1.0/TrackerExtract-%{gir_major}.typelib
 %{_libdir}/girepository-1.0/TrackerMiner-%{gir_major}.typelib
+
+%files thunderbird-plugin
+%{_datadir}/xul-ext/trackerbird/
+%{_libdir}/thunderbird/extensions/trackerbird@bustany.org
+%{_datadir}/applications/trackerbird-launcher.desktop
+
+%files firefox-plugin
+%{_datadir}/xul-ext/trackerfox/
+%{_libdir}/firefox/extensions/trackerfox@bustany.org
 
 %files -n %{develname}
 %{_libdir}/lib*.so
