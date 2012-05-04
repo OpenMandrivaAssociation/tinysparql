@@ -40,6 +40,7 @@ BuildRequires: pkgconfig(gio-unix-2.0) >= 2.28.0
 BuildRequires: pkgconfig(glib-2.0) >= 2.28.0
 BuildRequires: pkgconfig(gmodule-2.0) >= 2.28.0
 BuildRequires: pkgconfig(gnome-keyring-1) >= 2.26
+BuildRequires: pkgconfig(gnome-desktop-3.0)
 BuildRequires: pkgconfig(gobject-introspection-1.0) >= 0.9.5
 BuildRequires: pkgconfig(gstreamer-0.10) >= 0.10.31
 BuildRequires: pkgconfig(gstreamer-pbutils-0.10) >= 0.10.31
