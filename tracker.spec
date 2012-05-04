@@ -24,6 +24,8 @@ Patch0:		tracker-0.12.8-linkage.patch
 BuildRequires: desktop-file-utils
 BuildRequires: glib2.0-common
 BuildRequires: intltool
+BuildRequires: firefox
+BuildRequires: mozilla-thunderbird
 BuildRequires: giflib-devel
 BuildRequires: tiff-devel
 BuildRequires: jpeg-devel
@@ -49,6 +51,7 @@ BuildRequires: pkgconfig(gthread-2.0) >= 2.28.0
 BuildRequires: pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires: pkgconfig(libcue)
 BuildRequires: pkgconfig(libexif) >= 0.6
+BuildRequires: pkgconfig(libebackend-1.2)
 BuildRequires: pkgconfig(libgsf-1) >= 1.13
 BuildRequires: pkgconfig(libiptcdata)
 BuildRequires: pkgconfig(libnm-glib) >= 0.8
