@@ -1,11 +1,12 @@
-%define api			0.14
-%define major		0
-%define gir_major	0.14
-%define libname		%mklibname %{name} %{api} %{major}
-%define girname		%mklibname %{name}-gir %{gir_major}
-%define develname	%mklibname %{name} -d
+%define url_ver %(echo %{version}|cut -d. -f1,2)
 
-%define build_evo 1
+%define major	0
+%define api	0.14
+%define libname	%mklibname %{name} %{api} %{major}
+%define girname	%mklibname %{name}-gir %{api}
+%define devname	%mklibname %{name} -d
+
+%define build_evo 0
 %define build_doc 0
 
 #gw libtracker-common is in the main package and not provided
@@ -13,18 +14,18 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	0.14.2
+Version:	0.14.4
 Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		tracker-0.12.8-linkage.patch
 
 BuildRequires: desktop-file-utils
 BuildRequires: glib2.0-common
-BuildRequires: intltool
 BuildRequires: firefox
+BuildRequires: intltool
 BuildRequires: mozilla-thunderbird
 BuildRequires: giflib-devel
 BuildRequires: tiff-devel
@@ -118,9 +119,7 @@ Group:Networking/Mail
 Summary: Integrate Evolution with the Tracker desktop search
 Requires: evolution
 Requires:	%{name} = %{version}-%{release}
-BuildRequires:	pkgconfig(evolution-shell-3.0)
-#gw libtool dep of evo:
-BuildRequires: gnome-pilot-devel
+BuildRequires:	pkgconfig(evolution-plugin-3.0)
 
 %description -n evolution-tracker
 Tracker is a tool designed to extract information and metadata about your 
@@ -170,19 +169,19 @@ desktop-neutral, fast and resource efficient.
 %package -n %{girname}
 Summary:	GObject Introspection interface description for %{name}
 Group:		System/Libraries
-Requires:	%{libname} = %{version}-%{release}
 
 %description -n %{girname}
 GObject Introspection interface description for %{name}.
 
-%package -n %{develname}
+%package -n %{devname}
 Group:		Development/C
 Summary:	Development library of Tracker
 Requires:	%{libname} = %{version}-%{release}
-Obsoletes:	%{mklibname tracker 0 -d}
+Requires:	%{girname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname tracker 0 -d}
 
-%description -n %{develname}
+%description -n %{devname}
 Tracker is a tool designed to extract information and metadata about your 
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
@@ -211,7 +210,6 @@ desktop-neutral, fast and resource efficient.
 %make  LIBS='-lgmodule-2.0'
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 rm -rf %{buildroot}%{_datadir}/tracker-tests
@@ -279,9 +277,9 @@ desktop-file-install \
 %{_libdir}/%{name}-%{api}/libtracker-*.so.%{major}*
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/Tracker-%{gir_major}.typelib
-%{_libdir}/girepository-1.0/TrackerExtract-%{gir_major}.typelib
-%{_libdir}/girepository-1.0/TrackerMiner-%{gir_major}.typelib
+%{_libdir}/girepository-1.0/Tracker-%{api}.typelib
+%{_libdir}/girepository-1.0/TrackerExtract-%{api}.typelib
+%{_libdir}/girepository-1.0/TrackerMiner-%{api}.typelib
 
 %files thunderbird-plugin
 %{_datadir}/xul-ext/trackerbird/
@@ -292,7 +290,7 @@ desktop-file-install \
 %{_datadir}/xul-ext/trackerfox/
 %{_libdir}/firefox/extensions/trackerfox@bustany.org
 
-%files -n %{develname}
+%files -n %{devname}
 %{_libdir}/lib*.so
 %{_libdir}/%{name}-%{api}/libtracker-*.so
 %{_includedir}/%{name}-%{api}/*
@@ -306,9 +304,9 @@ desktop-file-install \
 %{_datadir}/vala/vapi/tracker-miner-%{api}.deps
 %{_datadir}/vala/vapi/tracker-sparql-%{api}.vapi
 %{_datadir}/vala/vapi/tracker-sparql-%{api}.deps
-%{_datadir}/gir-1.0/Tracker-%{gir_major}.gir
-%{_datadir}/gir-1.0/TrackerExtract-%{gir_major}.gir
-%{_datadir}/gir-1.0/TrackerMiner-%{gir_major}.gir
+%{_datadir}/gir-1.0/Tracker-%{api}.gir
+%{_datadir}/gir-1.0/TrackerExtract-%{api}.gir
+%{_datadir}/gir-1.0/TrackerMiner-%{api}.gir
 
 %if %{build_evo}
 %files -n evolution-tracker
