@@ -8,13 +8,14 @@
 
 %define build_evo 0
 %define build_doc 0
+%define gstapi	1.0
 
 #gw libtracker-common is in the main package and not provided
 %define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	0.14.4
+Version:	0.14.5
 Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -22,54 +23,54 @@ URL:		http://www.tracker-project.org
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		tracker-0.12.8-linkage.patch
 
-BuildRequires: desktop-file-utils
-BuildRequires: glib2.0-common
-BuildRequires: firefox
-BuildRequires: intltool
-BuildRequires: mozilla-thunderbird
-BuildRequires: giflib-devel
-BuildRequires: tiff-devel
-BuildRequires: jpeg-devel
-BuildRequires: libunistring-devel
-BuildRequires: pkgconfig(camel-1.2)
-BuildRequires: pkgconfig(evolution-data-server-1.2) >= 3.3
-BuildRequires: pkgconfig(evolution-plugin-3.0)
-BuildRequires: pkgconfig(evolution-shell-3.0) >= 3.1
-BuildRequires: pkgconfig(exempi-2.0) >= 2.1.0
-BuildRequires: pkgconfig(flac) >= 1.2.1
-BuildRequires: pkgconfig(gdk-pixbuf-2.0) >= 2.12.0
-BuildRequires: pkgconfig(gee-1.0) >= 0.3
-BuildRequires: pkgconfig(gio-unix-2.0) >= 2.28.0
-BuildRequires: pkgconfig(glib-2.0) >= 2.28.0
-BuildRequires: pkgconfig(gmodule-2.0) >= 2.28.0
-BuildRequires: pkgconfig(gnome-keyring-1) >= 2.26
-BuildRequires: pkgconfig(gnome-desktop-3.0)
-BuildRequires: pkgconfig(gobject-introspection-1.0) >= 0.9.5
-BuildRequires: pkgconfig(gstreamer-0.10) >= 0.10.31
-BuildRequires: pkgconfig(gstreamer-pbutils-0.10) >= 0.10.31
-BuildRequires: pkgconfig(gstreamer-tag-0.10) >= 0.10.31
-BuildRequires: pkgconfig(gthread-2.0) >= 2.28.0
-BuildRequires: pkgconfig(gtk+-3.0) >= 3.0.0
-BuildRequires: pkgconfig(libcue)
-BuildRequires: pkgconfig(libexif) >= 0.6
-BuildRequires: pkgconfig(libebackend-1.2)
-BuildRequires: pkgconfig(libgsf-1) >= 1.13
-BuildRequires: pkgconfig(libiptcdata)
-BuildRequires: pkgconfig(libnm-glib) >= 0.8
-BuildRequires: pkgconfig(libpanelapplet-4.0)
-BuildRequires: pkgconfig(libpng) >= 1.2
-BuildRequires: pkgconfig(libstreamanalyzer) >= 0.7.0
-BuildRequires: pkgconfig(libxine) >= 1.0
-BuildRequires: pkgconfig(libxml-2.0) >= 2.6
-BuildRequires: pkgconfig(pango) >= 1.0.0
-BuildRequires: pkgconfig(poppler-glib) >= 0.16.0
-BuildRequires: pkgconfig(rest-0.7) >= 0.6
-BuildRequires: pkgconfig(sqlite3) >= 3.7.0
-BuildRequires: pkgconfig(taglib_c) >= 1.6
-BuildRequires: pkgconfig(totem-plparser)
-BuildRequires: pkgconfig(upower-glib) >= 0.9.0
-BuildRequires: pkgconfig(uuid)
-BuildRequires: pkgconfig(vorbisfile) >= 0.22
+BuildRequires:	desktop-file-utils
+BuildRequires:	glib2.0-common
+BuildRequires:	firefox
+BuildRequires:	intltool
+BuildRequires:	mozilla-thunderbird
+BuildRequires:	giflib-devel
+BuildRequires:	tiff-devel
+BuildRequires:	jpeg-devel
+BuildRequires:	libunistring-devel
+BuildRequires:	pkgconfig(camel-1.2)
+BuildRequires:	pkgconfig(evolution-data-server-1.2) >= 3.3
+BuildRequires:	pkgconfig(evolution-plugin-3.0)
+BuildRequires:	pkgconfig(evolution-shell-3.0) >= 3.1
+BuildRequires:	pkgconfig(exempi-2.0) >= 2.1.0
+BuildRequires:	pkgconfig(flac) >= 1.2.1
+BuildRequires:	pkgconfig(gdk-pixbuf-2.0) >= 2.12.0
+BuildRequires:	pkgconfig(gee-1.0) >= 0.3
+BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.28.0
+BuildRequires:	pkgconfig(glib-2.0) >= 2.28.0
+BuildRequires:	pkgconfig(gmodule-2.0) >= 2.28.0
+BuildRequires:	pkgconfig(gnome-keyring-1) >= 2.26
+BuildRequires:	pkgconfig(gnome-desktop-3.0)
+BuildRequires:	pkgconfig(gobject-introspection-1.0) >= 0.9.5
+BuildRequires:	pkgconfig(gstreamer-%{gstapi}) >= 0.10.31
+BuildRequires:	pkgconfig(gstreamer-pbutils-%{gstapi}) >= 0.10.31
+BuildRequires:	pkgconfig(gstreamer-tag-%{gstapi}) >= 0.10.31
+BuildRequires:	pkgconfig(gthread-2.0) >= 2.28.0
+BuildRequires:	pkgconfig(gtk+-3.0) >= 3.0.0
+BuildRequires:	pkgconfig(libcue)
+BuildRequires:	pkgconfig(libexif) >= 0.6
+BuildRequires:	pkgconfig(libebackend-1.2)
+BuildRequires:	pkgconfig(libgsf-1) >= 1.13
+BuildRequires:	pkgconfig(libiptcdata)
+BuildRequires:	pkgconfig(libnm-glib) >= 0.8
+BuildRequires:	pkgconfig(libpanelapplet-4.0)
+BuildRequires:	pkgconfig(libpng) >= 1.2
+BuildRequires:	pkgconfig(libstreamanalyzer) >= 0.7.0
+BuildRequires:	pkgconfig(libxine) >= 1.0
+BuildRequires:	pkgconfig(libxml-2.0) >= 2.6
+BuildRequires:	pkgconfig(pango) >= 1.0.0
+BuildRequires:	pkgconfig(poppler-glib) >= 0.16.0
+BuildRequires:	pkgconfig(rest-0.7) >= 0.6
+BuildRequires:	pkgconfig(sqlite3) >= 3.7.0
+BuildRequires:	pkgconfig(taglib_c) >= 1.6
+BuildRequires:	pkgconfig(totem-plparser)
+BuildRequires:	pkgconfig(upower-glib) >= 0.9.0
+BuildRequires:	pkgconfig(uuid)
+BuildRequires:	pkgconfig(vorbisfile) >= 0.22
 
 Requires:	odt2txt
 
@@ -204,8 +205,8 @@ desktop-neutral, fast and resource efficient.
 %else
 	--enable-miner-evolution \
 %endif
-    --with-firefox-plugin-dir=%{_libdir}/firefox/extensions         \
-    --with-thunderbird-plugin-dir=%{_libdir}/thunderbird/extensions 
+	--with-firefox-plugin-dir=%{_libdir}/firefox/extensions         \
+	--with-thunderbird-plugin-dir=%{_libdir}/thunderbird/extensions 
 
 %make  LIBS='-lgmodule-2.0'
 
