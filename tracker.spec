@@ -8,7 +8,7 @@
 
 %define build_evo 0
 %define build_doc 0
-%define gstapi	1.0
+%define gstapi	0.10
 
 #gw libtracker-common is in the main package and not provided
 %define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
@@ -37,47 +37,47 @@ BuildRequires:	jpeg-devel
 BuildRequires:	libunistring-devel
 BuildRequires:	pkgconfig(camel-1.2)
 BuildRequires:	pkgconfig(enca)
-BuildRequires:	pkgconfig(evolution-data-server-1.2) >= 3.3
+BuildRequires:	pkgconfig(evolution-data-server-1.2)
 BuildRequires:	pkgconfig(evolution-plugin-3.0)
-BuildRequires:	pkgconfig(evolution-shell-3.0) >= 3.1
-BuildRequires:	pkgconfig(exempi-2.0) >= 2.1.0
-BuildRequires:	pkgconfig(flac) >= 1.2.1
-BuildRequires:	pkgconfig(gdk-pixbuf-2.0) >= 2.12.0
+BuildRequires:	pkgconfig(evolution-shell-3.0)
+BuildRequires:	pkgconfig(exempi-2.0)
+BuildRequires:	pkgconfig(flac)
+BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
 BuildRequires:	pkgconfig(gee-0.8)
-BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.28.0
-BuildRequires:	pkgconfig(glib-2.0) >= 2.28.0
-BuildRequires:	pkgconfig(gmodule-2.0) >= 2.28.0
-BuildRequires:	pkgconfig(gnome-keyring-1) >= 2.26
+BuildRequires:	pkgconfig(gio-unix-2.0)
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(gmodule-2.0)
+BuildRequires:	pkgconfig(gnome-keyring-1)
 BuildRequires:	pkgconfig(gnome-desktop-3.0)
-BuildRequires:	pkgconfig(gobject-introspection-1.0) >= 0.9.5
-BuildRequires:	pkgconfig(gstreamer-%{gstapi}) >= 0.10.31
-BuildRequires:	pkgconfig(gstreamer-pbutils-%{gstapi}) >= 0.10.31
-BuildRequires:	pkgconfig(gstreamer-tag-%{gstapi}) >= 0.10.31
-BuildRequires:	pkgconfig(gthread-2.0) >= 2.28.0
-BuildRequires:	pkgconfig(gtk+-3.0) >= 3.0.0
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(gstreamer-%{gstapi})
+BuildRequires:	pkgconfig(gstreamer-pbutils-%{gstapi})
+BuildRequires:	pkgconfig(gstreamer-tag-%{gstapi})
+BuildRequires:	pkgconfig(gthread-2.0)
+BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libcue)
-BuildRequires:	pkgconfig(libexif) >= 0.6
+BuildRequires:	pkgconfig(libexif)
 BuildRequires:	pkgconfig(libebackend-1.2)
-BuildRequires:	pkgconfig(libgsf-1) >= 1.13
+BuildRequires:	pkgconfig(libgsf-1)
 BuildRequires:	pkgconfig(libgrss-0.5)
 BuildRequires:	pkgconfig(libgxps)
 BuildRequires:	pkgconfig(libiptcdata)
-BuildRequires:	pkgconfig(libnm-glib) >= 0.8
+BuildRequires:	pkgconfig(libnm-glib)
 BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpanelapplet-4.0)
-BuildRequires:	pkgconfig(libpng) >= 1.2
-BuildRequires:	pkgconfig(libstreamanalyzer) >= 0.7.0
+BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(libstreamanalyzer)
 BuildRequires:	pkgconfig(libxine)
-BuildRequires:	pkgconfig(libxml-2.0) >= 2.6
-BuildRequires:	pkgconfig(pango) >= 1.0.0
-BuildRequires:	pkgconfig(poppler-glib) >= 0.16.0
-BuildRequires:	pkgconfig(rest-0.7) >= 0.6
-BuildRequires:	pkgconfig(sqlite3) >= 3.7.0
-BuildRequires:	pkgconfig(taglib_c) >= 1.6
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(pango)
+BuildRequires:	pkgconfig(poppler-glib)
+BuildRequires:	pkgconfig(rest-0.7)
+BuildRequires:	pkgconfig(sqlite3)
+BuildRequires:	pkgconfig(taglib_c)
 BuildRequires:	pkgconfig(totem-plparser)
-BuildRequires:	pkgconfig(upower-glib) >= 0.9.0
+BuildRequires:	pkgconfig(upower-glib)
 BuildRequires:	pkgconfig(uuid)
-BuildRequires:	pkgconfig(vorbisfile) >= 0.22
+BuildRequires:	pkgconfig(vorbisfile)
 
 Requires:	odt2txt
 
