@@ -67,7 +67,7 @@ BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpanelapplet-4.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
 BuildRequires:	pkgconfig(libstreamanalyzer) >= 0.7.0
-BuildRequires:	pkgconfig(libxine) >= 1.0
+BuildRequires:	pkgconfig(libxine)
 BuildRequires:	pkgconfig(libxml-2.0) >= 2.6
 BuildRequires:	pkgconfig(pango) >= 1.0.0
 BuildRequires:	pkgconfig(poppler-glib) >= 0.16.0
@@ -149,25 +149,25 @@ desktop-neutral, fast and resource efficient. This package contains an
 nautilus plugin for Tracker integration.
 
 %package firefox-plugin
-Summary:        A simple bookmark exporter for Tracker
+Summary:	A simple bookmark exporter for Tracker
 Group:		Graphical desktop/GNOME
-Requires:       %{name} = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description firefox-plugin
 This Firefox addon exports your bookmarks to Tracker, so that you can search
 for them for example using tracker-needle.
 
 %package thunderbird-plugin
-Summary:        Thunderbird extension to export mails to Tracker
+Summary:	Thunderbird extension to export mails to Tracker
 Group:		Graphical desktop/GNOME
-Requires:       %{name} = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description thunderbird-plugin
 A simple Thunderbird extension to export mails to Tracker.
 
 %package -n %{libname}
-Group:		System/Libraries
 Summary:	Shared library of Tracker
+Group:		System/Libraries
 
 %description -n %{libname}
 Tracker is a tool designed to extract information and metadata about your 
@@ -182,8 +182,8 @@ Group:		System/Libraries
 GObject Introspection interface description for %{name}.
 
 %package -n %{devname}
-Group:		Development/C
 Summary:	Development library of Tracker
+Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Requires:	%{girname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
