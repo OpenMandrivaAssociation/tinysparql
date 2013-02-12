@@ -22,9 +22,12 @@ Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		tracker-0.12.8-linkage.patch
+Patch1:		tracker-libgrss-0.5.patch
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	glib2.0-common
+BuildRequires:	gnome-common
+BuildRequires:	gtk-doc
 BuildRequires:	firefox
 BuildRequires:	intltool
 BuildRequires:	mozilla-thunderbird
@@ -33,13 +36,14 @@ BuildRequires:	tiff-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	libunistring-devel
 BuildRequires:	pkgconfig(camel-1.2)
+BuildRequires:	pkgconfig(enca)
 BuildRequires:	pkgconfig(evolution-data-server-1.2) >= 3.3
 BuildRequires:	pkgconfig(evolution-plugin-3.0)
 BuildRequires:	pkgconfig(evolution-shell-3.0) >= 3.1
 BuildRequires:	pkgconfig(exempi-2.0) >= 2.1.0
 BuildRequires:	pkgconfig(flac) >= 1.2.1
 BuildRequires:	pkgconfig(gdk-pixbuf-2.0) >= 2.12.0
-BuildRequires:	pkgconfig(gee-1.0) >= 0.3
+BuildRequires:	pkgconfig(gee-0.8)
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(glib-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(gmodule-2.0) >= 2.28.0
@@ -55,8 +59,11 @@ BuildRequires:	pkgconfig(libcue)
 BuildRequires:	pkgconfig(libexif) >= 0.6
 BuildRequires:	pkgconfig(libebackend-1.2)
 BuildRequires:	pkgconfig(libgsf-1) >= 1.13
+BuildRequires:	pkgconfig(libgrss-0.5)
+BuildRequires:	pkgconfig(libgxps)
 BuildRequires:	pkgconfig(libiptcdata)
 BuildRequires:	pkgconfig(libnm-glib) >= 0.8
+BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpanelapplet-4.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
 BuildRequires:	pkgconfig(libstreamanalyzer) >= 0.7.0
@@ -192,14 +199,16 @@ desktop-neutral, fast and resource efficient.
 %apply_patches
 
 %build
+NOCONFIGURE=yes gnome-autogen.sh
 %configure2_5x \
 	--disable-static \
 	--enable-libflac \
+	--enable-libosinfo \
+	--enable-libvorbis \
 	--disable-functional-tests \
 %if %{build_doc}
 	--enable-gtk-doc \
 %endif
-	--enable-libvorbis \
 %if !%{build_evo}
 	--disable-miner-evolution \
 %else
@@ -212,7 +221,7 @@ desktop-neutral, fast and resource efficient.
 
 %install
 %makeinstall_std
-find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
+
 rm -rf %{buildroot}%{_datadir}/tracker-tests
 
 %find_lang %{name}
@@ -227,6 +236,7 @@ desktop-file-install \
 %doc README NEWS AUTHORS ChangeLog
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-flickr.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-fs.desktop
+%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-rss.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-store.desktop
 %{_bindir}/%{name}-control
 %{_bindir}/%{name}-explorer
@@ -245,6 +255,7 @@ desktop-file-install \
 %{_libexecdir}/%{name}-extract
 %{_libexecdir}/%{name}-miner-flickr
 %{_libexecdir}/%{name}-miner-fs
+%{_libexecdir}/%{name}-miner-rss
 %{_libexecdir}/%{name}-store
 %{_libexecdir}/tracker-writeback
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Extract.service
