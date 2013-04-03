@@ -23,6 +23,7 @@ URL:		http://www.tracker-project.org
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		tracker-0.12.8-linkage.patch
 Patch1:		tracker-libgrss-0.5.patch
+Patch2:		tracker-0.14.4-giflib5.patch
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	glib2.0-common
