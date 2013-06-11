@@ -26,7 +26,7 @@ Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
 BuildRequires:	intltool
 BuildRequires:	firefox
-BuildRequires:	mozilla-thunderbir
+BuildRequires:	mozilla-thunderbird
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	tiff-devel
