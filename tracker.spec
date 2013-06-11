@@ -2,7 +2,7 @@
 %define build_doc	1
 
 #gw libtracker-common is in the main package and not provided
-%define _requires_exceptions devel(libtracker-common\\|devel(libtracker-data
+%define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
 
 %define api		0.16
 %define major		0
