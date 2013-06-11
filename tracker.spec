@@ -178,7 +178,7 @@ This package contains vala bindings for development %{name}.
 %if %{build_doc}
 %package docs
 Summary:	Documentations for tracker
-Group:		Documentation 
+Group:		Development/Other
 BuildArch:	noarch
 BuildRequires:  pkgconfig(gtk-doc)
 BuildRequires:	graphviz
