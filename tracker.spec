@@ -1,7 +1,7 @@
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 
 %define major	0
-%define api	0.14
+%define api	0.16
 %define libname	%mklibname %{name} %{api} %{major}
 %define girname	%mklibname %{name}-gir %{api}
 %define devname	%mklibname %{name} -d
@@ -15,15 +15,13 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	0.14.5
+Version:	0.16.1
 Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		tracker-0.12.8-linkage.patch
-Patch1:		tracker-libgrss-0.5.patch
-Patch2:		tracker-0.14.4-giflib5.patch
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	glib2.0-common
@@ -109,18 +107,6 @@ Tracker is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient. This package contains the
 GNOME-based configuration tool for the tracker framework.
-
-%package applet
-Summary:	Panel applet for Tracker search framework
-Group:		Graphical desktop/GNOME
-Requires:	%{name} = %{version}-%{release}
-Requires:	%{name}-common = %{version}-%{release}
-
-%description applet
-Tracker is a tool designed to extract information and metadata about your 
-personal data so that it can be searched easily and quickly. Tracker is
-desktop-neutral, fast and resource efficient. This package contains a
-panel applet for configuring and using Tracker.
 
 %if %{build_evo}
 %package -n evolution-tracker
@@ -235,12 +221,10 @@ desktop-file-install \
 
 %files -f %{name}.lang
 %doc README NEWS AUTHORS ChangeLog
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-flickr.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-fs.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-rss.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-store.desktop
 %{_bindir}/%{name}-control
-%{_bindir}/%{name}-explorer
 %{_bindir}/%{name}-import
 %{_bindir}/%{name}-info
 %{_bindir}/%{name}-needle
@@ -254,7 +238,6 @@ desktop-file-install \
 %{_libdir}/%{name}-%{api}/extract-modules/*.so
 %{_libdir}/%{name}-%{api}/writeback-modules/*.so
 %{_libexecdir}/%{name}-extract
-%{_libexecdir}/%{name}-miner-flickr
 %{_libexecdir}/%{name}-miner-fs
 %{_libexecdir}/%{name}-miner-rss
 %{_libexecdir}/%{name}-store
@@ -263,13 +246,10 @@ desktop-file-install \
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
-%{_datadir}/dbus-1/services/org.gnome.panel.applet.SearchBarFactory.service
-%{_datadir}/gnome-panel/4.0/applets/org.gnome.panel.SearchBar.panel-applet
 %{_datadir}/applications/tracker-needle.desktop
 %{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
 %{_mandir}/man1/tracker-*.1*
 %exclude %{_mandir}/man1/tracker-preferences.1*
-%exclude %{_mandir}/man1/tracker-search-bar.1*
 
 %files common
 %{_iconsdir}/hicolor/*/apps/%{name}.*
@@ -278,10 +258,6 @@ desktop-file-install \
 %{_bindir}/tracker-preferences
 %{_datadir}/applications/tracker-preferences.desktop
 %{_mandir}/man1/tracker-preferences.1*
-
-%files applet
-%{_libexecdir}/tracker-search-bar
-%{_mandir}/man1/tracker-search-bar.1*
 
 %files -n %{libname}
 %{_libdir}/libtracker-extract-%{api}.so.%{major}*
