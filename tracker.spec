@@ -25,6 +25,8 @@ License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://www.tracker-project.org
 BuildRequires:	intltool
+BuildRequires:	firefox
+BuildRequires:	mozilla-thunderbir
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	tiff-devel
