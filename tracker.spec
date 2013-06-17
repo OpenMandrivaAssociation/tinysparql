@@ -17,7 +17,7 @@
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
 Version:	0.16.1
-Release:	2
+Release:	3
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
 Patch0:		tracker-0.12.8-linkage.patch
