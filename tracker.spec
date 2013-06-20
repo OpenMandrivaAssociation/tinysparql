@@ -1,29 +1,27 @@
+%define url_ver %(echo %{version} | cut -d. -f1,2)
+
 %define build_evo	0
 %define build_doc	1
 
 #gw libtracker-common is in the main package and not provided
 %define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
 
-%define api		0.16
-%define major		0
-%define girmajor	0.16
-
-%define libname		%mklibname %{name} %{api} %{major}
-%define develname	%mklibname %{name} -d
-%define girname         %mklibname %{name}-gir %{girmajor}
-
-%define url_ver %(echo %{version} | cut -d. -f1,2)
+%define api	0.16
+%define major	0
+%define libname	%mklibname %{name} %{api} %{major}
+%define devname	%mklibname %{name} -d
+%define girname	%mklibname %{name}-gir %{api}
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
 Version:	0.16.1
-Release:	3
+Release:	4
+License:	GPLv2+ and LGPLv2+
+Group:		Graphical desktop/GNOME
+Url:		http://www.tracker-project.org
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
 Patch0:		tracker-0.12.8-linkage.patch
-License:	GPLv2+ and LGPLv2+
-Group:		Graphical desktop/GNOME
-URL:		http://www.tracker-project.org
 BuildRequires:	intltool
 BuildRequires:	firefox
 BuildRequires:	mozilla-thunderbird
@@ -33,7 +31,6 @@ BuildRequires:	tiff-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	icu-devel
 BuildRequires:	gnome-common
-BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	pkgconfig(camel-1.2) >= 2.32.0
 BuildRequires:	pkgconfig(evolution-data-server-1.2) >= 2.32.0
 BuildRequires:	pkgconfig(evolution-plugin-3.0)
@@ -46,6 +43,7 @@ BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(glib-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(gmodule-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(gnome-desktop-3.0)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gstreamer-1.0) >= 0.10.31
 BuildRequires:	pkgconfig(gstreamer-pbutils-1.0) >= 0.10.31
 BuildRequires:	pkgconfig(gstreamer-tag-1.0) >= 0.10.31
@@ -101,7 +99,6 @@ Requires:	%{name} = %{version}-%{release}
 %description thunderbird-plugin
 A simple Thunderbird extension to export mails to Tracker.
 
-
 %if %{build_evo}
 %package -n evolution-%{name}
 Group:		Networking/Mail
@@ -141,18 +138,15 @@ Tracker is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
-%package -n %{develname}
+%package -n %{devname}
 Group:		Development/C
 Summary:	Development library of Tracker
 Requires:	%{libname} = %{version}-%{release}
-Obsoletes:	%{mklibname %{name} -d} < 0.10.21
-Obsoletes:	%{mklibname %{name} 0.11 -d} < %{version}-%{release}
-Obsoletes:	%{mklibname %{name} 0.10 -d} 
+Requires:	%{girname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
-Provides:	lib%{name}-devel = %{version}-%{release}
 Conflicts:	%{name} < 0.12.8-2
 
-%description -n %{develname}
+%description -n %{devname}
 Tracker is a tool designed to extract information and metadata about your 
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
@@ -160,7 +154,6 @@ desktop-neutral, fast and resource efficient.
 %package -n %{girname}
 Summary:        GObject Introspection interface description for %{name}
 Group:          System/Libraries
-Requires:       %{libname} = %{version}-%{release}
 
 %description -n %{girname}
 GObject Introspection interface description for %{name}.
@@ -191,9 +184,9 @@ This package contains the documentation for tracker.
 %prep
 %setup -q
 %apply_patches
+NOCONFIGURE=yes gnome-autogen.sh
 
 %build
-NOCONFIGURE=yes gnome-autogen.sh
 %configure2_5x \
 	--enable-libflac \
 	--enable-libvorbis \
@@ -213,28 +206,26 @@ NOCONFIGURE=yes gnome-autogen.sh
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
-%{__install} -D -p -m 0644 %{SOURCE1} %{buildroot}%{_prefix}/lib/sysctl.d/30-%{name}.conf
+install -D -p -m 0644 %{SOURCE1} %{buildroot}%{_prefix}/lib/sysctl.d/30-%{name}.conf
 
 %find_lang %{name}
 
-find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 rm -rf %{buildroot}%{_datadir}/tracker-tests
 
 # do not start under KDE
 desktop-file-install \
 	--remove-only-show-in=KDE \
 	--dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
-		%{buildroot}%{_sysconfdir}/xdg/autostart/*.desktop
+	%{buildroot}%{_sysconfdir}/xdg/autostart/*.desktop
 
 #fix categories (mga#3613)
 desktop-file-install \
 	--add-category=GTK \
 	--add-category=GNOME \
 	--dir=%{buildroot}%{_datadir}/applications \
-		%{buildroot}%{_datadir}/applications/%{name}-preferences.desktop
+	%{buildroot}%{_datadir}/applications/%{name}-preferences.desktop
 
 %files -f %{name}.lang
 %doc README NEWS AUTHORS ChangeLog
@@ -298,11 +289,11 @@ desktop-file-install \
 %{_libdir}/%{name}-%{api}/libtracker-*.so.%{major}*
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/Tracker-%{girmajor}.typelib
-%{_libdir}/girepository-1.0/TrackerExtract-%{girmajor}.typelib
-%{_libdir}/girepository-1.0/TrackerMiner-%{girmajor}.typelib
+%{_libdir}/girepository-1.0/Tracker-%{api}.typelib
+%{_libdir}/girepository-1.0/TrackerExtract-%{api}.typelib
+%{_libdir}/girepository-1.0/TrackerMiner-%{api}.typelib
 
-%files -n %{develname}
+%files -n %{devname}
 %{_libdir}/lib%{name}-extract-%{api}.so
 %{_libdir}/lib%{name}-miner-%{api}.so
 %{_libdir}/lib%{name}-sparql-%{api}.so
@@ -311,9 +302,9 @@ desktop-file-install \
 %{_libdir}/pkgconfig/%{name}-extract-%{api}.pc
 %{_libdir}/pkgconfig/%{name}-miner-%{api}.pc
 %{_libdir}/pkgconfig/%{name}-sparql-%{api}.pc
-%{_datadir}/gir-1.0/Tracker-%{girmajor}.gir
-%{_datadir}/gir-1.0/TrackerExtract-%{girmajor}.gir
-%{_datadir}/gir-1.0/TrackerMiner-%{girmajor}.gir
+%{_datadir}/gir-1.0/Tracker-%{api}.gir
+%{_datadir}/gir-1.0/TrackerExtract-%{api}.gir
+%{_datadir}/gir-1.0/TrackerMiner-%{api}.gir
 
 %if %{build_doc}
 %files docs
@@ -340,3 +331,4 @@ desktop-file-install \
 %files firefox-plugin
 %{_datadir}/xul-ext/trackerfox/
 %{_libdir}/firefox/extensions/trackerfox@bustany.org
+
