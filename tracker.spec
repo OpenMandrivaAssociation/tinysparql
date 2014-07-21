@@ -54,7 +54,7 @@ BuildRequires:	pkgconfig(libexif) >= 0.6
 BuildRequires:	pkgconfig(libgsf-1) >= 1.13
 BuildRequires:	pkgconfig(libgxps)
 BuildRequires:	pkgconfig(libiptcdata)
-BuildRequires:	pkgconfig(libnm-glib) >= 0.8
+BuildRequires:	pkgconfig(libnm-glib-vpn) >= 0.8
 BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
 BuildRequires:	pkgconfig(libsecret-unstable) >= 0.5
