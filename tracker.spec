@@ -53,6 +53,7 @@ BuildRequires:	pkgconfig(libgxps)
 BuildRequires:	pkgconfig(libiptcdata)
 BuildRequires:	pkgconfig(libmediaart-1.0) >= 0.5.0
 BuildRequires:	pkgconfig(libnm-glib) >= 0.8
+BuildRequires:  pkgconfig(libnm-glib-vpn)
 BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
 BuildRequires:	pkgconfig(libsecret-unstable) >= 0.5
