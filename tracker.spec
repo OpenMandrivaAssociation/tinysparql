@@ -6,7 +6,7 @@
 #gw libtracker-common is in the main package and not provided
 %define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
 
-%define api	0.16
+%define api	1.0
 %define major	0
 %define libname	%mklibname %{name} %{api} %{major}
 %define devname	%mklibname %{name} -d
@@ -14,14 +14,14 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	0.16.1
-Release:	10
+Version:	1.2.2
+Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		http://www.tracker-project.org
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
-Patch0:		tracker-0.12.8-linkage.patch
+Patch0:                tracker-linkage.patch
 BuildRequires:	intltool
 BuildRequires:	firefox
 BuildRequires:	mozilla-thunderbird
@@ -33,7 +33,6 @@ BuildRequires:	icu-devel
 BuildRequires:	gnome-common
 BuildRequires:	pkgconfig(camel-1.2) >= 2.32.0
 BuildRequires:	pkgconfig(evolution-data-server-1.2) >= 2.32.0
-BuildRequires:	pkgconfig(evolution-plugin-3.0)
 BuildRequires:	pkgconfig(evolution-shell-3.0) >= 3.1
 BuildRequires:	pkgconfig(exempi-2.0) >= 2.1.0
 BuildRequires:	pkgconfig(flac) >= 1.2.1
@@ -54,6 +53,7 @@ BuildRequires:	pkgconfig(libexif) >= 0.6
 BuildRequires:	pkgconfig(libgsf-1) >= 1.13
 BuildRequires:	pkgconfig(libgxps)
 BuildRequires:	pkgconfig(libiptcdata)
+BuildRequires:	pkgconfig(libmediaart-1.0) >= 0.5.0
 BuildRequires:	pkgconfig(libnm-glib) >= 0.8
 BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
@@ -105,7 +105,6 @@ Group:		Networking/Mail
 Summary:	Integrate Evolution with the Tracker desktop search
 Requires:	evolution
 Requires:	%{name} = %{version}-%{release}
-BuildRequires:	pkgconfig(evolution-plugin-3.0)
 
 %description -n evolution-%{name}
 Tracker is a tool designed to extract information and metadata about your 
@@ -229,9 +228,12 @@ desktop-file-install \
 
 %files -f %{name}.lang
 %doc README NEWS AUTHORS ChangeLog
+%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-extract.desktop
+%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-apps.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-fs.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-store.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-rss.desktop
+%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-user-guides.desktop
 %{_bindir}/%{name}-control
 %{_bindir}/%{name}-import
 %{_bindir}/%{name}-info
@@ -247,8 +249,10 @@ desktop-file-install \
 %{_libdir}/%{name}-%{api}/extract-modules/*.so
 %{_libdir}/%{name}-%{api}/writeback-modules/*.so
 %{_libexecdir}/%{name}-extract
+%{_libexecdir}/%{name}-miner-apps
 %{_libexecdir}/%{name}-miner-fs
 %{_libexecdir}/%{name}-miner-rss
+%{_libexecdir}/%{name}-miner-user-guides
 %{_libexecdir}/%{name}-store
 %{_libexecdir}/%{name}-writeback
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
@@ -266,23 +270,25 @@ desktop-file-install \
 %{_mandir}/man1/%{name}-tag.1*
 %{_mandir}/man1/%{name}-writeback.1*
 %{_mandir}/man1/%{name}-preferences.1*
-%{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Extract.service
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
+%{_datadir}/appdata/*.xml
 %{_datadir}/applications/tracker-needle.desktop
 %{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
 %{_datadir}/applications/%{name}-preferences.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.*
 
 %files vala
+%{_datadir}/vala/vapi/%{name}-control-%{api}.vapi
+%{_datadir}/vala/vapi/%{name}-control-%{api}.deps
 %{_datadir}/vala/vapi/%{name}-sparql-%{api}.vapi
 %{_datadir}/vala/vapi/%{name}-sparql-%{api}.deps
 %{_datadir}/vala/vapi/%{name}-miner-%{api}.vapi
 %{_datadir}/vala/vapi/%{name}-miner-%{api}.deps
 
 %files -n %{libname}
-%{_libdir}/lib%{name}-extract-%{api}.so.%{major}*
+%{_libdir}/lib%{name}-control-%{api}.so.%{major}*
 %{_libdir}/lib%{name}-miner-%{api}.so.%{major}*
 %{_libdir}/lib%{name}-sparql-%{api}.so.%{major}*
 %dir %{_libdir}/%{name}-%{api}/
@@ -290,25 +296,25 @@ desktop-file-install \
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Tracker-%{api}.typelib
-%{_libdir}/girepository-1.0/TrackerExtract-%{api}.typelib
+%{_libdir}/girepository-1.0/TrackerControl-%{api}.typelib
 %{_libdir}/girepository-1.0/TrackerMiner-%{api}.typelib
 
 %files -n %{devname}
-%{_libdir}/lib%{name}-extract-%{api}.so
+%{_libdir}/lib%{name}-control-%{api}.so
 %{_libdir}/lib%{name}-miner-%{api}.so
 %{_libdir}/lib%{name}-sparql-%{api}.so
 %{_libdir}/%{name}-%{api}/libtracker-*.so
 %{_includedir}/*
-%{_libdir}/pkgconfig/%{name}-extract-%{api}.pc
+%{_libdir}/pkgconfig/%{name}-control-%{api}.pc
 %{_libdir}/pkgconfig/%{name}-miner-%{api}.pc
 %{_libdir}/pkgconfig/%{name}-sparql-%{api}.pc
 %{_datadir}/gir-1.0/Tracker-%{api}.gir
-%{_datadir}/gir-1.0/TrackerExtract-%{api}.gir
+%{_datadir}/gir-1.0/TrackerControl-%{api}.gir
 %{_datadir}/gir-1.0/TrackerMiner-%{api}.gir
 
 %if %{build_doc}
 %files docs
-%{_datadir}/gtk-doc/html/lib%{name}-extract
+%{_datadir}/gtk-doc/html/lib%{name}-control
 %{_datadir}/gtk-doc/html/lib%{name}-miner
 %{_datadir}/gtk-doc/html/lib%{name}-sparql
 %{_datadir}/gtk-doc/html/ontology

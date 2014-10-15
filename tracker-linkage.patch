@@ -1,0 +1,24 @@
+diff -ru tracker-0.17.7-orig/src/libtracker-data/Makefile.am tracker-0.17.7/src/libtracker-data/Makefile.am
+--- tracker-0.17.7-orig/src/libtracker-data/Makefile.am	2014-03-17 18:00:54.000000000 +0100
++++ tracker-0.17.7/src/libtracker-data/Makefile.am	2014-03-19 19:41:13.909365037 +0100
+@@ -45,6 +45,7 @@
+ libtracker_data_la_LIBADD =                            \
+ 	$(top_builddir)/src/gvdb/libgvdb.la \
+ 	$(top_builddir)/src/libtracker-common/libtracker-common.la \
++	$(top_builddir)/src/libtracker-sparql/libtracker-sparql.la \
+ 	$(BUILD_LIBS)                                  \
+ 	$(LIBTRACKER_DATA_LIBS)                        \
+ 	-lm
+Only in tracker-0.17.7/src/libtracker-data: Makefile.am.orig
+diff -ru tracker-0.17.7-orig/src/libtracker-data/Makefile.in tracker-0.17.7/src/libtracker-data/Makefile.in
+--- tracker-0.17.7-orig/src/libtracker-data/Makefile.in	2014-03-19 13:20:51.000000000 +0100
++++ tracker-0.17.7/src/libtracker-data/Makefile.in	2014-03-19 19:41:13.911365033 +0100
+@@ -524,6 +524,7 @@
+ 
+ libtracker_data_la_LIBADD = $(top_builddir)/src/gvdb/libgvdb.la \
+ 	$(top_builddir)/src/libtracker-common/libtracker-common.la \
++	$(top_builddir)/src/libtracker-sparql/libtracker-sparql.la \
+ 	$(BUILD_LIBS) $(LIBTRACKER_DATA_LIBS) -lm $(am__append_1)
+ noinst_HEADERS = \
+ 	tracker-class.h                                \
+Only in tracker-0.17.7/src/libtracker-data: Makefile.in.orig
