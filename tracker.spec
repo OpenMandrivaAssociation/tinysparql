@@ -32,8 +32,6 @@ BuildRequires:	jpeg-devel
 BuildRequires:	icu-devel
 BuildRequires:	gnome-common
 BuildRequires:	pkgconfig(camel-1.2) >= 2.32.0
-BuildRequires:	pkgconfig(evolution-data-server-1.2) >= 2.32.0
-BuildRequires:	pkgconfig(evolution-shell-3.0) >= 3.1
 BuildRequires:	pkgconfig(exempi-2.0) >= 2.1.0
 BuildRequires:	pkgconfig(flac) >= 1.2.1
 BuildRequires:	pkgconfig(gdk-pixbuf-2.0) >= 2.12.0
@@ -105,6 +103,8 @@ Group:		Networking/Mail
 Summary:	Integrate Evolution with the Tracker desktop search
 Requires:	evolution
 Requires:	%{name} = %{version}-%{release}
+BuildRequires:  pkgconfig(evolution-data-server-1.2) >= 2.32.0
+BuildRequires:  pkgconfig(evolution-shell-3.0) >= 3.1
 
 %description -n evolution-%{name}
 Tracker is a tool designed to extract information and metadata about your 
