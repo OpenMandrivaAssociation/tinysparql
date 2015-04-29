@@ -235,6 +235,7 @@ desktop-file-install \
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-store.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-rss.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-user-guides.desktop
+%{_sysconfdir}/bash_completion.d/%{name}-prompt.sh
 %{_bindir}/%{name}-control
 %{_bindir}/%{name}-import
 %{_bindir}/%{name}-info
@@ -244,6 +245,7 @@ desktop-file-install \
 %{_bindir}/%{name}-tag
 %{_bindir}/%{name}-needle
 %{_bindir}/%{name}-preferences
+%{_bindir}/%{name}
 %{_datadir}/%{name}/
 %dir %{_libdir}/%{name}-%{api}/extract-modules
 %dir %{_libdir}/%{name}-%{api}/writeback-modules
@@ -271,6 +273,17 @@ desktop-file-install \
 %{_mandir}/man1/%{name}-tag.1*
 %{_mandir}/man1/%{name}-writeback.1*
 %{_mandir}/man1/%{name}-preferences.1*
+%{_mandir}/man1/%{name}-daemon.1*
+%{_mandir}/man1/%{name}-index.1*
+%{_mandir}/man1/%{name}-reset.1*
+%{_mandir}/man1/%{name}-sql.1*
+%{_mandir}/man1/%{name}-status.1*
+%{_mandir}/man5/%{name}-db.cfg.5*
+%{_mandir}/man5/%{name}-extract.cfg.5*
+%{_mandir}/man5/%{name}-fts.cfg.5*
+%{_mandir}/man5/%{name}-miner-fs.cfg.5*
+%{_mandir}/man5/%{name}-store.cfg.5*
+%{_mandir}/man5/%{name}-writeback.cfg.5*
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
