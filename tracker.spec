@@ -2,6 +2,11 @@
 
 %define build_evo	0
 %define build_doc	1
+%ifarch %arm
+%define build_nautilus  0
+%else
+%define build_nautilus  1
+%endif
 
 #gw libtracker-common is in the main package and not provided
 %define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
@@ -115,6 +120,7 @@ desktop-neutral, fast and resource efficient.
 This package contains an evolution plugin for Tracker integration.
 %endif
 
+%if %{build_nautilus}
 %package -n nautilus-%{name}
 Group:		Graphical desktop/GNOME
 Summary:	Nautilus integration of tracker
@@ -127,6 +133,7 @@ personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
 This package contains an nautilus plugin for Tracker integration.
+%endif
 
 %package -n %{libname}
 Group:		System/Libraries
@@ -337,8 +344,10 @@ desktop-file-install \
 %{_libdir}/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
 %endif
 
+%if %{build_nautilus}
 %files -n nautilus-%{name}
 %{_libdir}/nautilus/extensions-3.0/libnautilus-tracker-tags.*
+%endif
 
 %files thunderbird-plugin
 %{_datadir}/xul-ext/trackerbird/
