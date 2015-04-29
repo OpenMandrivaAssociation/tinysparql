@@ -14,7 +14,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	1.2.2
+Version:	 1.4.0
 Release:	3
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -77,7 +77,7 @@ Obsoletes:	%{name}-applet < 0.12.8-2
 Requires:	odt2txt
 
 %description
-Tracker is a framework designed to extract information and metadata about your 
+Tracker is a framework designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
@@ -108,7 +108,7 @@ BuildRequires:  pkgconfig(evolution-data-server-1.2) >= 2.32.0
 BuildRequires:  pkgconfig(evolution-shell-3.0) >= 3.1
 
 %description -n evolution-%{name}
-Tracker is a tool designed to extract information and metadata about your 
+Tracker is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
@@ -122,7 +122,7 @@ Requires:	%{name} = %{version}-%{release}
 BuildRequires:	pkgconfig(libnautilus-extension)
 
 %description -n nautilus-%{name}
-Tracker is a tool designed to extract information and metadata about your 
+Tracker is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
@@ -134,7 +134,7 @@ Summary:	Shared library of Tracker
 Conflicts:	%{name}	< 0.12.8-2
 
 %description -n %{libname}
-Tracker is a tool designed to extract information and metadata about your 
+Tracker is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
@@ -147,7 +147,7 @@ Provides:	%{name}-devel = %{version}-%{release}
 Conflicts:	%{name} < 0.12.8-2
 
 %description -n %{devname}
-Tracker is a tool designed to extract information and metadata about your 
+Tracker is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
