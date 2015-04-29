@@ -259,16 +259,13 @@ desktop-file-install \
 %{_libexecdir}/%{name}-store
 %{_libexecdir}/%{name}-writeback
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
-%{_mandir}/man1/%{name}-control.1*
 %{_mandir}/man1/%{name}-extract.1*
-%{_mandir}/man1/%{name}-import.1*
 %{_mandir}/man1/%{name}-info.1*
 %{_mandir}/man1/%{name}-miner-fs.1*
 %{_mandir}/man1/%{name}-miner-rss.1*
 %{_mandir}/man1/%{name}-needle.1.*
 %{_mandir}/man1/%{name}-search.1*
 %{_mandir}/man1/%{name}-sparql.1*
-%{_mandir}/man1/%{name}-stats.1*
 %{_mandir}/man1/%{name}-store.1*
 %{_mandir}/man1/%{name}-tag.1*
 %{_mandir}/man1/%{name}-writeback.1*
