@@ -19,8 +19,8 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	 1.4.0
-Release:	3
+Version:	1.4.0
+Release:	4
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		http://www.tracker-project.org
@@ -194,7 +194,7 @@ This package contains the documentation for tracker.
 NOCONFIGURE=yes gnome-autogen.sh
 
 %build
-%configure2_5x \
+%configure \
 	--enable-libflac \
 	--enable-libvorbis \
 	--enable-libosinfo \
