@@ -242,7 +242,7 @@ desktop-file-install \
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-store.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-rss.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-user-guides.desktop
-%{_sysconfdir}/bash_completion.d/%{name}-prompt.sh
+%{_datadir}/bash-completion/completions/%{name}
 %{_bindir}/%{name}-control
 %{_bindir}/%{name}-import
 %{_bindir}/%{name}-info
