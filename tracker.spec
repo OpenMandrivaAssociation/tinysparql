@@ -1,5 +1,5 @@
 %define url_ver %(echo %{version} | cut -d. -f1,2)
-
+%define _disable_lto 1
 %define build_evo	0
 %define build_doc	1
 %ifarch %arm
@@ -19,8 +19,8 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	1.4.0
-Release:	5
+Version:	1.5.0
+Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		http://www.tracker-project.org
