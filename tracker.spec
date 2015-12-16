@@ -1,5 +1,4 @@
 %define url_ver %(echo %{version} | cut -d. -f1,2)
-%define _disable_lto 1
 %define build_evo	0
 %define build_doc	1
 %ifarch %arm
@@ -74,7 +73,7 @@ BuildRequires:	pkgconfig(totem-plparser)
 BuildRequires:	pkgconfig(upower-glib) >= 0.9.0
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	pkgconfig(vorbisfile) >= 0.22
-BuildRequires:	pkgconfig(libgrss-0.5)
+BuildRequires:	pkgconfig(libgrss)
 Obsoletes:	tracker-search-tool < 0.10
 Obsoletes:	%{name}-common < 0.12.8-2
 Obsoletes:	%{name}-preferences < 0.12.8-2
