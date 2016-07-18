@@ -16,8 +16,6 @@
 %define devname	%mklibname %{name} -d
 %define girname	%mklibname %{name}-gir %{api}
 
-%define _disable_ld_no_undefined 1
-
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
 Version:	1.6.2
@@ -209,7 +207,7 @@ NOCONFIGURE=yes gnome-autogen.sh
         --enable-miner-evolution \
 %endif
 	--with-firefox-plugin-dir=%{_libdir}/firefox/extensions \
-	--with-thunderbird-plugin-dir=%{_libdir}/thunderbird/extensions
+	--with-thunderbird-plugin-dir=%{_libdir}/thunderbird/extensions LIBS='-ldl -lpthread'
 
 %make
 
