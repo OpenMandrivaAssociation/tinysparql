@@ -16,6 +16,8 @@
 %define devname	%mklibname %{name} -d
 %define girname	%mklibname %{name}-gir %{api}
 
+%define _disable_ld_no_undefined 1
+
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
 Version:	1.6.2
