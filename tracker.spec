@@ -1,7 +1,7 @@
 %define url_ver %(echo %{version} | cut -d. -f1,2)
 %define build_evo	0
 %define build_doc	1
-%ifarch %arm
+%ifarch %arm aarch64
 %define build_nautilus  0
 %else
 %define build_nautilus  1
