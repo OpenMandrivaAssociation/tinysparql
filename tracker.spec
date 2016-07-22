@@ -78,7 +78,6 @@ Obsoletes:	tracker-search-tool < 0.10
 Obsoletes:	%{name}-common < 0.12.8-2
 Obsoletes:	%{name}-preferences < 0.12.8-2
 Obsoletes:	%{name}-applet < 0.12.8-2
-Requires:	odt2txt
 
 %description
 Tracker is a framework designed to extract information and metadata about your
