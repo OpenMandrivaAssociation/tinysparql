@@ -7,6 +7,10 @@
 %define build_nautilus  1
 %endif
 
+%define _disable_ld_no_undefined 1
+%define _disable_rebuild_configure 1
+%define _disable_lto 1
+
 #gw libtracker-common is in the main package and not provided
 %define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
 
@@ -18,14 +22,14 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	1.6.2
+Version:	1.10.2
 Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		http://www.tracker-project.org
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
-Patch0:                tracker-linkage.patch
+#Patch0:                tracker-linkage.patch
 BuildRequires:	intltool
 BuildRequires:	firefox
 BuildRequires:	mozilla-thunderbird
@@ -35,6 +39,7 @@ BuildRequires:	tiff-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	icu-devel
 BuildRequires:	gnome-common
+BuildRequires:	pkgconfig(libseccomp)
 BuildRequires:	pkgconfig(camel-1.2) >= 2.32.0
 BuildRequires:	pkgconfig(exempi-2.0) >= 2.1.0
 BuildRequires:	pkgconfig(flac) >= 1.2.1
@@ -189,14 +194,16 @@ This package contains the documentation for tracker.
 %prep
 %setup -q
 %apply_patches
-NOCONFIGURE=yes gnome-autogen.sh
 
 %build
+export CC=gcc
+export CXX=g++
 %configure \
 	--enable-libflac \
 	--enable-libvorbis \
 	--enable-libosinfo \
 	--disable-functional-tests \
+	--disable-libstemmer \
 %if %{build_doc}
 	--enable-gtk-doc \
 %endif
@@ -241,13 +248,6 @@ desktop-file-install \
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-rss.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-user-guides.desktop
 %{_datadir}/bash-completion/completions/%{name}
-%{_bindir}/%{name}-control
-%{_bindir}/%{name}-import
-%{_bindir}/%{name}-info
-%{_bindir}/%{name}-search
-%{_bindir}/%{name}-sparql
-%{_bindir}/%{name}-stats
-%{_bindir}/%{name}-tag
 %{_bindir}/%{name}-needle
 %{_bindir}/%{name}-preferences
 %{_bindir}/%{name}
@@ -280,12 +280,6 @@ desktop-file-install \
 %{_mandir}/man1/%{name}-reset.1*
 %{_mandir}/man1/%{name}-sql.1*
 %{_mandir}/man1/%{name}-status.1*
-%{_mandir}/man5/%{name}-db.cfg.5*
-%{_mandir}/man5/%{name}-extract.cfg.5*
-%{_mandir}/man5/%{name}-fts.cfg.5*
-%{_mandir}/man5/%{name}-miner-fs.cfg.5*
-%{_mandir}/man5/%{name}-store.cfg.5*
-%{_mandir}/man5/%{name}-writeback.cfg.5*
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
@@ -294,6 +288,7 @@ desktop-file-install \
 %{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
 %{_datadir}/applications/%{name}-preferences.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.*
+%{_prefix}/lib/systemd/user/tracker-*.service
 
 %files vala
 %{_datadir}/vala/vapi/%{name}-control-%{api}.vapi
