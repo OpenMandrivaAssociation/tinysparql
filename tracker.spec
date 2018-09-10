@@ -4,7 +4,7 @@
 %ifarch %arm aarch64
 %define build_nautilus  0
 %else
-%define build_nautilus  1
+%define build_nautilus  0
 %endif
 
 %define _disable_ld_no_undefined 1
