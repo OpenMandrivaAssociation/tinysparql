@@ -236,53 +236,53 @@ desktop-file-install \
 
 %files -f %{name}.lang
 %doc README NEWS AUTHORS ChangeLog
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-extract.desktop
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-apps.desktop
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-fs.desktop
+#config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-extract.desktop
+#config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-apps.desktop
+#config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-fs.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-store.desktop
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-rss.desktop
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-user-guides.desktop
+#config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-rss.desktop
+#config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-user-guides.desktop
 %{_datadir}/bash-completion/completions/%{name}
-%{_bindir}/%{name}-needle
-%{_bindir}/%{name}-preferences
+#{_bindir}/%{name}-needle
+#{_bindir}/%{name}-preferences
 %{_bindir}/%{name}
 %{_datadir}/%{name}/
-%dir %{_libdir}/%{name}-%{api}/extract-modules
-%dir %{_libdir}/%{name}-%{api}/writeback-modules
+#dir #{_libdir}/%{name}-%{api}/extract-modules
+#dir #{_libdir}/%{name}-%{api}/writeback-modules
 %{_libdir}/%{name}-%{api}/extract-modules/*.so
 %{_libdir}/%{name}-%{api}/writeback-modules/*.so
-%{_libexecdir}/%{name}-extract
-%{_libexecdir}/%{name}-miner-apps
-%{_libexecdir}/%{name}-miner-fs
-%{_libexecdir}/%{name}-miner-rss
-%{_libexecdir}/%{name}-miner-user-guides
+#_libexecdir}/%{name}-extract
+#_libexecdir}/%{name}-miner-apps
+#_libexecdir}/%{name}-miner-fs
+#_libexecdir}/%{name}-miner-rss
+#_libexecdir}/%{name}-miner-user-guides
 %{_libexecdir}/%{name}-store
-%{_libexecdir}/%{name}-writeback
+#_libexecdir}/%{name}-writeback
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
-%{_mandir}/man1/%{name}-extract.1*
+#_mandir}/man1/%{name}-extract.1*
 %{_mandir}/man1/%{name}-info.1*
-%{_mandir}/man1/%{name}-miner-fs.1*
-%{_mandir}/man1/%{name}-miner-rss.1*
-%{_mandir}/man1/%{name}-needle.1.*
+#_mandir}/man1/%{name}-miner-fs.1*
+#_mandir}/man1/%{name}-miner-rss.1*
+#_mandir}/man1/%{name}-needle.1.*
 %{_mandir}/man1/%{name}-search.1*
 %{_mandir}/man1/%{name}-sparql.1*
 %{_mandir}/man1/%{name}-store.1*
 %{_mandir}/man1/%{name}-tag.1*
-%{_mandir}/man1/%{name}-writeback.1*
-%{_mandir}/man1/%{name}-preferences.1*
+#_mandir}/man1/%{name}-writeback.1*
+#_mandir}/man1/%{name}-preferences.1*
 %{_mandir}/man1/%{name}-daemon.1*
 %{_mandir}/man1/%{name}-index.1*
 %{_mandir}/man1/%{name}-reset.1*
 %{_mandir}/man1/%{name}-sql.1*
 %{_mandir}/man1/%{name}-status.1*
-%{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
-%{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
+#_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
+#_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
-%{_datadir}/appdata/*.xml
-%{_datadir}/applications/tracker-needle.desktop
+#_datadir}/appdata/*.xml
+#_datadir}/applications/tracker-needle.desktop
 %{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
 #{_datadir}/applications/%{name}-preferences.desktop
-%{_iconsdir}/hicolor/*/apps/%{name}.*
+#_iconsdir}/hicolor/*/apps/%{name}.*
 %{_prefix}/lib/systemd/user/tracker-*.service
 
 %files vala
