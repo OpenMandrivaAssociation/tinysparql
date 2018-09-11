@@ -32,8 +32,8 @@ Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}
 Source1:	30-tracker.conf
 #Patch0:                tracker-linkage.patch
 BuildRequires:	intltool
-BuildRequires:	firefox
-BuildRequires:	mozilla-thunderbird
+#BuildRequires:	firefox
+#BuildRequires:	mozilla-thunderbird
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	tiff-devel
