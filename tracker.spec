@@ -249,8 +249,8 @@ desktop-file-install \
 %{_datadir}/%{name}/
 #dir #{_libdir}/%{name}-%{api}/extract-modules
 #dir #{_libdir}/%{name}-%{api}/writeback-modules
-%{_libdir}/%{name}-%{api}/extract-modules/*.so
-%{_libdir}/%{name}-%{api}/writeback-modules/*.so
+#{_libdir}/%{name}-%{api}/extract-modules/*.so
+#{_libdir}/%{name}-%{api}/writeback-modules/*.so
 #_libexecdir}/%{name}-extract
 #_libexecdir}/%{name}-miner-apps
 #_libexecdir}/%{name}-miner-fs
