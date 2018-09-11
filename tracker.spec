@@ -339,7 +339,7 @@ desktop-file-install \
 %endif
 
 %files thunderbird-plugin
-%{_datadir}/xul-ext/trackerbird/
+#{_datadir}/xul-ext/trackerbird/
 #{_libdir}/thunderbird/extensions/trackerbird@bustany.org
 #{_datadir}/applications/trackerbird-launcher.desktop
 
