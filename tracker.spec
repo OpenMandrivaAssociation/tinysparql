@@ -79,6 +79,7 @@ BuildRequires:	pkgconfig(upower-glib) >= 0.9.0
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	pkgconfig(vorbisfile) >= 0.22
 BuildRequires:	pkgconfig(libgrss)
+BuildRequires:	pkgconfig(json-glib-1.0)
 Obsoletes:	tracker-search-tool < 0.10
 Obsoletes:	%{name}-common < 0.12.8-2
 Obsoletes:	%{name}-preferences < 0.12.8-2
