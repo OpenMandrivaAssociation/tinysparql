@@ -1,10 +1,11 @@
 %define url_ver %(echo %{version} | cut -d. -f1,2)
+# evolution and nautilus plugin dropped by upstream. Build disabled. (penguin)
 %define build_evo	0
 %define build_doc	1
 %ifarch %arm aarch64
 %define build_nautilus  0
 %else
-%define build_nautilus  1
+%define build_nautilus  0
 %endif
 
 %define _disable_ld_no_undefined 1
@@ -14,7 +15,7 @@
 #gw libtracker-common is in the main package and not provided
 %define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
 
-%define api	1.0
+%define api	2.0
 %define major	0
 %define libname	%mklibname %{name} %{api} %{major}
 %define devname	%mklibname %{name} -d
@@ -22,7 +23,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	1.10.2
+Version:	2.1.4
 Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -66,7 +67,7 @@ BuildRequires:  pkgconfig(libnm-glib-vpn)
 BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
 BuildRequires:	pkgconfig(libsecret-unstable) >= 0.5
-BuildRequires:	pkgconfig(libstreamanalyzer) >= 0.7.0
+#BuildRequires:	pkgconfig(libstreamanalyzer) >= 0.7.0
 BuildRequires:	pkgconfig(libxine) >= 1.0
 BuildRequires:	pkgconfig(libxml-2.0) >= 2.6
 BuildRequires:	pkgconfig(pango) >= 1.0.0
@@ -79,6 +80,7 @@ BuildRequires:	pkgconfig(upower-glib) >= 0.9.0
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	pkgconfig(vorbisfile) >= 0.22
 BuildRequires:	pkgconfig(libgrss)
+BuildRequires:	pkgconfig(json-glib-1.0)
 Obsoletes:	tracker-search-tool < 0.10
 Obsoletes:	%{name}-common < 0.12.8-2
 Obsoletes:	%{name}-preferences < 0.12.8-2
@@ -89,22 +91,22 @@ Tracker is a framework designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
-%package firefox-plugin
-Summary:	A simple bookmark exporter for Tracker
-Group:		Graphical desktop/GNOME
-Requires:	%{name} = %{version}-%{release}
+#package firefox-plugin
+#Summary:	A simple bookmark exporter for Tracker
+#Group:		Graphical desktop/GNOME
+#Requires:	%{name} = %{version}-%{release}
 
-%description firefox-plugin
-This Firefox addon exports your bookmarks to Tracker, so that you can search
-for them for example using tracker-needle.
+#description firefox-plugin
+#This Firefox addon exports your bookmarks to Tracker, so that you can search
+#for them for example using tracker-needle.
 
-%package thunderbird-plugin
-Summary:	Thunderbird extension to export mails to Tracker
-Group:		Graphical desktop/GNOME
-Requires:	%{name} = %{version}-%{release}
+#package thunderbird-plugin
+#Summary:	Thunderbird extension to export mails to Tracker
+#Group:		Graphical desktop/GNOME
+#Requires:	%{name} = %{version}-%{release}
 
-%description thunderbird-plugin
-A simple Thunderbird extension to export mails to Tracker.
+#description thunderbird-plugin
+#A simple Thunderbird extension to export mails to Tracker.
 
 %if %{build_evo}
 %package -n evolution-%{name}
@@ -196,8 +198,6 @@ This package contains the documentation for tracker.
 %apply_patches
 
 %build
-export CC=gcc
-export CXX=g++
 %configure \
 	--enable-libflac \
 	--enable-libvorbis \
@@ -232,62 +232,56 @@ desktop-file-install \
 	--dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
 	%{buildroot}%{_sysconfdir}/xdg/autostart/*.desktop
 
-#fix categories (mga#3613)
-desktop-file-install \
-	--add-category=GTK \
-	--add-category=GNOME \
-	--dir=%{buildroot}%{_datadir}/applications \
-	%{buildroot}%{_datadir}/applications/%{name}-preferences.desktop
 
 %files -f %{name}.lang
 %doc README NEWS AUTHORS ChangeLog
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-extract.desktop
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-apps.desktop
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-fs.desktop
+#config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-extract.desktop
+#config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-apps.desktop
+#config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-fs.desktop
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-store.desktop
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-rss.desktop
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-miner-user-guides.desktop
+#config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-rss.desktop
+#config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-user-guides.desktop
 %{_datadir}/bash-completion/completions/%{name}
-%{_bindir}/%{name}-needle
-%{_bindir}/%{name}-preferences
+#{_bindir}/%{name}-needle
+#{_bindir}/%{name}-preferences
 %{_bindir}/%{name}
 %{_datadir}/%{name}/
-%dir %{_libdir}/%{name}-%{api}/extract-modules
-%dir %{_libdir}/%{name}-%{api}/writeback-modules
-%{_libdir}/%{name}-%{api}/extract-modules/*.so
-%{_libdir}/%{name}-%{api}/writeback-modules/*.so
-%{_libexecdir}/%{name}-extract
-%{_libexecdir}/%{name}-miner-apps
-%{_libexecdir}/%{name}-miner-fs
-%{_libexecdir}/%{name}-miner-rss
-%{_libexecdir}/%{name}-miner-user-guides
+#dir #{_libdir}/%{name}-%{api}/extract-modules
+#dir #{_libdir}/%{name}-%{api}/writeback-modules
+#{_libdir}/%{name}-%{api}/extract-modules/*.so
+#{_libdir}/%{name}-%{api}/writeback-modules/*.so
+#_libexecdir}/%{name}-extract
+#_libexecdir}/%{name}-miner-apps
+#_libexecdir}/%{name}-miner-fs
+#_libexecdir}/%{name}-miner-rss
+#_libexecdir}/%{name}-miner-user-guides
 %{_libexecdir}/%{name}-store
-%{_libexecdir}/%{name}-writeback
+#_libexecdir}/%{name}-writeback
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
-%{_mandir}/man1/%{name}-extract.1*
+#_mandir}/man1/%{name}-extract.1*
 %{_mandir}/man1/%{name}-info.1*
-%{_mandir}/man1/%{name}-miner-fs.1*
-%{_mandir}/man1/%{name}-miner-rss.1*
-%{_mandir}/man1/%{name}-needle.1.*
+#_mandir}/man1/%{name}-miner-fs.1*
+#_mandir}/man1/%{name}-miner-rss.1*
+#_mandir}/man1/%{name}-needle.1.*
 %{_mandir}/man1/%{name}-search.1*
 %{_mandir}/man1/%{name}-sparql.1*
 %{_mandir}/man1/%{name}-store.1*
 %{_mandir}/man1/%{name}-tag.1*
-%{_mandir}/man1/%{name}-writeback.1*
-%{_mandir}/man1/%{name}-preferences.1*
+#_mandir}/man1/%{name}-writeback.1*
+#_mandir}/man1/%{name}-preferences.1*
 %{_mandir}/man1/%{name}-daemon.1*
 %{_mandir}/man1/%{name}-index.1*
 %{_mandir}/man1/%{name}-reset.1*
 %{_mandir}/man1/%{name}-sql.1*
 %{_mandir}/man1/%{name}-status.1*
-%{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
-%{_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
+#_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
+#_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
-%{_datadir}/appdata/*.xml
-%{_datadir}/applications/tracker-needle.desktop
+#_datadir}/appdata/*.xml
+#_datadir}/applications/tracker-needle.desktop
 %{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
-%{_datadir}/applications/%{name}-preferences.desktop
-%{_iconsdir}/hicolor/*/apps/%{name}.*
+#{_datadir}/applications/%{name}-preferences.desktop
+#_iconsdir}/hicolor/*/apps/%{name}.*
 %{_prefix}/lib/systemd/user/tracker-*.service
 
 %files vala
@@ -342,12 +336,12 @@ desktop-file-install \
 %{_libdir}/nautilus/extensions-3.0/libnautilus-tracker-tags.*
 %endif
 
-%files thunderbird-plugin
-%{_datadir}/xul-ext/trackerbird/
-%{_libdir}/thunderbird/extensions/trackerbird@bustany.org
-%{_datadir}/applications/trackerbird-launcher.desktop
+#files thunderbird-plugin
+#{_datadir}/xul-ext/trackerbird/
+#{_libdir}/thunderbird/extensions/trackerbird@bustany.org
+#{_datadir}/applications/trackerbird-launcher.desktop
 
-%files firefox-plugin
-%{_datadir}/xul-ext/trackerfox/
-%{_libdir}/firefox/extensions/trackerfox@bustany.org
+#files firefox-plugin
+#{_datadir}/xul-ext/trackerfox/
+#{_libdir}/firefox/extensions/trackerfox@bustany.org
 
