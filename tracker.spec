@@ -91,22 +91,22 @@ Tracker is a framework designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
-%package firefox-plugin
-Summary:	A simple bookmark exporter for Tracker
-Group:		Graphical desktop/GNOME
-Requires:	%{name} = %{version}-%{release}
+#package firefox-plugin
+#Summary:	A simple bookmark exporter for Tracker
+#Group:		Graphical desktop/GNOME
+#Requires:	%{name} = %{version}-%{release}
 
-%description firefox-plugin
-This Firefox addon exports your bookmarks to Tracker, so that you can search
-for them for example using tracker-needle.
+#description firefox-plugin
+#This Firefox addon exports your bookmarks to Tracker, so that you can search
+#for them for example using tracker-needle.
 
-%package thunderbird-plugin
-Summary:	Thunderbird extension to export mails to Tracker
-Group:		Graphical desktop/GNOME
-Requires:	%{name} = %{version}-%{release}
+#package thunderbird-plugin
+#Summary:	Thunderbird extension to export mails to Tracker
+#Group:		Graphical desktop/GNOME
+#Requires:	%{name} = %{version}-%{release}
 
-%description thunderbird-plugin
-A simple Thunderbird extension to export mails to Tracker.
+#description thunderbird-plugin
+#A simple Thunderbird extension to export mails to Tracker.
 
 %if %{build_evo}
 %package -n evolution-%{name}
@@ -198,8 +198,6 @@ This package contains the documentation for tracker.
 %apply_patches
 
 %build
-#export CC=gcc
-#export CXX=g++
 %configure \
 	--enable-libflac \
 	--enable-libvorbis \
@@ -338,12 +336,12 @@ desktop-file-install \
 %{_libdir}/nautilus/extensions-3.0/libnautilus-tracker-tags.*
 %endif
 
-%files thunderbird-plugin
+#files thunderbird-plugin
 #{_datadir}/xul-ext/trackerbird/
 #{_libdir}/thunderbird/extensions/trackerbird@bustany.org
 #{_datadir}/applications/trackerbird-launcher.desktop
 
-%files firefox-plugin
+#files firefox-plugin
 #{_datadir}/xul-ext/trackerfox/
 #{_libdir}/firefox/extensions/trackerfox@bustany.org
 
