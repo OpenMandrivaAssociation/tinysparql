@@ -1,4 +1,5 @@
 %define url_ver %(echo %{version} | cut -d. -f1,2)
+# evolution and nautilus plugin dropped by upstream. Build disabled. (penguin)
 %define build_evo	0
 %define build_doc	1
 %ifarch %arm aarch64
@@ -343,6 +344,6 @@ desktop-file-install \
 %{_datadir}/applications/trackerbird-launcher.desktop
 
 %files firefox-plugin
-%{_datadir}/xul-ext/trackerfox/
-%{_libdir}/firefox/extensions/trackerfox@bustany.org
+#{_datadir}/xul-ext/trackerfox/
+#{_libdir}/firefox/extensions/trackerfox@bustany.org
 
