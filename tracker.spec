@@ -287,7 +287,7 @@ desktop-file-install \
 %{_datadir}/appdata/*.xml
 %{_datadir}/applications/tracker-needle.desktop
 %{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
-%{_datadir}/applications/%{name}-preferences.desktop
+#{_datadir}/applications/%{name}-preferences.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.*
 %{_prefix}/lib/systemd/user/tracker-*.service
 
