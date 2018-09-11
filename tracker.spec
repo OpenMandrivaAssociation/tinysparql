@@ -198,8 +198,8 @@ This package contains the documentation for tracker.
 %apply_patches
 
 %build
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 %configure \
 	--enable-libflac \
 	--enable-libvorbis \
@@ -340,8 +340,8 @@ desktop-file-install \
 
 %files thunderbird-plugin
 %{_datadir}/xul-ext/trackerbird/
-%{_libdir}/thunderbird/extensions/trackerbird@bustany.org
-%{_datadir}/applications/trackerbird-launcher.desktop
+#{_libdir}/thunderbird/extensions/trackerbird@bustany.org
+#{_datadir}/applications/trackerbird-launcher.desktop
 
 %files firefox-plugin
 #{_datadir}/xul-ext/trackerfox/
