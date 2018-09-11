@@ -238,7 +238,7 @@ desktop-file-install \
 	--add-category=GTK \
 	--add-category=GNOME \
 	--dir=%{buildroot}%{_datadir}/applications \
-	%{buildroot}%{_datadir}/applications/%{name}-preferences.desktop
+	#{buildroot}%{_datadir}/applications/%{name}-preferences.desktop
 
 %files -f %{name}.lang
 %doc README NEWS AUTHORS ChangeLog
