@@ -233,12 +233,6 @@ desktop-file-install \
 	--dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
 	%{buildroot}%{_sysconfdir}/xdg/autostart/*.desktop
 
-#fix categories (mga#3613)
-desktop-file-install \
-	--add-category=GTK \
-	--add-category=GNOME \
-	--dir=%{buildroot}%{_datadir}/applications \
-	#{buildroot}%{_datadir}/applications/%{name}-preferences.desktop
 
 %files -f %{name}.lang
 %doc README NEWS AUTHORS ChangeLog
