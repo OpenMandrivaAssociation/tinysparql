@@ -7,6 +7,8 @@
 %define build_nautilus  1
 %endif
 
+%define _disable_ld_no_udnefined 1
+
 #gw libtracker-common is in the main package and not provided
 %define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
 
