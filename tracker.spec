@@ -63,8 +63,6 @@ BuildRequires:  pkgconfig(libnm-glib-vpn)
 BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
 BuildRequires:	pkgconfig(libsecret-unstable) >= 0.5
-BuildRequires:	pkgconfig(libstreamanalyzer) >= 0.7.0
-BuildRequires:	pkgconfig(libxine) >= 1.0
 BuildRequires:	pkgconfig(libxml-2.0) >= 2.6
 BuildRequires:	pkgconfig(pango) >= 1.0.0
 BuildRequires:	pkgconfig(poppler-glib) >= 0.16.0
@@ -196,6 +194,7 @@ NOCONFIGURE=yes gnome-autogen.sh
 
 %build
 %configure \
+        --disable-libstemmer \
 	--enable-libflac \
 	--enable-libvorbis \
 	--enable-libosinfo \
@@ -209,7 +208,8 @@ NOCONFIGURE=yes gnome-autogen.sh
         --enable-miner-evolution \
 %endif
 	--with-firefox-plugin-dir=%{_libdir}/firefox/extensions \
-	--with-thunderbird-plugin-dir=%{_libdir}/thunderbird/extensions
+	--with-thunderbird-plugin-dir=%{_libdir}/thunderbird/extensions \
+	LIBS='-ldl -lpthread'
 
 %make
 
