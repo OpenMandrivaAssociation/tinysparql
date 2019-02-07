@@ -1,7 +1,2 @@
-removed_sources:
-  tracker-1.6.2.tar.xz: b168d4e5bcf153d4418a8263a4e99b3c21c03447
-  tracker-1.10.2.tar.xz: be6171f77dd7a09d89d446ab7f4a49df999937be
 sources:
-  tracker-2.1.4.tar.xz: ceb852bda02b4c708a1301904ff3cc0ea89edf90
-  tracker-2.1.5.tar.xz: 0441c3f1b69fbeea18ca2bf8d85ca33b0c4c8dd0
-  tracker-2.1.6.tar.xz: f629743bac252db3662c7485092eed87d92891f4
+  tracker-2.1.7.tar.xz: 8dcb3707edcc12f2bea4acbe63bf456a41877ba4
