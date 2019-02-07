@@ -215,10 +215,10 @@ This package contains the documentation for tracker.
 	--with-firefox-plugin-dir=%{_libdir}/firefox/extensions \
 	--with-thunderbird-plugin-dir=%{_libdir}/thunderbird/extensions LIBS='-ldl -lpthread'
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 install -D -p -m 0644 %{SOURCE1} %{buildroot}%{_prefix}/lib/sysctl.d/30-%{name}.conf
 
