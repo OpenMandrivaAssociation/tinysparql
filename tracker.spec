@@ -23,7 +23,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	2.1.6
+Version:	2.1.7
 Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -215,10 +215,10 @@ This package contains the documentation for tracker.
 	--with-firefox-plugin-dir=%{_libdir}/firefox/extensions \
 	--with-thunderbird-plugin-dir=%{_libdir}/thunderbird/extensions LIBS='-ldl -lpthread'
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 install -D -p -m 0644 %{SOURCE1} %{buildroot}%{_prefix}/lib/sysctl.d/30-%{name}.conf
 
