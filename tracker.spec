@@ -41,6 +41,7 @@ BuildRequires:	tiff-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	icu-devel
 BuildRequires:	gnome-common
+BuildRequires:	libstemmer-devel
 BuildRequires:	pkgconfig(libseccomp)
 BuildRequires:	pkgconfig(camel-1.2) >= 2.32.0
 BuildRequires:	pkgconfig(exempi-2.0) >= 2.1.0
