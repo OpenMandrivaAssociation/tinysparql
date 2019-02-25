@@ -63,6 +63,7 @@ BuildRequires:	pkgconfig(libgsf-1) >= 1.13
 BuildRequires:	pkgconfig(libgxps)
 BuildRequires:	pkgconfig(libiptcdata)
 BuildRequires:	pkgconfig(libmediaart-2.0) >= 0.5.0
+BuildRequires:	pkgconfig(libnm)
 BuildRequires:	pkgconfig(libnm-glib) >= 0.8
 BuildRequires:  pkgconfig(libnm-glib-vpn)
 BuildRequires:	pkgconfig(libosinfo-1.0)
