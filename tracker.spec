@@ -23,7 +23,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	2.1.7
+Version:	2.2.0
 Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -33,6 +33,7 @@ Source1:	30-tracker.conf
 #Patch0:                tracker-linkage.patch
 BuildRequires:	intltool
 #BuildRequires:	firefox
+BuildRequires:	meson
 #BuildRequires:	mozilla-thunderbird
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
@@ -198,27 +199,11 @@ This package contains the documentation for tracker.
 %apply_patches
 
 %build
-%configure \
-	--enable-libflac \
-	--enable-libvorbis \
-	--enable-libosinfo \
-	--disable-functional-tests \
-	--disable-libstemmer \
-%if %{build_doc}
-	--enable-gtk-doc \
-%endif
-%if !%{build_evo}
-	--disable-miner-evolution \
-%else
-        --enable-miner-evolution \
-%endif
-	--with-firefox-plugin-dir=%{_libdir}/firefox/extensions \
-	--with-thunderbird-plugin-dir=%{_libdir}/thunderbird/extensions LIBS='-ldl -lpthread'
-
-%make_build
+%meson
+%meson_build
 
 %install
-%make_install
+%meson_install
 
 install -D -p -m 0644 %{SOURCE1} %{buildroot}%{_prefix}/lib/sysctl.d/30-%{name}.conf
 
