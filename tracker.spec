@@ -1,11 +1,6 @@
 %define url_ver %(echo %{version} | cut -d. -f1,2)
 
 %define build_doc	1
-%ifarch %arm aarch64
-%define build_nautilus  0
-%else
-%define build_nautilus  0
-%endif
 
 %define _disable_ld_no_undefined 1
 %define _disable_rebuild_configure 1
@@ -96,37 +91,6 @@ Tracker is a framework designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
-%if %{build_evo}
-%package -n evolution-%{name}
-Group:		Networking/Mail
-Summary:	Integrate Evolution with the Tracker desktop search
-Requires:	evolution
-Requires:	%{name} = %{version}-%{release}
-BuildRequires:  pkgconfig(evolution-data-server-1.2) >= 2.32.0
-BuildRequires:  pkgconfig(evolution-shell-3.0) >= 3.1
-
-%description -n evolution-%{name}
-Tracker is a tool designed to extract information and metadata about your
-personal data so that it can be searched easily and quickly. Tracker is
-desktop-neutral, fast and resource efficient.
-
-This package contains an evolution plugin for Tracker integration.
-%endif
-
-%if %{build_nautilus}
-%package -n nautilus-%{name}
-Group:		Graphical desktop/GNOME
-Summary:	Nautilus integration of tracker
-Requires:	%{name} = %{version}-%{release}
-BuildRequires:	pkgconfig(libnautilus-extension)
-
-%description -n nautilus-%{name}
-Tracker is a tool designed to extract information and metadata about your
-personal data so that it can be searched easily and quickly. Tracker is
-desktop-neutral, fast and resource efficient.
-
-This package contains an nautilus plugin for Tracker integration.
-%endif
 
 %package -n %{libname}
 Group:		System/Libraries
@@ -296,24 +260,4 @@ desktop-file-install \
 %{_datadir}/gtk-doc/html/lib%{name}-sparql
 %{_datadir}/gtk-doc/html/ontology
 %endif
-
-%if %{build_evo}
-%files -n evolution-%{name}
-%{_libdir}/evolution/*/plugins/liborg-freedesktop-Tracker-evolution-plugin.so
-%{_libdir}/evolution/*/plugins/org-freedesktop-Tracker-evolution-plugin.eplug
-%endif
-
-%if %{build_nautilus}
-%files -n nautilus-%{name}
-%{_libdir}/nautilus/extensions-3.0/libnautilus-tracker-tags.*
-%endif
-
-#files thunderbird-plugin
-#{_datadir}/xul-ext/trackerbird/
-#{_libdir}/thunderbird/extensions/trackerbird@bustany.org
-#{_datadir}/applications/trackerbird-launcher.desktop
-
-#files firefox-plugin
-#{_datadir}/xul-ext/trackerfox/
-#{_libdir}/firefox/extensions/trackerfox@bustany.org
 
