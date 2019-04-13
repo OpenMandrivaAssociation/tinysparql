@@ -1,6 +1,5 @@
 %define url_ver %(echo %{version} | cut -d. -f1,2)
-# evolution and nautilus plugin dropped by upstream. Build disabled. (penguin)
-%define build_evo	0
+
 %define build_doc	1
 %ifarch %arm aarch64
 %define build_nautilus  0
@@ -23,7 +22,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	2.2.0
+Version:	2.2.1
 Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -32,7 +31,6 @@ Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}
 Source1:	30-tracker.conf
 #Patch0:                tracker-linkage.patch
 BuildRequires:	intltool
-#BuildRequires:	firefox
 BuildRequires:	meson
 #BuildRequires:	mozilla-thunderbird
 BuildRequires:	gettext-devel
@@ -53,6 +51,7 @@ BuildRequires:	pkgconfig(glib-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(gmodule-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(gnome-desktop-3.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(gthread-2.0)
 BuildRequires:	pkgconfig(gstreamer-1.0) >= 0.10.31
 BuildRequires:	pkgconfig(gstreamer-pbutils-1.0) >= 0.10.31
 BuildRequires:	pkgconfig(gstreamer-tag-1.0) >= 0.10.31
@@ -86,6 +85,7 @@ BuildRequires:	pkgconfig(libgrss)
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	vala
+
 Obsoletes:	tracker-search-tool < 0.10
 Obsoletes:	%{name}-common < 0.12.8-2
 Obsoletes:	%{name}-preferences < 0.12.8-2
@@ -95,23 +95,6 @@ Obsoletes:	%{name}-applet < 0.12.8-2
 Tracker is a framework designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
-
-#package firefox-plugin
-#Summary:	A simple bookmark exporter for Tracker
-#Group:		Graphical desktop/GNOME
-#Requires:	%{name} = %{version}-%{release}
-
-#description firefox-plugin
-#This Firefox addon exports your bookmarks to Tracker, so that you can search
-#for them for example using tracker-needle.
-
-#package thunderbird-plugin
-#Summary:	Thunderbird extension to export mails to Tracker
-#Group:		Graphical desktop/GNOME
-#Requires:	%{name} = %{version}-%{release}
-
-#description thunderbird-plugin
-#A simple Thunderbird extension to export mails to Tracker.
 
 %if %{build_evo}
 %package -n evolution-%{name}
