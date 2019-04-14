@@ -224,7 +224,7 @@ desktop-file-install \
 %{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
 #{_datadir}/applications/%{name}-preferences.desktop
 #_iconsdir}/hicolor/*/apps/%{name}.*
-%{_prefix}/lib/systemd/user/tracker-*.service
+#{_prefix}/lib/systemd/user/tracker-*.service
 
 %files vala
 %{_datadir}/vala/vapi/%{name}-control-%{api}.vapi
