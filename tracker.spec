@@ -5,6 +5,7 @@
 %define _disable_ld_no_undefined 1
 %define _disable_rebuild_configure 1
 %define _disable_lto 1
+%define _userunitdir /usr/lib/systemd/user/
 
 #gw libtracker-common is in the main package and not provided
 %define __noautoreq 'devel\\(libtracker-common\\|devel\\(libtracker-data'
@@ -82,6 +83,7 @@ BuildRequires:	pkgconfig(libgrss)
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	vala
+BuildRequires:  systemd
 
 Obsoletes:	tracker-search-tool < 0.10
 Obsoletes:	%{name}-common < 0.12.8-2
