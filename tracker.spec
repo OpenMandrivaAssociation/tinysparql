@@ -154,9 +154,6 @@ This package contains the documentation for tracker.
 %build
 export LC_ALL=UTF-8 CPATH+=":/usr/include/libstemmer/"
 %meson
-%if %{build_doc}
-	-Ddocs=true \
-%endif
 	-Dsystemd_user_services=%{_userunitdir}
 %meson_build
 
