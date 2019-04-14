@@ -25,7 +25,7 @@ Url:		http://www.tracker-project.org
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
 #Patch0:                tracker-linkage.patch
-# Related to Meson 50. Retest w/o this after next meson rel. Upstream bug https://github.com/mesonbuild/meson/issues/5049
+# Related to Meson 0.50. Retest w/o this after next meson rel. Upstream bug https://github.com/mesonbuild/meson/issues/5049
 Patch1:		tracker-2.2.1-fix-meson-50-crap.patch
 BuildRequires:	intltool
 BuildRequires:	meson
@@ -154,6 +154,10 @@ This package contains the documentation for tracker.
 %build
 export LC_ALL=UTF-8 CPATH+=":/usr/include/libstemmer/"
 %meson
+%if %{build_doc}
+	-Ddocs=true \
+%endif
+	-Dsystemd_user_services=%{_userunitdir}
 %meson_build
 
 %install
@@ -173,7 +177,7 @@ desktop-file-install \
 
 
 %files -f %{name}.lang
-%doc README NEWS AUTHORS ChangeLog
+%doc README NEWS AUTHORS
 #config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-extract.desktop
 #config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-apps.desktop
 #config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-fs.desktop
