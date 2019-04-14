@@ -25,6 +25,8 @@ Url:		http://www.tracker-project.org
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
 #Patch0:                tracker-linkage.patch
+# Related to Meson 50. Retest w/o this after next meson rel. Upstream bug https://github.com/mesonbuild/meson/issues/5049
+Patch1:		tracker-2.2.1-fix-meson-50-crap.patch
 BuildRequires:	intltool
 BuildRequires:	meson
 #BuildRequires:	mozilla-thunderbird
@@ -147,7 +149,7 @@ This package contains the documentation for tracker.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p0
 
 %build
 export LC_ALL=UTF-8 CPATH+=":/usr/include/libstemmer/"
