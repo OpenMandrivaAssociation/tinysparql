@@ -239,7 +239,7 @@ desktop-file-install \
 %{_libdir}/lib%{name}-miner-%{api}.so.%{major}*
 %{_libdir}/lib%{name}-sparql-%{api}.so.%{major}*
 %dir %{_libdir}/%{name}-%{api}/
-%{_libdir}/%{name}-%{api}/libtracker-*.so.%{major}*
+#{_libdir}/%{name}-%{api}/libtracker-*.so.%{major}*
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Tracker-%{api}.typelib
