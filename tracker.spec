@@ -177,7 +177,7 @@ desktop-file-install \
 
 
 %files -f %{name}.lang
-%doc README NEWS AUTHORS
+%doc README.md NEWS AUTHORS
 #config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-extract.desktop
 #config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-apps.desktop
 #config(noreplace) #_sysconfdir}/xdg/autostart/%{name}-miner-fs.desktop
