@@ -19,7 +19,7 @@
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
 Version:	2.2.2
-Release:	1
+Release:	2
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		http://www.tracker-project.org
@@ -62,7 +62,7 @@ BuildRequires:	pkgconfig(libmediaart-2.0) >= 0.5.0
 BuildRequires:	pkgconfig(libnm)
 BuildRequires:	pkgconfig(libnm-glib) >= 0.8
 BuildRequires:  pkgconfig(libnm-glib-vpn)
-#BuildRequires:	pkgconfig(libosinfo-1.0)
+BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
 BuildRequires:	pkgconfig(libsecret-unstable) >= 0.5
 #BuildRequires:	pkgconfig(libstreamanalyzer) >= 0.7.0
