@@ -226,6 +226,7 @@ desktop-file-install \
 #{_datadir}/applications/%{name}-preferences.desktop
 #_iconsdir}/hicolor/*/apps/%{name}.*
 %{_userunitdir}/tracker-store.service
+%{_libdir}/tracker-2.0/trackertestutils/*
 
 %files vala
 %{_datadir}/vala/vapi/%{name}-control-%{api}.vapi
