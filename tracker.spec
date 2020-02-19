@@ -18,8 +18,8 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	2.3.1
-Release:	2
+Version:	2.3.2
+Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		http://www.tracker-project.org
