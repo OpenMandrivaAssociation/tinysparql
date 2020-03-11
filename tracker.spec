@@ -18,7 +18,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	2.3.2
+Version:	2.3.4
 Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -26,6 +26,7 @@ Url:		http://www.tracker-project.org
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
 
+BuildRequires:	dbus-daemon
 BuildRequires:	intltool
 BuildRequires:	meson
 #BuildRequires:	mozilla-thunderbird
@@ -36,6 +37,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	icu-devel
 BuildRequires:	gnome-common
 BuildRequires:	libstemmer-devel
+BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(libseccomp)
 BuildRequires:	pkgconfig(camel-1.2) >= 2.32.0
 BuildRequires:	pkgconfig(exempi-2.0) >= 2.1.0
