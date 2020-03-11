@@ -26,6 +26,7 @@ Url:		http://www.tracker-project.org
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
 
+BuildRequires:	dbus
 BuildRequires:	intltool
 BuildRequires:	meson
 #BuildRequires:	mozilla-thunderbird
