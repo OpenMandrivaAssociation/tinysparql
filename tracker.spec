@@ -217,6 +217,7 @@ desktop-file-install \
 %{_mandir}/man1/%{name}-reset.1*
 %{_mandir}/man1/%{name}-sql.1*
 %{_mandir}/man1/%{name}-status.1*
+%{_mandir}/man1/tracker-export.1.*
 #_datadir}/dbus-1/services/org.freedesktop.Tracker1.Miner*
 #_datadir}/dbus-1/services/org.freedesktop.Tracker1.Writeback.service
 %{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
