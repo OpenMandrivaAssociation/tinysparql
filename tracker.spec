@@ -176,7 +176,7 @@ desktop-file-install \
 	%{buildroot}%{_sysconfdir}/xdg/autostart/*.desktop
 
 
-%files -f %{name}.lang
+%files -f %{name}3.lang
 %doc README.md NEWS AUTHORS
 %config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-store.desktop
 %{_datadir}/bash-completion/completions/%{name}
