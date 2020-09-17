@@ -165,7 +165,7 @@ export LC_ALL=UTF-8 CPATH+=":/usr/include/libstemmer/"
 
 install -D -p -m 0644 %{SOURCE1} %{buildroot}%{_prefix}/lib/sysctl.d/30-%{name}.conf
 
-%find_lang %{name}
+%find_lang %{name}3
 
 rm -rf %{buildroot}%{_datadir}/tracker-tests
 
