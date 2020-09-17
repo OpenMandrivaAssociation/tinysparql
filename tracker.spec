@@ -209,8 +209,8 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_datadir}/vala/vapi/%{name}-miner-%{api}.deps
 
 %files -n %{libname}
-%{_libdir}/lib%{name}-control-%{api}.so.%{major}*
-%{_libdir}/lib%{name}-miner-%{api}.so.%{major}*
+#{_libdir}/lib%{name}-control-%{api}.so.%{major}*
+#{_libdir}/lib%{name}-miner-%{api}.so.%{major}*
 %{_libdir}/lib%{name}-sparql-%{api}.so.%{major}*
 %dir %{_libdir}/%{name}-%{api}/
 
