@@ -216,8 +216,8 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Tracker-%{api}.typelib
-%{_libdir}/girepository-1.0/TrackerControl-%{api}.typelib
-%{_libdir}/girepository-1.0/TrackerMiner-%{api}.typelib
+#{_libdir}/girepository-1.0/TrackerControl-%{api}.typelib
+#{_libdir}/girepository-1.0/TrackerMiner-%{api}.typelib
 
 %files -n %{devname}
 #{_libdir}/lib%{name}-control-%{api}.so
@@ -234,8 +234,8 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 
 %if %{build_doc}
 %files docs
-%{_datadir}/gtk-doc/html/lib%{name}-control
-%{_datadir}/gtk-doc/html/lib%{name}-miner
+#{_datadir}/gtk-doc/html/lib%{name}-control
+#{_datadir}/gtk-doc/html/lib%{name}-miner
 %{_datadir}/gtk-doc/html/lib%{name}-sparql-3
 %{_datadir}/gtk-doc/html/ontology-3
 %endif
