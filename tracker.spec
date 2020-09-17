@@ -179,11 +179,15 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %files -f %{name}3.lang
 %doc README.md NEWS AUTHORS
 #config(noreplace) #{_sysconfdir}/xdg/autostart/%{name}-store.desktop
-#{_datadir}/bash-completion/completions/%{name}
+%{_datadir}/bash-completion/completions/tracker3
 %{_bindir}/%{name}3
 %{_datadir}/%{name}3/
 #{_libexecdir}/%{name}-store
+%{_libexecdir}/tracker-xdg-portal-3
+%{_libexecdir}/tracker3/*
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
+%{_mandir}/man1/tracker-xdg-portal-3.1.*
+%{_mandir}/man1/tracker3-
 #{_mandir}/man1/%{name}-info.1*
 #{_mandir}/man1/%{name}-search.1*
 #{_mandir}/man1/%{name}-sparql.1*
@@ -195,10 +199,12 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 #{_mandir}/man1/%{name}-sql.1*
 #{_mandir}/man1/%{name}-status.1*
 #{_mandir}/man1/tracker-export.1.*
+%{_datadir}/dbus-1/services/org.freedesktop.portal.Tracker.service
 #{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
 #{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
 #{_userunitdir}/tracker-store.service
 %{_libdir}/tracker-3.0/trackertestutils/*
+/usr/lib/systemd/user/tracker-xdg-portal-3.service
 
 %files vala
 #{_datadir}/vala/vapi/%{name}-control-%{api}.vapi
@@ -231,6 +237,7 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_datadir}/gir-1.0/Tracker-%{api}.gir
 #{_datadir}/gir-1.0/TrackerControl-%{api}.gir
 #{_datadir}/gir-1.0/TrackerMiner-%{api}.gir
+%{_libdir}/pkgconfig/tracker-testutils-3.0.pc
 
 %if %{build_doc}
 %files docs
