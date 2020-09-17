@@ -182,7 +182,7 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 #{_datadir}/bash-completion/completions/%{name}
 %{_bindir}/%{name}3
 %{_datadir}/%{name}3/
-%{_libexecdir}/%{name}-store
+#{_libexecdir}/%{name}-store
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
 #{_mandir}/man1/%{name}-info.1*
 #{_mandir}/man1/%{name}-search.1*
