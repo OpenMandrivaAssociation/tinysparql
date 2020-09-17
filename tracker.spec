@@ -170,10 +170,10 @@ install -D -p -m 0644 %{SOURCE1} %{buildroot}%{_prefix}/lib/sysctl.d/30-%{name}.
 rm -rf %{buildroot}%{_datadir}/tracker-tests
 
 # do not start under KDE
-desktop-file-install \
-	--remove-only-show-in=KDE \
-	--dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
-	%{buildroot}%{_sysconfdir}/xdg/autostart/*.desktop
+#desktop-file-install \
+#	--remove-only-show-in=KDE \
+#	--dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
+#	#{buildroot}%{_sysconfdir}/xdg/autostart/*.desktop
 
 
 %files -f %{name}3.lang
