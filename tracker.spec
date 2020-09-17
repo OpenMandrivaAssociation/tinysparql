@@ -201,12 +201,12 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_libdir}/tracker-3.0/trackertestutils/*
 
 %files vala
-%{_datadir}/vala/vapi/%{name}-control-%{api}.vapi
-%{_datadir}/vala/vapi/%{name}-control-%{api}.deps
+#{_datadir}/vala/vapi/%{name}-control-%{api}.vapi
+#{_datadir}/vala/vapi/%{name}-control-%{api}.deps
 %{_datadir}/vala/vapi/%{name}-sparql-%{api}.vapi
 %{_datadir}/vala/vapi/%{name}-sparql-%{api}.deps
-%{_datadir}/vala/vapi/%{name}-miner-%{api}.vapi
-%{_datadir}/vala/vapi/%{name}-miner-%{api}.deps
+#{_datadir}/vala/vapi/%{name}-miner-%{api}.vapi
+#{_datadir}/vala/vapi/%{name}-miner-%{api}.deps
 
 %files -n %{libname}
 #{_libdir}/lib%{name}-control-%{api}.so.%{major}*
