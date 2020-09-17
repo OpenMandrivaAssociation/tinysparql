@@ -178,26 +178,26 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 
 %files -f %{name}3.lang
 %doc README.md NEWS AUTHORS
-%config(noreplace) %{_sysconfdir}/xdg/autostart/%{name}-store.desktop
-%{_datadir}/bash-completion/completions/%{name}
+#config(noreplace) #{_sysconfdir}/xdg/autostart/%{name}-store.desktop
+#{_datadir}/bash-completion/completions/%{name}
 %{_bindir}/%{name}3
 %{_datadir}/%{name}3/
 %{_libexecdir}/%{name}-store
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
-%{_mandir}/man1/%{name}-info.1*
-%{_mandir}/man1/%{name}-search.1*
-%{_mandir}/man1/%{name}-sparql.1*
-%{_mandir}/man1/%{name}-store.1*
-%{_mandir}/man1/%{name}-tag.1*
-%{_mandir}/man1/%{name}-daemon.1*
-%{_mandir}/man1/%{name}-index.1*
-%{_mandir}/man1/%{name}-reset.1*
-%{_mandir}/man1/%{name}-sql.1*
-%{_mandir}/man1/%{name}-status.1*
-%{_mandir}/man1/tracker-export.1.*
-%{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
-%{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
-%{_userunitdir}/tracker-store.service
+#{_mandir}/man1/%{name}-info.1*
+#{_mandir}/man1/%{name}-search.1*
+#{_mandir}/man1/%{name}-sparql.1*
+#{_mandir}/man1/%{name}-store.1*
+#{_mandir}/man1/%{name}-tag.1*
+#{_mandir}/man1/%{name}-daemon.1*
+#{_mandir}/man1/%{name}-index.1*
+#{_mandir}/man1/%{name}-reset.1*
+#{_mandir}/man1/%{name}-sql.1*
+#{_mandir}/man1/%{name}-status.1*
+#{_mandir}/man1/tracker-export.1.*
+#{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
+#{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
+#{_userunitdir}/tracker-store.service
 %{_libdir}/tracker-3.0/trackertestutils/*
 
 %files vala
