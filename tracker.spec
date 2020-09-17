@@ -220,17 +220,17 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_libdir}/girepository-1.0/TrackerMiner-%{api}.typelib
 
 %files -n %{devname}
-%{_libdir}/lib%{name}-control-%{api}.so
-%{_libdir}/lib%{name}-miner-%{api}.so
+#{_libdir}/lib%{name}-control-%{api}.so
+#{_libdir}/lib%{name}-miner-%{api}.so
 %{_libdir}/lib%{name}-sparql-%{api}.so
-%{_libdir}/%{name}-%{api}/libtracker-*.so
+#{_libdir}/%{name}-%{api}/libtracker-*.so
 %{_includedir}/*
-%{_libdir}/pkgconfig/%{name}-control-%{api}.pc
-%{_libdir}/pkgconfig/%{name}-miner-%{api}.pc
+#{_libdir}/pkgconfig/%{name}-control-%{api}.pc
+#{_libdir}/pkgconfig/%{name}-miner-%{api}.pc
 %{_libdir}/pkgconfig/%{name}-sparql-%{api}.pc
 %{_datadir}/gir-1.0/Tracker-%{api}.gir
-%{_datadir}/gir-1.0/TrackerControl-%{api}.gir
-%{_datadir}/gir-1.0/TrackerMiner-%{api}.gir
+#{_datadir}/gir-1.0/TrackerControl-%{api}.gir
+#{_datadir}/gir-1.0/TrackerMiner-%{api}.gir
 
 %if %{build_doc}
 %files docs
