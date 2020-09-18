@@ -178,71 +178,38 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 
 %files -f %{name}3.lang
 %doc README.md NEWS AUTHORS
-#config(noreplace) #{_sysconfdir}/xdg/autostart/%{name}-store.desktop
 %{_datadir}/bash-completion/completions/tracker3
 %{_bindir}/%{name}3
 %{_datadir}/%{name}3/
-#{_libexecdir}/%{name}-store
 %{_libexecdir}/tracker-xdg-portal-3
 %{_libexecdir}/tracker3/*
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
 %{_mandir}/man1/tracker-xdg-portal-3.1.*
 %{_mandir}/man1/tracker3-*
-#{_mandir}/man1/%{name}-info.1*
-#{_mandir}/man1/%{name}-search.1*
-#{_mandir}/man1/%{name}-sparql.1*
-#{_mandir}/man1/%{name}-store.1*
-#{_mandir}/man1/%{name}-tag.1*
-#{_mandir}/man1/%{name}-daemon.1*
-#{_mandir}/man1/%{name}-index.1*
-#{_mandir}/man1/%{name}-reset.1*
-#{_mandir}/man1/%{name}-sql.1*
-#{_mandir}/man1/%{name}-status.1*
-#{_mandir}/man1/tracker-export.1.*
 %{_datadir}/dbus-1/services/org.freedesktop.portal.Tracker.service
-#{_datadir}/dbus-1/services/org.freedesktop.Tracker1.service
-#{_datadir}/glib-2.0/schemas/org.freedesktop.Tracker.*
-#{_userunitdir}/tracker-store.service
 %{_libdir}/tracker-3.0/trackertestutils/*
-/usr/lib/systemd/user/tracker-xdg-portal-3.service
+%{_userunitdir}/tracker-xdg-portal-3.service
 
 %files vala
-#{_datadir}/vala/vapi/%{name}-control-%{api}.vapi
-#{_datadir}/vala/vapi/%{name}-control-%{api}.deps
 %{_datadir}/vala/vapi/%{name}-sparql-%{api}.vapi
 %{_datadir}/vala/vapi/%{name}-sparql-%{api}.deps
-#{_datadir}/vala/vapi/%{name}-miner-%{api}.vapi
-#{_datadir}/vala/vapi/%{name}-miner-%{api}.deps
 
 %files -n %{libname}
-#{_libdir}/lib%{name}-control-%{api}.so.%{major}*
-#{_libdir}/lib%{name}-miner-%{api}.so.%{major}*
 %{_libdir}/lib%{name}-sparql-%{api}.so.%{major}*
 %dir %{_libdir}/%{name}-%{api}/
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Tracker-%{api}.typelib
-#{_libdir}/girepository-1.0/TrackerControl-%{api}.typelib
-#{_libdir}/girepository-1.0/TrackerMiner-%{api}.typelib
 
 %files -n %{devname}
-#{_libdir}/lib%{name}-control-%{api}.so
-#{_libdir}/lib%{name}-miner-%{api}.so
 %{_libdir}/lib%{name}-sparql-%{api}.so
-#{_libdir}/%{name}-%{api}/libtracker-*.so
 %{_includedir}/*
-#{_libdir}/pkgconfig/%{name}-control-%{api}.pc
-#{_libdir}/pkgconfig/%{name}-miner-%{api}.pc
 %{_libdir}/pkgconfig/%{name}-sparql-%{api}.pc
 %{_datadir}/gir-1.0/Tracker-%{api}.gir
-#{_datadir}/gir-1.0/TrackerControl-%{api}.gir
-#{_datadir}/gir-1.0/TrackerMiner-%{api}.gir
 %{_libdir}/pkgconfig/tracker-testutils-3.0.pc
 
 %if %{build_doc}
 %files docs
-#{_datadir}/gtk-doc/html/lib%{name}-control
-#{_datadir}/gtk-doc/html/lib%{name}-miner
 %{_datadir}/gtk-doc/html/lib%{name}-sparql-3
 %{_datadir}/gtk-doc/html/ontology-3
 %endif
