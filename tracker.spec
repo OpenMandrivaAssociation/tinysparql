@@ -187,7 +187,7 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_libexecdir}/tracker3/*
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
 %{_mandir}/man1/tracker-xdg-portal-3.1.*
-%{_mandir}/man1/tracker3-
+%{_mandir}/man1/tracker3-*
 #{_mandir}/man1/%{name}-info.1*
 #{_mandir}/man1/%{name}-search.1*
 #{_mandir}/man1/%{name}-sparql.1*
