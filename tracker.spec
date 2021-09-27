@@ -189,6 +189,7 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_mandir}/man1/tracker3-*
 %{_datadir}/dbus-1/services/org.freedesktop.portal.Tracker.service
 %{_libdir}/tracker-3.0/trackertestutils/*
+%{_libdir}/tracker-3.0/libtracker-remote-soup2.so
 %{_userunitdir}/tracker-xdg-portal-3.service
 
 %files vala
@@ -213,5 +214,6 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %files docs
 #{_datadir}/gtk-doc/html/lib%{name}-sparql-3
 #{_datadir}/gtk-doc/html/ontology-3
+%{_datadir}/devhelp/books/Tracker/
 %endif
 
