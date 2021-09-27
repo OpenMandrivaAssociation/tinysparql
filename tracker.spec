@@ -81,6 +81,7 @@ BuildRequires:	pkgconfig(vorbisfile) >= 0.22
 BuildRequires:	pkgconfig(libgrss)
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(vapigen)
+BuildRequires:  python3dist(pygobject)
 BuildRequires:	vala
 BuildRequires:  systemd
 
