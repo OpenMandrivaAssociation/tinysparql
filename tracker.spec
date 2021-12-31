@@ -22,7 +22,7 @@ Version:	3.2.1
 Release:	2
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
-Url:		http://www.tracker-project.org
+Url:		https://wiki.gnome.org/Projects/Tracker
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
 
