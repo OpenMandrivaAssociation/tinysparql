@@ -18,15 +18,17 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	3.2.1
-Release:	3
+Version:	3.3.0
+Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://wiki.gnome.org/Projects/Tracker
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
 
+BuildRequires:  a2x
 BuildRequires:	asciidoc
+BuildRequires:  bash-completion
 BuildRequires:	dbus-daemon
 BuildRequires:	intltool
 BuildRequires:	meson
