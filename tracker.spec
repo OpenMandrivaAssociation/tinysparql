@@ -28,6 +28,7 @@ Source1:	30-tracker.conf
 
 BuildRequires:  a2x
 BuildRequires:	asciidoc
+BuildRequires:  bash-completion
 BuildRequires:	dbus-daemon
 BuildRequires:	intltool
 BuildRequires:	meson
