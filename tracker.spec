@@ -26,6 +26,7 @@ Url:		https://wiki.gnome.org/Projects/Tracker
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
 
+BuildRequires:  a2x
 BuildRequires:	asciidoc
 BuildRequires:	dbus-daemon
 BuildRequires:	intltool
