@@ -191,8 +191,8 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_mandir}/man1/tracker3-*
 %{_datadir}/dbus-1/services/org.freedesktop.portal.Tracker.service
 %{_libdir}/tracker-3.0/trackertestutils/*
-%{_libdir}/tracker-3.0/libtracker-remote-soup2.so
-%{_libdir}/tracker-3.0/libtracker-remote-soup3.so
+%{_libdir}/tracker-3.0/libtracker-http-soup2.so
+%{_libdir}/tracker-3.0/libtracker-http-soup3.so
 %{_userunitdir}/tracker-xdg-portal-3.service
 
 %files vala
