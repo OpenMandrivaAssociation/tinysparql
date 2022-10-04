@@ -18,7 +18,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	3.3.3
+Version:	3.4.0
 Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -68,12 +68,13 @@ BuildRequires:	pkgconfig(libnm)
 BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
 BuildRequires:	pkgconfig(libsecret-unstable) >= 0.5
+BuildRequires:  pkgconfig(libsoup-3.0)
 #BuildRequires:	pkgconfig(libstreamanalyzer) >= 0.7.0
 #BuildRequires:	pkgconfig(libxine) >= 1.0
 BuildRequires:	pkgconfig(libxml-2.0) >= 2.6
 BuildRequires:	pkgconfig(pango) >= 1.0.0
 BuildRequires:	pkgconfig(poppler-glib) >= 0.16.0
-BuildRequires:	pkgconfig(rest-0.7) >= 0.6
+BuildRequires:	pkgconfig(rest-1.0)
 BuildRequires:	pkgconfig(sqlite3) >= 3.7.14
 BuildRequires:	pkgconfig(taglib_c) >= 1.6
 BuildRequires:	pkgconfig(totem-plparser)
@@ -191,6 +192,7 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_datadir}/dbus-1/services/org.freedesktop.portal.Tracker.service
 %{_libdir}/tracker-3.0/trackertestutils/*
 %{_libdir}/tracker-3.0/libtracker-remote-soup2.so
+%{_libdir}/tracker-3.0/libtracker-remote-soup3.so
 %{_userunitdir}/tracker-xdg-portal-3.service
 
 %files vala
