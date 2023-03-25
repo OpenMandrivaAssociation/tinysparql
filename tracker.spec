@@ -193,6 +193,7 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_libdir}/tracker-3.0/trackertestutils/*
 %{_libdir}/tracker-3.0/libtracker-http-soup2.so
 %{_libdir}/tracker-3.0/libtracker-http-soup3.so
+%{_libdir}/tracker-3.0/libtracker-parser-libicu.so
 %{_userunitdir}/tracker-xdg-portal-3.service
 
 %files vala
@@ -218,5 +219,6 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 #{_datadir}/gtk-doc/html/lib%{name}-sparql-3
 #{_datadir}/gtk-doc/html/ontology-3
 #{_datadir}/devhelp/books/Tracker/
+%{_datadir}/Tracker-3.0/
 %endif
 
