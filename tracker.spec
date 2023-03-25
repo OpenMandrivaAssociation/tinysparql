@@ -217,6 +217,6 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %files docs
 #{_datadir}/gtk-doc/html/lib%{name}-sparql-3
 #{_datadir}/gtk-doc/html/ontology-3
-%{_datadir}/devhelp/books/Tracker/
+#{_datadir}/devhelp/books/Tracker/
 %endif
 
