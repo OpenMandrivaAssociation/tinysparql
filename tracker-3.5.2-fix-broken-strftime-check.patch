@@ -1,0 +1,11 @@
+diff -up tracker-3.5.2/meson.build.omv~ tracker-3.5.2/meson.build
+--- tracker-3.5.2/meson.build.omv~	2023-05-13 17:57:24.608845179 +0200
++++ tracker-3.5.2/meson.build	2023-05-13 17:57:39.925170627 +0200
+@@ -202,6 +202,7 @@ endif
+ # Get an appropriate 4-digit year modifier for strftime
+ ##################################################################
+ result = cc.run('''
++  #define _POSIX_SOURCE 1 /* for gmtime_r */
+   #include <stdio.h>
+   #include <string.h>
+   #include <time.h>
