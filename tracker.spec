@@ -19,13 +19,14 @@
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
 Version:	3.5.3
-Release:	2
+Release:	3
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://wiki.gnome.org/Projects/Tracker
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	30-tracker.conf
 #Patch0:		tracker-3.5.2-fix-broken-strftime-check.patch
+Patch0:		tracker-3.5.3-no-sqlite3_enable_shared_cache.patch
 
 BuildRequires:  a2x
 BuildRequires:	asciidoc

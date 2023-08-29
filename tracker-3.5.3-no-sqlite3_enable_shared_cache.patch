@@ -1,0 +1,13 @@
+diff -up tracker-3.5.3/src/libtracker-sparql/core/tracker-db-interface-sqlite.c.omv~ tracker-3.5.3/src/libtracker-sparql/core/tracker-db-interface-sqlite.c
+--- tracker-3.5.3/src/libtracker-sparql/core/tracker-db-interface-sqlite.c.omv~	2023-08-29 20:27:23.987482493 +0200
++++ tracker-3.5.3/src/libtracker-sparql/core/tracker-db-interface-sqlite.c	2023-08-29 20:27:48.114796945 +0200
+@@ -147,7 +147,8 @@ G_DEFINE_TYPE (TrackerDBCursor, tracker_
+ void
+ tracker_db_interface_sqlite_enable_shared_cache (void)
+ {
+-	sqlite3_enable_shared_cache (1);
++	// sqlite shared_cache is deprecated and removed in OM
++	//sqlite3_enable_shared_cache (1);
+ }
+ 
+ static void
