@@ -15,15 +15,16 @@
 %define libname	%mklibname %{name} %{api} %{major}
 %define devname	%mklibname %{name} -d
 %define girname	%mklibname %{name}-gir %{api}
+%define beta rc
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	3.5.3
-Release:	3
+Version:	3.6
+Release:	%{?beta:0.%{beta}.}1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://wiki.gnome.org/Projects/Tracker
-Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}%{?beta:.%{beta}}.tar.xz
 Source1:	30-tracker.conf
 #Patch0:		tracker-3.5.2-fix-broken-strftime-check.patch
 Patch0:		tracker-3.5.3-no-sqlite3_enable_shared_cache.patch
@@ -155,7 +156,7 @@ This package contains the documentation for tracker.
 %endif
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-%{version}%{?beta:.%{beta}}
 
 %build
 export LC_ALL=UTF-8 CPATH+=":/usr/include/libstemmer/"
