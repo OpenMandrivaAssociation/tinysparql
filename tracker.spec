@@ -15,11 +15,11 @@
 %define libname	%mklibname %{name} %{api} %{major}
 %define devname	%mklibname %{name} -d
 %define girname	%mklibname %{name}-gir %{api}
-%define beta rc
+#define beta rc
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	3.6
+Version:	3.6.0
 Release:	%{?beta:0.%{beta}.}1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
