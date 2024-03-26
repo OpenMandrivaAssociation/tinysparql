@@ -43,6 +43,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	icu-devel
 BuildRequires:	gnome-common
 BuildRequires:	libstemmer-devel
+BuildRequires:  pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(libseccomp)
 BuildRequires:	pkgconfig(camel-1.2) >= 2.32.0
