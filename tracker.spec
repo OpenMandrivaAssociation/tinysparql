@@ -19,15 +19,13 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tracker
-Version:	3.6.0
+Version:	3.7.0
 Release:	%{?beta:0.%{beta}.}1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://wiki.gnome.org/Projects/Tracker
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}%{?beta:.%{beta}}.tar.xz
 Source1:	30-tracker.conf
-#Patch0:		tracker-3.5.2-fix-broken-strftime-check.patch
-Patch0:		tracker-3.5.3-no-sqlite3_enable_shared_cache.patch
 
 BuildRequires:  a2x
 BuildRequires:	asciidoc
@@ -43,6 +41,8 @@ BuildRequires:	jpeg-devel
 BuildRequires:	icu-devel
 BuildRequires:	gnome-common
 BuildRequires:	libstemmer-devel
+BuildRequires:  pkgconfig(avahi-client)
+BuildRequires:  pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(libseccomp)
 BuildRequires:	pkgconfig(camel-1.2) >= 2.32.0
@@ -185,9 +185,14 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %doc README.md NEWS AUTHORS
 %{_datadir}/bash-completion/completions/tracker3
 %{_bindir}/%{name}3
+%{_bindir}/tracker3-endpoint
+%{_bindir}/tracker3-export
+%{_bindir}/tracker3-help
+%{_bindir}/tracker3-import
+%{_bindir}/tracker3-sparql
+%{_bindir}/tracker3-sql
 %{_datadir}/%{name}3/
 %{_libexecdir}/tracker-xdg-portal-3
-%{_libexecdir}/tracker3/*
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
 %{_mandir}/man1/tracker-xdg-portal-3.1.*
 %{_mandir}/man1/tracker3-*
