@@ -26,8 +26,6 @@ Group:		Graphical desktop/GNOME
 Url:		https://wiki.gnome.org/Projects/Tracker
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}%{?beta:.%{beta}}.tar.xz
 Source1:	30-tracker.conf
-#Patch0:		tracker-3.5.2-fix-broken-strftime-check.patch
-#Patch0:		tracker-3.5.3-no-sqlite3_enable_shared_cache.patch
 
 BuildRequires:  a2x
 BuildRequires:	asciidoc
@@ -195,7 +193,6 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_bindir}/tracker3-sql
 %{_datadir}/%{name}3/
 %{_libexecdir}/tracker-xdg-portal-3
-#{_libexecdir}/tracker3/*
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
 %{_mandir}/man1/tracker-xdg-portal-3.1.*
 %{_mandir}/man1/tracker3-*
