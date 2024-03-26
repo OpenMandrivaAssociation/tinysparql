@@ -189,7 +189,7 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_bindir}/%{name}3
 %{_datadir}/%{name}3/
 %{_libexecdir}/tracker-xdg-portal-3
-%{_libexecdir}/tracker3/*
+#{_libexecdir}/tracker3/*
 %{_prefix}/lib/sysctl.d/30-%{name}.conf
 %{_mandir}/man1/tracker-xdg-portal-3.1.*
 %{_mandir}/man1/tracker3-*
