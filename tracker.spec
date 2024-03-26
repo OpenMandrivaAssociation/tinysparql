@@ -187,6 +187,12 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %doc README.md NEWS AUTHORS
 %{_datadir}/bash-completion/completions/tracker3
 %{_bindir}/%{name}3
+%{_bindir}/tracker3-endpoint
+%{_bindir}/tracker3-export
+%{_bindir}/tracker3-help
+%{_bindir}/tracker3-import
+%{_bindir}/tracker3-sparql
+%{_bindir}/tracker3-sql
 %{_datadir}/%{name}3/
 %{_libexecdir}/tracker-xdg-portal-3
 #{_libexecdir}/tracker3/*
