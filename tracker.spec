@@ -33,58 +33,28 @@ BuildRequires:  bash-completion
 BuildRequires:	dbus-daemon
 BuildRequires:	intltool
 BuildRequires:	meson
-#BuildRequires:	mozilla-thunderbird
 BuildRequires:	gettext-devel
-BuildRequires:	giflib-devel
-BuildRequires:	tiff-devel
-BuildRequires:	jpeg-devel
 BuildRequires:	icu-devel
-BuildRequires:	gnome-common
 BuildRequires:	libstemmer-devel
 BuildRequires:  pkgconfig(avahi-client)
 BuildRequires:  pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(dbus-1)
-BuildRequires:	pkgconfig(libseccomp)
-BuildRequires:	pkgconfig(camel-1.2) >= 2.32.0
-BuildRequires:	pkgconfig(exempi-2.0) >= 2.1.0
-BuildRequires:	pkgconfig(flac) >= 1.2.1
-BuildRequires:	pkgconfig(gdk-pixbuf-2.0) >= 2.12.0
-BuildRequires:	pkgconfig(gee-0.8) >= 0.3
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(glib-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(gmodule-2.0) >= 2.28.0
-BuildRequires:	pkgconfig(gnome-desktop-3.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gthread-2.0)
-BuildRequires:	pkgconfig(gstreamer-1.0) >= 0.10.31
-BuildRequires:	pkgconfig(gstreamer-pbutils-1.0) >= 0.10.31
-BuildRequires:	pkgconfig(gstreamer-tag-1.0) >= 0.10.31
-BuildRequires:	pkgconfig(gthread-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:	pkgconfig(libcue)
-BuildRequires:	pkgconfig(libexif) >= 0.6
-BuildRequires:	pkgconfig(libgsf-1) >= 1.13
-BuildRequires:	pkgconfig(libgxps)
-BuildRequires:	pkgconfig(libiptcdata)
-BuildRequires:	pkgconfig(libmediaart-2.0) >= 0.5.0
 BuildRequires:	pkgconfig(libnm)
 BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
-BuildRequires:	pkgconfig(libsecret-unstable) >= 0.5
 BuildRequires:  pkgconfig(libsoup-3.0)
-#BuildRequires:	pkgconfig(libstreamanalyzer) >= 0.7.0
-#BuildRequires:	pkgconfig(libxine) >= 1.0
 BuildRequires:	pkgconfig(libxml-2.0) >= 2.6
 BuildRequires:	pkgconfig(pango) >= 1.0.0
 BuildRequires:	pkgconfig(poppler-glib) >= 0.16.0
-BuildRequires:	pkgconfig(rest-1.0)
 BuildRequires:	pkgconfig(sqlite3) >= 3.7.14
-BuildRequires:	pkgconfig(taglib_c) >= 1.6
-BuildRequires:	pkgconfig(totem-plparser)
-BuildRequires:	pkgconfig(upower-glib) >= 0.9.0
 BuildRequires:	pkgconfig(uuid)
-BuildRequires:	pkgconfig(vorbisfile) >= 0.22
-BuildRequires:	pkgconfig(libgrss)
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:  python3dist(pygobject)
@@ -162,7 +132,8 @@ This package contains the documentation for tracker.
 export LC_ALL=UTF-8 CPATH+=":/usr/include/libstemmer/"
 %meson \
   -Ddocs=true \
-  -Dunicode_support=icu
+  -Dunicode_support=icu \
+  -Dsoup=soup3
 %meson_build
 
 %install
@@ -198,7 +169,6 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 %{_mandir}/man1/tracker3-*
 %{_datadir}/dbus-1/services/org.freedesktop.portal.Tracker.service
 %{_libdir}/tracker-3.0/trackertestutils/*
-%{_libdir}/tracker-3.0/libtracker-http-soup2.so
 %{_libdir}/tracker-3.0/libtracker-http-soup3.so
 %{_libdir}/tracker-3.0/libtracker-parser-libicu.so
 %{_userunitdir}/tracker-xdg-portal-3.service
