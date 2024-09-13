@@ -18,8 +18,8 @@
 #define beta rc
 
 Summary:	Desktop-neutral metadata-based search framework
-Name:		tracker
-Version:	3.7.3
+Name:		tinysparql
+Version:	3.8.rc
 Release:	%{?beta:0.%{beta}.}2
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
