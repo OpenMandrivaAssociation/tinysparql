@@ -12,7 +12,7 @@
 
 %define api	3.0
 %define major	0
-%define libname	%mklibname %{name} %{api} %{major}
+%define libname	%mklibname %{name}
 %define devname	%mklibname %{name} -d
 %define girname	%mklibname %{name}-gir %{api}
 #define beta rc
@@ -20,7 +20,7 @@
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tinysparql
 Version:	3.8.rc
-Release:	%{?beta:0.%{beta}.}2
+Release:	%{?beta:0.%{beta}.}1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://wiki.gnome.org/Projects/Tracker
@@ -61,13 +61,12 @@ BuildRequires:  python3dist(pygobject)
 BuildRequires:	vala
 BuildRequires:  systemd
 
-Obsoletes:	tracker-search-tool < 0.10
-Obsoletes:	%{name}-common < 0.12.8-2
-Obsoletes:	%{name}-preferences < 0.12.8-2
-Obsoletes:	%{name}-applet < 0.12.8-2
+# Tracker was renamed to tinysparql with 3.8 version. So lets obsolete previous name:
+Obsoletes:  tracker < 3.7.9
+Provides:   tracker = %{version}-%{release}
 
 %description
-Tracker is a framework designed to extract information and metadata about your
+Tinysparql is a framework designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
@@ -76,28 +75,31 @@ desktop-neutral, fast and resource efficient.
 Group:		System/Libraries
 Summary:	Shared library of Tracker
 Conflicts:	%{name}	< 0.12.8-2
+Obsoletes:  lib64tracker3.0_0 < 3.7.4
 
 %description -n %{libname}
-Tracker is a tool designed to extract information and metadata about your
+Tinysparql is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
 %package -n %{devname}
 Group:		Development/C
-Summary:	Development library of Tracker
+Summary:	Development library of Tinysparql
 Requires:	%{libname} = %{version}-%{release}
 Requires:	%{girname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Conflicts:	%{name} < 0.12.8-2
+Obsoletes:  lib64tracker-devel < 3.7.4
 
 %description -n %{devname}
-Tracker is a tool designed to extract information and metadata about your
-personal data so that it can be searched easily and quickly. Tracker is
+Tinysparql is a tool designed to extract information and metadata about your
+personal data so that it can be searched easily and quickly. Tinysparql is
 desktop-neutral, fast and resource efficient.
 
 %package -n %{girname}
 Summary:        GObject Introspection interface description for %{name}
 Group:          System/Libraries
+Obsoletes:  	lib64tracker-gir3.0 < 3.7.4
 
 %description -n %{girname}
 GObject Introspection interface description for %{name}.
@@ -108,6 +110,7 @@ Group:		Development/Other
 BuildArch:	noarch
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala
+Obsoletes:  tracker-vala < 3.7.4
 
 %description vala
 This package contains vala bindings for development %{name}.
@@ -120,9 +123,10 @@ BuildArch:	noarch
 BuildRequires:  pkgconfig(gtk-doc)
 BuildRequires:	graphviz
 Conflicts:	%{name} < 0.10.17
+Obsoletes:  tracker-docs < 3.7.4
 
 %description docs
-This package contains the documentation for tracker.
+This package contains the documentation for tinysparql.
 %endif
 
 %prep
