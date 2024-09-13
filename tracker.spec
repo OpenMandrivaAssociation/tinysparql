@@ -153,45 +153,41 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 
 %files -f %{name}3.lang
 %doc README.md NEWS AUTHORS
-#{_datadir}/bash-completion/completions/tracker3
-#{_bindir}/%{name}3
-#{_bindir}/tracker3-endpoint
-#{_bindir}/tracker3-export
-#{_bindir}/tracker3-help
-#{_bindir}/tracker3-import
-#{_bindir}/tracker3-sparql
-#{_bindir}/tracker3-sql
-#{_datadir}/%{name}3/
-#{_libexecdir}/tracker-xdg-portal-3
-#{_prefix}/lib/sysctl.d/30-%{name}.conf
-#{_mandir}/man1/tracker-xdg-portal-3.1.*
-#{_mandir}/man1/tracker3-*
-#{_datadir}/dbus-1/services/org.freedesktop.portal.Tracker.service
-#{_libdir}/tracker-3.0/trackertestutils/*
-#{_libdir}/tracker-3.0/libtracker-http-soup3.so
-#{_libdir}/tracker-3.0/libtracker-parser-libicu.so
-#{_userunitdir}/tracker-xdg-portal-3.service
+%{_bindir}/tinysparql
+%{_prefix}/lib/sysctl.d/30-tinysparql.conf
+%{_userunitdir}/tinysparql-xdg-portal-3.service
+%{_libexecdir}/tinysparql-sql
+%{_libexecdir}/tinysparql-xdg-portal-3
+%{_datadir}/bash-completion/completions/tinysparql
+%{_datadir}/dbus-1/services/org.freedesktop.portal.Tracker.service
+%{_mandir}/man1/tinysparql*
+%{_libdir}/tinysparql-3.0/libtracker-http-soup3.so
+%{_libdir}/tinysparql-3.0/libtracker-parser-libicu.so
 
 %files vala
-#{_datadir}/vala/vapi/%{name}-sparql-%{api}.vapi
-#{_datadir}/vala/vapi/%{name}-sparql-%{api}.deps
+%{_datadir}/vala/vapi/tinysparql-3.0.deps
+%{_datadir}/vala/vapi/tinysparql-3.0.vapi
+%{_datadir}/vala/vapi/tracker-sparql-3.0.deps
+%{_datadir}/vala/vapi/tracker-sparql-3.0.vapi
 
 %files -n %{libname}
-#{_libdir}/lib%{name}-sparql-%{api}.so.%{major}*
-#dir %{_libdir}/%{name}-%{api}/
+%{_libdir}/libtinysparql-3.0.so.%{major}*
+%{_libdir}/libtracker-sparql-3.0.so.%{major}*
 
 %files -n %{girname}
-#{_libdir}/girepository-1.0/Tracker-%{api}.typelib
+%{_libdir}/girepository-1.0/Tracker-3.0.typelib
+%{_libdir}/girepository-1.0/Tsparql-3.0.typelib
 
 %files -n %{devname}
-#{_libdir}/lib%{name}-sparql-%{api}.so
-#{_includedir}/*
-#{_libdir}/pkgconfig/%{name}-sparql-%{api}.pc
-#{_datadir}/gir-1.0/Tracker-%{api}.gir
-#{_libdir}/pkgconfig/tracker-testutils-3.0.pc
+%{_libdir}/libtinysparql-3.0.so
+%{_libdir}/libtracker-sparql-3.0.so
+%{_libdir}/pkgconfig/tinysparql-3.0.pc
+%{_libdir}/pkgconfig/tracker-sparql-3.0.pc
+%{_datadir}/gir-1.0/Tracker-3.0.gir
+%{_datadir}/gir-1.0/Tsparql-3.0.gir
+%{_includedir}/tinysparql-3.0/
 
 %if %{build_doc}
 %files docs
-#{_datadir}/doc/Tracker-3.0/
+%{_datadir}/doc/Tsparql-3.0/
 %endif
-
