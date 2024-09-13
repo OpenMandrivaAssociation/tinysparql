@@ -12,15 +12,15 @@
 
 %define api	3.0
 %define major	0
-%define libname	%mklibname %{name} %{api} %{major}
+%define libname	%mklibname %{name}
 %define devname	%mklibname %{name} -d
 %define girname	%mklibname %{name}-gir %{api}
 #define beta rc
 
 Summary:	Desktop-neutral metadata-based search framework
-Name:		tracker
-Version:	3.7.3
-Release:	%{?beta:0.%{beta}.}2
+Name:		tinysparql
+Version:	3.8.rc
+Release:	%{?beta:0.%{beta}.}1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://wiki.gnome.org/Projects/Tracker
@@ -61,13 +61,12 @@ BuildRequires:  python3dist(pygobject)
 BuildRequires:	vala
 BuildRequires:  systemd
 
-Obsoletes:	tracker-search-tool < 0.10
-Obsoletes:	%{name}-common < 0.12.8-2
-Obsoletes:	%{name}-preferences < 0.12.8-2
-Obsoletes:	%{name}-applet < 0.12.8-2
+# Tracker was renamed to tinysparql with 3.8 version. So lets obsolete previous name:
+Obsoletes:  tracker < 3.7.9
+Provides:   tracker = %{version}-%{release}
 
 %description
-Tracker is a framework designed to extract information and metadata about your
+Tinysparql is a framework designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
@@ -76,28 +75,31 @@ desktop-neutral, fast and resource efficient.
 Group:		System/Libraries
 Summary:	Shared library of Tracker
 Conflicts:	%{name}	< 0.12.8-2
+Obsoletes:  lib64tracker3.0_0 < 3.7.4
 
 %description -n %{libname}
-Tracker is a tool designed to extract information and metadata about your
+Tinysparql is a tool designed to extract information and metadata about your
 personal data so that it can be searched easily and quickly. Tracker is
 desktop-neutral, fast and resource efficient.
 
 %package -n %{devname}
 Group:		Development/C
-Summary:	Development library of Tracker
+Summary:	Development library of Tinysparql
 Requires:	%{libname} = %{version}-%{release}
 Requires:	%{girname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Conflicts:	%{name} < 0.12.8-2
+Obsoletes:  lib64tracker-devel < 3.7.4
 
 %description -n %{devname}
-Tracker is a tool designed to extract information and metadata about your
-personal data so that it can be searched easily and quickly. Tracker is
+Tinysparql is a tool designed to extract information and metadata about your
+personal data so that it can be searched easily and quickly. Tinysparql is
 desktop-neutral, fast and resource efficient.
 
 %package -n %{girname}
 Summary:        GObject Introspection interface description for %{name}
 Group:          System/Libraries
+Obsoletes:  	lib64tracker-gir3.0 < 3.7.4
 
 %description -n %{girname}
 GObject Introspection interface description for %{name}.
@@ -108,6 +110,7 @@ Group:		Development/Other
 BuildArch:	noarch
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala
+Obsoletes:  tracker-vala < 3.7.4
 
 %description vala
 This package contains vala bindings for development %{name}.
@@ -120,9 +123,10 @@ BuildArch:	noarch
 BuildRequires:  pkgconfig(gtk-doc)
 BuildRequires:	graphviz
 Conflicts:	%{name} < 0.10.17
+Obsoletes:  tracker-docs < 3.7.4
 
 %description docs
-This package contains the documentation for tracker.
+This package contains the documentation for tinysparql.
 %endif
 
 %prep
@@ -132,8 +136,7 @@ This package contains the documentation for tracker.
 export LC_ALL=UTF-8 CPATH+=":/usr/include/libstemmer/"
 %meson \
   -Ddocs=true \
-  -Dunicode_support=icu \
-  -Dsoup=soup3
+  -Dunicode_support=icu
 %meson_build
 
 %install
@@ -154,45 +157,41 @@ rm -rf %{buildroot}%{_datadir}/tracker-tests
 
 %files -f %{name}3.lang
 %doc README.md NEWS AUTHORS
-%{_datadir}/bash-completion/completions/tracker3
-%{_bindir}/%{name}3
-%{_bindir}/tracker3-endpoint
-%{_bindir}/tracker3-export
-%{_bindir}/tracker3-help
-%{_bindir}/tracker3-import
-%{_bindir}/tracker3-sparql
-%{_bindir}/tracker3-sql
-%{_datadir}/%{name}3/
-%{_libexecdir}/tracker-xdg-portal-3
-%{_prefix}/lib/sysctl.d/30-%{name}.conf
-%{_mandir}/man1/tracker-xdg-portal-3.1.*
-%{_mandir}/man1/tracker3-*
+%{_bindir}/tinysparql
+%{_prefix}/lib/sysctl.d/30-tinysparql.conf
+%{_userunitdir}/tinysparql-xdg-portal-3.service
+%{_libexecdir}/tinysparql-sql
+%{_libexecdir}/tinysparql-xdg-portal-3
+%{_datadir}/bash-completion/completions/tinysparql
 %{_datadir}/dbus-1/services/org.freedesktop.portal.Tracker.service
-%{_libdir}/tracker-3.0/trackertestutils/*
-%{_libdir}/tracker-3.0/libtracker-http-soup3.so
-%{_libdir}/tracker-3.0/libtracker-parser-libicu.so
-%{_userunitdir}/tracker-xdg-portal-3.service
+%{_mandir}/man1/tinysparql*
+%{_libdir}/tinysparql-3.0/libtracker-http-soup3.so
+%{_libdir}/tinysparql-3.0/libtracker-parser-libicu.so
 
 %files vala
-%{_datadir}/vala/vapi/%{name}-sparql-%{api}.vapi
-%{_datadir}/vala/vapi/%{name}-sparql-%{api}.deps
+%{_datadir}/vala/vapi/tinysparql-3.0.deps
+%{_datadir}/vala/vapi/tinysparql-3.0.vapi
+%{_datadir}/vala/vapi/tracker-sparql-3.0.deps
+%{_datadir}/vala/vapi/tracker-sparql-3.0.vapi
 
 %files -n %{libname}
-%{_libdir}/lib%{name}-sparql-%{api}.so.%{major}*
-%dir %{_libdir}/%{name}-%{api}/
+%{_libdir}/libtinysparql-3.0.so.%{major}*
+%{_libdir}/libtracker-sparql-3.0.so.%{major}*
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/Tracker-%{api}.typelib
+%{_libdir}/girepository-1.0/Tracker-3.0.typelib
+%{_libdir}/girepository-1.0/Tsparql-3.0.typelib
 
 %files -n %{devname}
-%{_libdir}/lib%{name}-sparql-%{api}.so
-%{_includedir}/*
-%{_libdir}/pkgconfig/%{name}-sparql-%{api}.pc
-%{_datadir}/gir-1.0/Tracker-%{api}.gir
-%{_libdir}/pkgconfig/tracker-testutils-3.0.pc
+%{_libdir}/libtinysparql-3.0.so
+%{_libdir}/libtracker-sparql-3.0.so
+%{_libdir}/pkgconfig/tinysparql-3.0.pc
+%{_libdir}/pkgconfig/tracker-sparql-3.0.pc
+%{_datadir}/gir-1.0/Tracker-3.0.gir
+%{_datadir}/gir-1.0/Tsparql-3.0.gir
+%{_includedir}/tinysparql-3.0/
 
 %if %{build_doc}
 %files docs
-%{_datadir}/doc/Tracker-3.0/
+%{_datadir}/doc/Tsparql-3.0/
 %endif
-
