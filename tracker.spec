@@ -132,8 +132,7 @@ This package contains the documentation for tracker.
 export LC_ALL=UTF-8 CPATH+=":/usr/include/libstemmer/"
 %meson \
   -Ddocs=true \
-  -Dunicode_support=icu \
-  -Dsoup=soup3
+  -Dunicode_support=icu
 %meson_build
 
 %install
