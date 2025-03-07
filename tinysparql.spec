@@ -20,7 +20,7 @@
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tinysparql
 Version:	3.8.2
-Release:	%{?beta:0.%{beta}.}2
+Release:	%{?beta:0.%{beta}.}3
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://wiki.gnome.org/Projects/Tracker
