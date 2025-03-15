@@ -137,7 +137,7 @@ This package contains the documentation for tinysparql.
 %build
 export LC_ALL=UTF-8 CPATH+=":/usr/include/libstemmer/"
 %meson \
-  -Ddocs=true \
+  -Ddocs=false \
   -Dunicode_support=icu
 %meson_build
 
