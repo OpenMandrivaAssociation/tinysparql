@@ -38,6 +38,7 @@ BuildRequires:	icu-devel
 BuildRequires:	libstemmer-devel
 BuildRequires:  pkgconfig(avahi-client)
 BuildRequires:  pkgconfig(avahi-glib)
+BuildRequires:  pkgconfig(bash-completion)
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.28.0
 BuildRequires:	pkgconfig(glib-2.0) >= 2.28.0
@@ -60,6 +61,7 @@ BuildRequires:	pkgconfig(vapigen)
 BuildRequires:  python3dist(pygobject)
 BuildRequires:	vala
 BuildRequires:  systemd
+BuildRequires:  gi-docgen
 
 # Tracker was renamed to tinysparql with 3.8 version. So lets obsolete previous name:
 Obsoletes:  tracker < 3.7.9
