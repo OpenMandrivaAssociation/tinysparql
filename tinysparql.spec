@@ -1,6 +1,6 @@
 %define url_ver %(echo %{version} | cut -d. -f1,2)
 
-%define build_doc	1
+%define build_doc	0
 
 %define _disable_ld_no_undefined 1
 %define _disable_rebuild_configure 1
@@ -61,7 +61,7 @@ BuildRequires:	pkgconfig(vapigen)
 BuildRequires:  python3dist(pygobject)
 BuildRequires:	vala
 BuildRequires:  systemd
-BuildRequires:  gi-docgen
+#BuildRequires:  gi-docgen
 
 # Tracker was renamed to tinysparql with 3.8 version. So lets obsolete previous name:
 Obsoletes:  tracker < 3.7.9
@@ -149,13 +149,6 @@ install -D -p -m 0644 %{SOURCE1} %{buildroot}%{_prefix}/lib/sysctl.d/30-%{name}.
 %find_lang %{name}3
 
 rm -rf %{buildroot}%{_datadir}/tracker-tests
-
-# do not start under KDE
-#desktop-file-install \
-#	--remove-only-show-in=KDE \
-#	--dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
-#	#{buildroot}%{_sysconfdir}/xdg/autostart/*.desktop
-
 
 %files -f %{name}3.lang
 %doc README.md NEWS AUTHORS
