@@ -19,7 +19,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tinysparql
-Version:	3.9.rc
+Version:	3.9.1
 Release:	%{?beta:0.%{beta}.}1
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
