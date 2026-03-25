@@ -19,7 +19,7 @@
 
 Summary:	Desktop-neutral metadata-based search framework
 Name:		tinysparql
-Version:	3.10.1
+Version:	3.11.0
 Release:	%{?beta:0.%{beta}.}2
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -51,7 +51,7 @@ BuildRequires:	pkgconfig(libnm)
 BuildRequires:	pkgconfig(libosinfo-1.0)
 BuildRequires:	pkgconfig(libpng) >= 1.2
 BuildRequires:  pkgconfig(libsoup-3.0)
-BuildRequires:	pkgconfig(libxml-2.0) >= 2.6
+BuildRequires:	pkgconfig(libxml-2.0) >= 2..15.2
 BuildRequires:	pkgconfig(pango) >= 1.0.0
 BuildRequires:	pkgconfig(poppler-glib) >= 0.16.0
 BuildRequires:	pkgconfig(sqlite3) >= 3.7.14
